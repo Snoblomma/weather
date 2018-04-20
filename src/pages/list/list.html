@@ -12,8 +12,18 @@
     <button ion-item *ngFor="let weather of (weathers | async)?.weather" (click)="openDetails(weather)">
       {{ weather.description }}
     </button>
-  </ion-list> 
-  <ion-list>
+
+    <ion-item *ngIf="values.length > 0">        
+      Weather: {{ (weathers | async)?.weather[0].main }}
+    </ion-item>
+    <ion-item *ngIf="values.length > 0">        
+      Description: {{ (weathers | async)?.weather[0].description }}
+    </ion-item>
+    <ion-item *ngIf="values.length > 0">        
+      Temperature (Kelvin): {{ (weathers | async)?.main.temp }}
+    </ion-item>
+  </ion-list>
+  <!-- <ion-list>
     <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
       <ion-icon [name]="item.icon" item-start></ion-icon>
       {{item.title}}
@@ -24,5 +34,5 @@
   </ion-list>
   <div *ngIf="selectedItem" padding>
     You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+  </div> -->
 </ion-content>
