@@ -8,31 +8,22 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-auto-complete [dataProvider]="apiProvider"></ion-auto-complete>
+
   <ion-list>
     <button ion-item *ngFor="let weather of (weathers | async)?.weather" (click)="openDetails(weather)">
       {{ weather.description }}
     </button>
 
-    <ion-item *ngIf="values.length > 0">        
+    <ion-item *ngIf="values.length > 0">
       Weather: {{ (weathers | async)?.weather[0].main }}
     </ion-item>
-    <ion-item *ngIf="values.length > 0">        
+    <ion-item *ngIf="values.length > 0">
       Description: {{ (weathers | async)?.weather[0].description }}
     </ion-item>
-    <ion-item *ngIf="values.length > 0">        
-      Temperature (Kelvin): {{ (weathers | async)?.main.temp }}
+    <ion-item *ngIf="values.length > 0">
+      Temperature: {{ (weathers | async)?.main.temp }}
     </ion-item>
   </ion-list>
-  <!-- <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div> -->
 </ion-content>
