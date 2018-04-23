@@ -19,6 +19,7 @@ export class ListPage {
   countries:any[] = [];
   private anyErrors: boolean;
   private finished: boolean;
+  items2;
 
   constructor(
     public navCtrl: NavController, 
@@ -47,12 +48,11 @@ export class ListPage {
       () => this.finished = true
     );
 
-  
-
     if(this.values.length > 0){
       this.bla2 = this.values. pop().description;
     }
     
+    this.initializeItems();
   }
 
   itemTapped(event, item) {
@@ -60,5 +60,66 @@ export class ListPage {
     this.navCtrl.push(ListPage, {
       item: item
     });
+  }
+
+  initializeItems(){
+
+    this.apiProvider.getResults("name").subscribe(results => this.items2 = results);
+    // this.items2 = [
+    //   'Amsterdam',
+    //   'Amsterdam',
+    //   'Amsterdam2',
+    //   'Bogota',
+    //   'Buenos Aires',
+    //   'Cairo',
+    //   'Dhaka',
+    //   'Edinburgh',
+    //   'Geneva',
+    //   'Genoa',
+    //   'Glasglow',
+    //   'Hanoi',
+    //   'Hong Kong',
+    //   'Islamabad',
+    //   'Istanbul',
+    //   'Jakarta',
+    //   'Kiel',
+    //   'Kyoto',
+    //   'Le Havre',
+    //   'Lebanon',
+    //   'Lhasa',
+    //   'Lima',
+    //   'London',
+    //   'Los Angeles',
+    //   'Madrid',
+    //   'Manila',
+    //   'New York',
+    //   'Olympia',
+    //   'Oslo',
+    //   'Panama City',
+    //   'Peking',
+    //   'Philadelphia',
+    //   'San Francisco',
+    //   'Seoul',
+    //   'Taipeh',
+    //   'Tel Aviv',
+    //   'Tokio',
+    //   'Uelzen',
+    //   'Washington'
+    // ];
+  }
+
+  getItems(ev) {
+    // Reset items back to all of the items
+    this.initializeItems();
+
+    // set val to the value of the ev target
+    var val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.items2 = this.items2.filter((item) => {
+        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
   }
 }

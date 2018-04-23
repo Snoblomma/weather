@@ -11,6 +11,17 @@
 
   <ion-auto-complete [dataProvider]="apiProvider"></ion-auto-complete>
 
+  <!-- <ion-item>
+    Item count{{ items2.length }}
+  </ion-item> -->
+
+  <ion-searchbar autocomplete="on" (ionInput)="getItems($event)" ></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let item of items2">
+      {{ item }}
+    </ion-item>
+  </ion-list>
+
   <ion-list>
     <button ion-item *ngFor="let weather of (weathers | async)?.weather" (click)="openDetails(weather)">
       {{ weather.description }}
