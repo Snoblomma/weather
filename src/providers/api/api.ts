@@ -27,4 +27,8 @@ export class ApiProvider implements AutoCompleteService {
             .filter(item => item.name.toLowerCase().startsWith(keyword.toLowerCase()) )
         });
   }
+
+  getCountries() {
+    return this.httpClient.get('https://restcountries.eu/rest/v2/all');
+  }
 }

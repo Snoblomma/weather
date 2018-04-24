@@ -41,7 +41,7 @@ export class ListPage {
     this.bla = this.items.pop().note;
 
     this.weathers = this.apiProvider.getWeather();
-    this.weathers.subscribe(countries => this.countries = countries);
+    // this.weathers.subscribe(countries => this.countries = countries);
     let subscription = this.weathers.subscribe(
       value => this.values.push(value),
       error => this.anyErrors = true,
@@ -64,7 +64,7 @@ export class ListPage {
 
   initializeItems(){
 
-    this.apiProvider.getResults("name").subscribe(results => this.items2 = results);
+    this.apiProvider.getCountries().subscribe(results => this.items2 = results);
     // this.items2 = [
     //   'Amsterdam',
     //   'Amsterdam',
@@ -118,7 +118,7 @@ export class ListPage {
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.items2 = this.items2.filter((item) => {
-        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }
