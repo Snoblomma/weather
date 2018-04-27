@@ -31,4 +31,8 @@ export class ApiProvider implements AutoCompleteService {
   getCountries() {
     return this.httpClient.get('https://restcountries.eu/rest/v2/all');
   }
+
+  getCities(ev) {
+    return this.httpClient.get('https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + ev +'&types=(cities)&key=AIzaSyBarlH0bIAdai_7JK2V-iGFKBO1tZCXSms');
+  }
 }
