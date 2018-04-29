@@ -8,45 +8,21 @@
 </ion-header>
 
 <ion-content>
-
-  <!-- <ion-auto-complete [dataProvider]="apiProvider"></ion-auto-complete> -->
-
-
-  <!-- <ion-item-divider>Countries</ion-item-divider> -->
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-  <ion-list>
+  <!-- <ion-list>
     <ion-item *ngFor="let item of countries">
       {{ item.name }}
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 
   <ion-item-divider>cities</ion-item-divider>
-  <ion-list>
-    <ion-item *ngIf="items3 != null">
-      Lenght: {{ items3.length }}
-    </ion-item>
-    <ion-item *ngIf="cities2 != null">
-        cities2.length: {{ cities2.length }}
-      </ion-item>
-    <ion-item *ngIf="items3.length > 0">
-        items3[0].predictions.length:{{ items3[0].predictions.length }}
-    </ion-item>
-    <!-- <ion-item *ngFor="let city of cities">
-      {{ city.description }}
-    </ion-item> -->
-  </ion-list>
 
   <ion-list *ngIf="items3.length > 0">
     <ion-item *ngFor="let city of items3[0].predictions">
-      {{ city.description }}
+      {{ city.description }} +
+      {{ city.structured_formatting.main_text }}
     </ion-item>
-  </ion-list>
-
-  <ion-list *ngIf="cities2 != null">
-      <ion-item *ngFor="let city of cities2">
-        {{ city.description }}
-      </ion-item>
-    </ion-list>
+  </ion-list> 
 
   <!-- <ion-list>
     <button ion-item *ngFor="let weather of (weathers | async)?.weather" (click)="openDetails(weather)">

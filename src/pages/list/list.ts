@@ -1,4 +1,4 @@
-  import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
@@ -44,19 +44,8 @@ export class ListPage {
     this.initializeItems("");
   }
 
-
-  presentAlert(s: any) {
-    let alert = this.alertCtrl.create({
-      title: 'Alert',
-      subTitle: s,
-      buttons: ['Dismiss']
-    });
-    alert.present();
-  }
-
-  initializeItems(ev){
+  initializeItems(ev: string){
     this.apiProvider.getCountries().subscribe(results => this.items2 = results);
-    // this.apiProvider.getCities().subscribe(results => this.items3 = results);
     this.items3 = [];
     this.apiProvider.getCities(ev).subscribe(
         value => this.items3.push(value), 
@@ -66,36 +55,14 @@ export class ListPage {
   }
 
   getItems(ev) {
-    // console.log("before " +this.items3.length);
-    // Reset items back to all of the items
-    this.initializeItems(ev);
-
-    // set val to the value of the ev target
     var val = ev.target.value;
-    console.log("val " +val);
 
-  //  if the value is an empty string don't filter the items
+    this.initializeItems(val);
+
     if (val && val.trim() != '') {
       this.countries = this.items2.filter((item) => {
         return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
-
-    this.presentAlert(this.items3[0].predictions[0].description);
-
-    if(this.items3 != null){
-      // this.cities2 = this.items3[0].predictions;
-      if(this.items3.length > 0){
-        this.cities2 = this.items3[0];
-      }
-
-        // if (val && val.trim() != '') {
-        //   this.cities2 = this.items3.filter((item) => {
-        //     return (item.predictions[0].description.toLowerCase().indexOf(val.toLowerCase()) > -1);
-        //   })
-        // }
-    }
-    // console.log("after " +this.items3.length);
-    
   }
 }
