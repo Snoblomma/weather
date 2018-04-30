@@ -9,19 +9,12 @@
 
 <ion-content>
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-  <!-- <ion-list>
-    <ion-item *ngFor="let item of countries">
-      {{ item.name }}
-    </ion-item>
-  </ion-list> -->
-
-  <ion-item-divider>cities</ion-item-divider>
 
   <ion-list *ngIf="items3.length > 0">
-    <ion-item *ngFor="let city of items3[0].predictions">
-      {{ city.description }} +
+    <button ion-item *ngFor="let city of items3[0].predictions" (click)="getWeather(city.place_id, city.structured_formatting.main_text)">
+      {{ city.description }},
       {{ city.structured_formatting.main_text }}
-    </ion-item>
+    </button >
   </ion-list> 
 
   <!-- <ion-list>

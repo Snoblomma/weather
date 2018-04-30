@@ -1,20 +1,19 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { ApiProvider } from './../../providers/api/api';
-import { AlertController } from 'ionic-angular';
+import { WeatherPage } from '../weather/weather';
 
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
 })
 export class ListPage {
-  selectedItem: any;
   bla: any = '';
   bla2: any = '';
   items: Array<{title: string, note: string, icon: string}>;
-  weathers: Observable<any>;
+  
   values: Array<any> = [];
   private anyErrors: boolean;
   private finished: boolean;
@@ -29,25 +28,14 @@ export class ListPage {
     public navParams: NavParams,
     public httpClient: HttpClient,
     public apiProvider: ApiProvider,
-    private alertCtrl: AlertController) {
-    this.selectedItem = navParams.get('item');
-
-    // this.weathers = this.apiProvider.getWeather();
-    // let subscription = this.weathers.subscribe(
-    //   value => this.values.push(value),
-    //   error => this.anyErrors = true,
-    //   () => this.finished = true
-    // );
-
+    public modalCtrl: ModalController,) {
     // this.cities = this.apiProvider.getCities();
-    
-    this.initializeItems("");
   }
 
-  initializeItems(ev: string){
+  initializeItems(val: string){
     this.apiProvider.getCountries().subscribe(results => this.items2 = results);
     this.items3 = [];
-    this.apiProvider.getCities(ev).subscribe(
+    this.apiProvider.getCities(val).subscribe(
         value => this.items3.push(value), 
         error => this.anyErrors = true,
         () => this.finished = true
@@ -64,5 +52,10 @@ export class ListPage {
         return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
+  }
+
+  getWeather(placeId, name){
+    let modal = this.modalCtrl.create(WeatherPage, {placeId: placeId});
+    modal.present();
   }
 }

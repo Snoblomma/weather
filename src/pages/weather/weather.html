@@ -1,0 +1,46 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>weather</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    Place Id : {{placeId}}
+  </ion-item>
+  <ion-item>
+    Lat : {{ (placeDetails | async)?.result.geometry.location.lat }}
+  </ion-item>
+  <ion-item>
+    Lon : {{ (placeDetails | async)?.result.geometry.location.lng}}
+  </ion-item>
+  <!-- <ion-item *ngIf="placeDetailsValues.length > 0">
+    Length2 : {{ placeDetailsValues[0].result.geometry.location.lat }}
+  </ion-item> -->
+  <!-- <button (click)="print(placeDetailsValues[0].result.geometry.location.lat, placeDetailsValues[0].result.geometry.location.lng)">Click</button>
+   -->
+  <ion-item>
+    placeDetailsValues : {{ placeDetailsValues[0] }}
+  </ion-item>
+  <ion-item>
+    placeDetailsValues : {{ placeDetailsValues.length }}
+  </ion-item>
+  <ion-item>
+    Lat : {{ lat }}
+  </ion-item>
+  <ion-item>
+    Lon : {{ lon }}
+  </ion-item>
+  <ion-item *ngIf="values.length > 0">
+    Weather: {{ (weathers | async)?.weather[0].main }}
+  </ion-item>
+  <ion-item *ngIf="values.length > 0">
+    Description: {{ (weathers | async)?.weather[0].description }}
+  </ion-item>
+  <ion-item *ngIf="values.length > 0">
+    Temperature: {{ (weathers | async)?.main.temp }}
+  </ion-item>
+</ion-content>

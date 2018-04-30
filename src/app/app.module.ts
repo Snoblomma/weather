@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { WeatherPage } from '../pages/weather/weather';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -17,7 +18,8 @@ import { AutoCompleteModule } from 'ionic2-auto-complete';
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    WeatherPage
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import { AutoCompleteModule } from 'ionic2-auto-complete';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    WeatherPage
   ],
   providers: [
     StatusBar,
