@@ -5,13 +5,13 @@ import { HttpClient } from '@angular/common/http';
 import { ApiProvider } from './../../providers/api/api';
 import { WeatherPage } from '../weather/weather';
 
+import { map } from 'rxjs/operators'
+
 @Component({
   selector: 'page-list',
   templateUrl: 'list.html'
 })
 export class ListPage {
-  bla: any = '';
-  bla2: any = '';
   items: Array<{title: string, note: string, icon: string}>;
   
   values: Array<any> = [];
@@ -22,14 +22,14 @@ export class ListPage {
   countries: Array<any> = [];
   cities: Array<any> = [];
   cities2: Array<any> = [];
+  weathers: Observable<any>;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public httpClient: HttpClient,
     public apiProvider: ApiProvider,
-    public modalCtrl: ModalController,) {
-    // this.cities = this.apiProvider.getCities();
+    public modalCtrl: ModalController) {
   }
 
   initializeItems(val: string){

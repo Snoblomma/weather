@@ -2,6 +2,18 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { ApiProvider } from './../../providers/api/api';
+import { AlertController } from 'ionic-angular';
+import { map } from 'rxjs/operators';
+
+export class Article {
+  
+    constructor(
+      public articleId: number,
+      public articleSubject: string,
+      public articleBody: string
+    ){}
+  
+  }
 
 @IonicPage()
 @Component({
@@ -10,8 +22,8 @@ import { ApiProvider } from './../../providers/api/api';
 })
 export class WeatherPage {
   placeId: any;
-  public lat: string;
-  public lon: string;
+  public lat: any;
+  public lng: any;
   a: any;
   weathers: Observable<any>;
   placeDetails: Observable<any>;
@@ -25,13 +37,10 @@ export class WeatherPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public apiProvider: ApiProvider,) {
+    public apiProvider: ApiProvider,
+    private alertCtrl: AlertController) {
       this.placeId = this.navParams.get('placeId');
       this.initialize();
-      // if (this.placeDetailsValues.length > 0) {
-      //   this.lat = this.placeDetailsValues[0];
-      //   this.lon = this.placeDetailsValues[1];
-      // }
 
     }
 
@@ -42,33 +51,31 @@ export class WeatherPage {
   initialize(){
     this.placeDetails = this.apiProvider.getPlaceDetails(this.placeId);
     this.placeDetails.subscribe(
-      value => this.placeDetailsValues.push(value.result.geometry.location.lat, value.result.geometry.location.lng),
-      error => this.anyErrors = true,
-      () => this.finished = true
+      res => {
+        this.lat = res.result.geometry.location.lat; 
+        this.lng = res.result.geometry.location.lng; 
+        this.presentAlert(this.lat);
+        this.getWeather(this.lat, this.lng);
+      }
     );
-    
+  }
 
-    // if(this.placeDetailsValues.length > 0) {
-    //   this.res.push(this.placeDetailsValues[0]);
-    //   // this.res.push(this.placeDetailsValues[0].result.geometry.location.lng);
-    // }  
+  presentAlert(s: string) {
+    let alert = this.alertCtrl.create({
+      title: 'Lat',
+      subTitle: s,
+      buttons: ['Dismiss']
+    });
+    alert.present();
+  }
 
-
-    
-
-    
-
-    this.weathers = this.apiProvider.getWeatherCoordinates(this.placeDetailsValues[0], this.placeDetailsValues[1]);
+  getWeather(lat: string, lng: string){
+    this.weathers = this.apiProvider.getWeatherCoordinates(lat, lng);
     this.weathers.subscribe(
       value => this.values.push(value),
       error => this.anyErrors = true,
       () => this.finished = true
     );
-  }
-
-  print(a, b){
-    this.lat =  a;
-    this.lon = b;
   }
 
 }
