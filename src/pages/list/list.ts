@@ -12,50 +12,37 @@ import { map } from 'rxjs/operators'
   templateUrl: 'list.html'
 })
 export class ListPage {
-  items: Array<{title: string, note: string, icon: string}>;
-  
-  values: Array<any> = [];
   private anyErrors: boolean;
   private finished: boolean;
-  items2: any = null;
   items3: Array<any> = [];
-  countries: Array<any> = [];
-  cities: Array<any> = [];
-  cities2: Array<any> = [];
-  weathers: Observable<any>;
+  i: Array<{ id: string }>;
+
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public httpClient: HttpClient,
-    public apiProvider: ApiProvider,
-    public modalCtrl: ModalController) {
-  }
-
-  initializeItems(val: string){
-    this.apiProvider.getCountries().subscribe(results => this.items2 = results);
-    this.items3 = [];
-    this.apiProvider.getCities(val).subscribe(
-        value => this.items3.push(value), 
-        error => this.anyErrors = true,
-        () => this.finished = true
-      );
+    public apiProvider: ApiProvider) {
+    this.i = [
+      { id: 'countryBar' },
+      { id: 'weatherBar' },
+      { id: 'tempBar' },
+      { id: 'humBar' },
+      { id: 'windBar' }];
   }
 
   getItems(ev) {
     var val = ev.target.value;
 
-    this.initializeItems(val);
-
-    if (val && val.trim() != '') {
-      this.countries = this.items2.filter((item) => {
-        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
-    }
+    this.items3 = [];
+    this.apiProvider.getCities(val).subscribe(
+      value => this.items3.push(value),
+      error => this.anyErrors = true,
+      () => this.finished = true
+    );
   }
 
-  getWeather(placeId, name){
-    let modal = this.modalCtrl.create(WeatherPage, {placeId: placeId});
-    modal.present();
+  getWeather(placeId, placeName) {
+    this.navCtrl.push(WeatherPage, { placeId: placeId, placeName: placeName });
   }
 }

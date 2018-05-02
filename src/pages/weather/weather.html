@@ -1,24 +1,40 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>weather</ion-title>
+    <ion-title>Weather in {{placeName}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
   <ion-item>
-    Lat : {{ lat }}
+    Country : {{ counrty }}
   </ion-item>
   <ion-item>
-    Lon : {{ lng }}
+    Weather: {{ description }}
   </ion-item>
   <ion-item>
-    Weather: {{ (weathers | async)?.weather[0].main }}
+    Temperature: {{ temperature }}&#8451;
   </ion-item>
   <ion-item>
-    Description: {{ (weathers | async)?.weather[0].description }}
+    Humidity: {{ humidity }}%
   </ion-item>
   <ion-item>
-    Temperature: {{ (weathers | async)?.main.temp }}
+    Wind speed: {{ wind }}mps
   </ion-item>
+
+  <div id="main">
+    <div id="cloud">
+      <div id="five"></div>
+      <div id="six"></div>
+      <div id="seven"></div>
+      <div id="rain">
+        <ul>
+          <li id="one">.</li>
+          <li id="two">.</li>
+          <li id="three">.</li>
+          <li id="four">.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </ion-content>

@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { WeatherPage } from '../pages/weather/weather';
 
@@ -17,7 +16,6 @@ import { AutoCompleteModule } from 'ionic2-auto-complete';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     ListPage,
     WeatherPage
   ],
@@ -31,7 +29,6 @@ import { AutoCompleteModule } from 'ionic2-auto-complete';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     ListPage,
     WeatherPage
   ],
