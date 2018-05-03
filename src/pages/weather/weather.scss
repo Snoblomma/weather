@@ -104,20 +104,6 @@ page-weather {
     animation-direction: alternate;
   }
   @media only screen and (max-width: 600px) {
-    // #top{
-    //   width: 50px;
-    //   animation-name: top-small;
-    //   animation-duration: 2s;
-    //   animation-iteration-count: infinite;
-    //   animation-direction: alternate;
-    // }
-    //  #bottom{
-    //   width: 200px;
-    //   animation-name: bottom-small;
-    //   animation-duration: 2s;
-    //   animation-iteration-count: infinite;
-    //   animation-direction: alternate;
-    // }
     @keyframes top-small {
       from {
         width: 200px;
@@ -166,5 +152,13 @@ page-weather {
       width: 400px;
     }
     ;
+  }
+
+  #b{
+    opacity: 0.4;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size:cover;
   }
 }

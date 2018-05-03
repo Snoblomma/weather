@@ -20,10 +20,13 @@ export class WeatherPage {
   temperature: any;
   humidity: any;
   wind: any;
+  picToView: any;
+  photoreference: any;
   weathers: Observable<any>;
   placeDetails: Observable<any>;
   values: Array<any> = [];
   placeDetailsValues: Array<any> = [];
+  f: string = "https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350";
   private anyErrors: boolean;
   private finished: boolean;
 
@@ -47,9 +50,14 @@ export class WeatherPage {
       res => { 
         this.lat = res.result.geometry.location.lat; 
         this.lng = res.result.geometry.location.lng; 
-        this.getWeather(this.lat, this.lng);
+        this.photoreference = res.result.photos[0].photo_reference;
+        this.getWeather(this.lat, this.lng);    
+        // this.getPhoto(this.photoreference); 
+        this.picToView = this.apiProvider.getPhotoString(this.photoreference);
+        this.f = this.picToView;
       }
     );
+    //this.setBackground();
   }
 
   getWeather(lat: string, lng: string){
@@ -64,5 +72,18 @@ export class WeatherPage {
       error => this.anyErrors = true,
       () => this.finished = true
     );
+  }
+
+  getPhoto(photoreference: string){
+    this.apiProvider.getPlacePhoto(photoreference).subscribe(
+      value => {
+        this.picToView = value;},
+      error => this.anyErrors = true,
+      () => this.finished = true
+    );
+  }
+
+  setBackground(){
+    document.getElementById('content').style.backgroundColor = 'red'; 
   }
 }

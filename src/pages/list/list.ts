@@ -14,6 +14,7 @@ import { map } from 'rxjs/operators'
 export class ListPage {
   private anyErrors: boolean;
   private finished: boolean;
+  
   items3: Array<any> = [];
   i: Array<{ id: string }>;
 

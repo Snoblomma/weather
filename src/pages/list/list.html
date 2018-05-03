@@ -7,10 +7,10 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content id="b" [style.backgroundImage]="'url(' + f + ')'">
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-  
-  <ion-item id="countryBar">
+
+  <!-- <ion-item id="countryBar">
     Country :  counrty 
   </ion-item>
   <ion-item id="weatherBar">
@@ -24,7 +24,7 @@
   </ion-item>
   <ion-item id="windBar">
     Wind speed:  wind 
-  </ion-item>
+  </ion-item> -->
 
   <ion-list *ngIf="items3.length > 0">
     <button ion-item *ngFor="let city of items3[0].predictions" (click)="getWeather(city.place_id, city.structured_formatting.main_text)">

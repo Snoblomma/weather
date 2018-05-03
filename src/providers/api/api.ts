@@ -31,4 +31,12 @@ export class ApiProvider {
   getPlaceDetails(placeId: string){
     return this.httpClient.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeId +'&key=AIzaSyBarlH0bIAdai_7JK2V-iGFKBO1tZCXSms');
   }
+
+  getPlacePhoto(photoreference: string){
+    return this.httpClient.get('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='+photoreference+'&key=AIzaSyBarlH0bIAdai_7JK2V-iGFKBO1tZCXSms');
+  }
+
+  getPhotoString(photoreference: string){
+    return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='+photoreference+'&key=AIzaSyBarlH0bIAdai_7JK2V-iGFKBO1tZCXSms';
+  }
 }

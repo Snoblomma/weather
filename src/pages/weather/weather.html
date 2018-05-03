@@ -5,7 +5,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content id="b" [style.backgroundImage]="'url(' + f + ')'">
   <ion-item>
     Country : {{ counrty }}
   </ion-item>
@@ -22,7 +22,9 @@
     Wind speed: {{ wind }}mps
   </ion-item>
 
-  <div id="main">
+  <!-- <img [src]="picToView"/> -->
+
+  <!-- <div id="main">
     <div id="cloud">
       <div id="five"></div>
       <div id="six"></div>
@@ -36,5 +38,5 @@
         </ul>
       </div>
     </div>
-  </div>
+  </div> -->
 </ion-content>
