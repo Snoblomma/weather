@@ -12,6 +12,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ApiProvider } from '../providers/api/api';
 import { AutoCompleteModule } from 'ionic2-auto-complete';
+import { NativeStorage } from '@ionic-native/native-storage';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { AutoCompleteModule } from 'ionic2-auto-complete';
     IonicModule.forRoot(MyApp),
     HttpClientModule,
     HttpModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -36,7 +39,8 @@ import { AutoCompleteModule } from 'ionic2-auto-complete';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ApiProvider
+    ApiProvider,
+    NativeStorage
   ]
 })
 export class AppModule {}
