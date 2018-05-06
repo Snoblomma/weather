@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { ListPage } from '../pages/list/list';
+import { PlacesPage } from '../pages/places/places';
 import { WeatherPage } from '../pages/weather/weather';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -19,6 +20,7 @@ import { IonicStorageModule } from '@ionic/storage';
   declarations: [
     MyApp,
     ListPage,
+    PlacesPage,
     WeatherPage
   ],
   imports: [
@@ -33,6 +35,7 @@ import { IonicStorageModule } from '@ionic/storage';
   entryComponents: [
     MyApp,
     ListPage,
+    PlacesPage,
     WeatherPage
   ],
   providers: [

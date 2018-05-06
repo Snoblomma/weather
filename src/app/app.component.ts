@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 
 import { ListPage } from '../pages/list/list';
+import { PlacesPage } from '../pages/places/places';
 import { WeatherPage } from '../pages/weather/weather';
 
 @Component({
@@ -13,7 +14,7 @@ import { WeatherPage } from '../pages/weather/weather';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ListPage;
+  rootPage: any = PlacesPage;
 
   pages: Array<{title: string, component: any}>;
 
@@ -21,7 +22,8 @@ export class MyApp {
     this.initializeApp();
 
     this.pages = [
-      { title: 'List', component: ListPage }
+      { title: 'List', component: ListPage },
+      { title: 'Places', component: PlacesPage }
     ];
 
   }

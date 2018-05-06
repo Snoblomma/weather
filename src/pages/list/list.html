@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content id="b" [style.backgroundImage]="'url(' + f + ')'">
+<ion-content>
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
 
   <ion-item *ngIf="value != null">
