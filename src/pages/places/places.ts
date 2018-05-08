@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
+import { PlaceDetailsPage } from '../place-details/place-details';
 
 @IonicPage()
 @Component({
@@ -104,5 +105,9 @@ export class PlacesPage {
         }
       );
     });
+  }
+
+  getPlaceDetails(result: any) {
+    this.navCtrl.push(PlaceDetailsPage, {result: result});
   }
 }

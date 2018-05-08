@@ -1,3 +1,53 @@
 page-place-details {
+  ion-header {
+    .toolbar {
+      position: absolute;
+      .toolbar-background {
+        background: transparent;
+      }
+      .toolbar-title {
+        color: white;
+        text-shadow: 1px 1px 1px #000;
+      }
+      .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default{
+        color: white;
+        text-shadow: 1px 1px 1px #000;
+      }
+    }
+  }
+  #place {
+    color: white;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: 300px;
+    padding: 0;
+  }
+  #place ion-label {
+    font-size: 2rem;
+    display: table;
+    position: absolute;
+    bottom: 0;
+  }
+  ion-label #name {
+    display: table-cell;
+    text-shadow: 1px 1px 1px #000;        
+  }
+  .name {
+    margin-left: 10px;
+    vertical-align: bottom;
+  }
 
+  // #placeName{
+  //   text-shadow: 1px 1px 1px #000;   
+  // }
+
+  .item-inner {
+    border-bottom: none !important;
+  }
+
+  .name p{
+    font-size: 1.6rem;
+  }
 }
