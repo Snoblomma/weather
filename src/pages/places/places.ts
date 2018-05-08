@@ -63,11 +63,12 @@ export class PlacesPage {
 
     this.placesDecription = [
       { name: "Powerscourt", placeId: "ChIJp-IbAv2mZ0gRvIV9f0y-uz0", image: "string" },
-      { name: "Newbridge", placeId: "ChIJLeT0RiIaZ0gRJDhoYhpxe2Q", image: "string" },
+      { name: "Newbridge", placeId: "ChIJYx2pjSMaZ0gRcG9LYqCuQII", image: "string" },
       { name: "Irish National Stud", placeId: "ChIJDYhC3dB4XUgR-WIfHkiJzhc", image: "string" },
-      { name: "Glendalough", placeId: "ChIJi1eprKqXZ0gRp73t20i0dMo", image: "string" },
+      { name: "Glendalough", placeId: "ChIJFxLcsMuXZ0gRV-Gogyek8T0", image: "string" },
       { name: "Kilruddery House", placeId: "ChIJW2Vey4-oZ0gRNKiHuxIKtcc", image: "string" },
-      { name: "Giants Causeway", placeId: "ChIJlYL0PzQpYEgR761lt5T7qoI", image: "string" }
+      { name: "Giants Causeway", placeId: "ChIJD48V9EQpYEgR0h_eGaCMIvM", image: "string" },
+      { name: "Newgrange", placeId: "ChIJL-3aomI4Z0gRF4zQvv0Phcw", image: "string" }
     ];
     this.placesResult2 = [{
       place: "This is Place With Very Long Name", image: "https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350", weather: this.weathers.fog_partly_cloudy_night

@@ -26,6 +26,16 @@
       </ion-row>
     </ion-grid>
   </ion-item>
+  <ion-item-divider color="light" *ngIf="types != ''">Types</ion-item-divider>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let type of types">
+          <p>{{type}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
   <ion-item-divider color="light">WEATHER</ion-item-divider>
   <ion-item>
     <ion-grid>
@@ -43,10 +53,13 @@
   <ion-item>
     <ion-grid>
       <ion-row>
-        <ion-col>
+        <ion-col *ngIf="openingHours != ''">
           <p>{{openingHours[5]}}</p>
           <p>{{openingHours[6]}}</p>
         </ion-col>
+        <ion-col *ngIf="openingHours == ''">
+            <p>unknown</p>
+          </ion-col>
       </ion-row>
     </ion-grid>
   </ion-item>
