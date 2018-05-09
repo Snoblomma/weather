@@ -23,6 +23,7 @@ page-place-details {
     background-size: cover;
     height: 300px;
     padding: 0;
+    
   }
   #place ion-label {
     font-size: 2rem;
@@ -39,15 +40,22 @@ page-place-details {
     vertical-align: bottom;
   }
 
-  // #placeName{
-  //   text-shadow: 1px 1px 1px #000;   
-  // }
-
   .item-inner {
     border-bottom: none !important;
   }
 
   .name p{
     font-size: 1.6rem;
+  }
+
+  .sticky{
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    z-index: -1;
+    height: 400px;
+    // padding: 10px 20px;
   }
 }

@@ -5,11 +5,30 @@
 </ion-header>
 
 <ion-content>
-  <ion-item id="place" [style.backgroundImage]="'url(' + image + ')'">
+  <ion-slides class="sticky">
+    <ion-slide>
+      <ion-item id="place" [style.backgroundImage]="'url(' + image + ')'">
+        <div class="name">
+          <label id="placeName">{{placeName}}</label>
+        </div>
+      </ion-item>
+    </ion-slide>
+    <ion-slide>
+      <ion-item id="place" [style.backgroundImage]="'url(' + image + ')'">
+        <div class="name">
+          <label id="placeName">{{placeName}}</label>
+        </div>
+      </ion-item>
+    </ion-slide>
+    <ion-slide>
+        <h3>BLaaa</h3>
+      </ion-slide>
+  </ion-slides>
+  <!-- <ion-item id="place" [style.backgroundImage]="'url(' + image + ')'">
     <div class="name">
       <label id="placeName">{{placeName}}</label>
     </div>
-  </ion-item>
+  </ion-item> -->
   <ion-item id="general">
     <ion-grid>
       <ion-row>
@@ -49,17 +68,14 @@
       </ion-row>
     </ion-grid>
   </ion-item>
-  <ion-item-divider color="light">OPENING HOURS</ion-item-divider>
+  <ion-item-divider color="light" *ngIf="openingHours != ''">OPENING HOURS</ion-item-divider>
   <ion-item>
     <ion-grid>
       <ion-row>
-        <ion-col *ngIf="openingHours != ''">
+        <ion-col>
           <p>{{openingHours[5]}}</p>
           <p>{{openingHours[6]}}</p>
         </ion-col>
-        <ion-col *ngIf="openingHours == ''">
-            <p>unknown</p>
-          </ion-col>
       </ion-row>
     </ion-grid>
   </ion-item>
