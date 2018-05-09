@@ -17,6 +17,7 @@ export class PlaceDetailsPage {
   public photoreference: any;
   public openingHours: any = '';
   public types: any = '';
+  public images: Array<any> = [];
 
 
   constructor(
@@ -33,6 +34,8 @@ export class PlaceDetailsPage {
   }
 
   initialize() {
+    // this.images.push(this.image);
+    // this.images.push(this.image);
     this.getComponents();
     this.getImage();
   }
@@ -41,13 +44,12 @@ export class PlaceDetailsPage {
     if (this.result['place']) {
       this.photoreference = this.result.place.result.photos[0].photo_reference;
       this.placeName = this.result.place.result.name;
-      this.image = this.apiProvider.getPhotoString(this.photoreference);
       this.rating = this.result.place.result.rating;
       this.drive = this.result.distance;
-      if (this.result.place.result['opening_hours']){
+      if (this.result.place.result['opening_hours']) {
         this.openingHours = this.result.place.result.opening_hours.weekday_text;
       }
-      if (this.result.place.result['types']){
+      if (this.result.place.result['types']) {
         this.types = this.result.place.result.types;
       }
 
@@ -55,13 +57,15 @@ export class PlaceDetailsPage {
   }
 
   getImage() {
-    let placeDetails: any;
-    placeDetails = this.apiProvider.getPlaceDetails(this.placeId);
-    placeDetails.subscribe(
-      res => {
-        var photoreference = res.result.photos[0].photo_reference;
+    if (this.result['place']) {
+      var max = this.result.place.result.photos.length;
+      max = max < 10 ? max : 10
+      for (var index = 0; index < max; index++) {
+        var photoreference = this.result.place.result.photos[index].photo_reference;
         this.image = this.apiProvider.getPhotoString(photoreference);
+        var t = this.apiProvider.getPhotoString(photoreference);
+        this.images.push(this.image);
       }
-    );
+    }
   }
 }
