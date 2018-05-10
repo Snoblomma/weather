@@ -34,8 +34,8 @@ export class PlaceDetailsPage {
   }
 
   initialize() {
-    // this.images.push(this.image);
-    // this.images.push(this.image);
+    //this.images.push(this.image);
+    //this.images.push(this.image);
     this.getComponents();
     this.getImage();
   }

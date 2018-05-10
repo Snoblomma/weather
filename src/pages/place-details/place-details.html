@@ -8,14 +8,26 @@
   <ion-slides class="sticky" loop="true">
     <ion-slide *ngFor="let image of images">
       <ion-item id="place" [style.backgroundImage]="'url(' + image + ')'">
-        <div class="name">
+        <!-- <div class="name">
           <label id="placeName">{{placeName}}</label>
-        </div>
+        </div> -->
       </ion-item>
     </ion-slide>
   </ion-slides>
+
+  <ion-item class="title">
+    <div class="name">
+      <label id="placeName">{{placeName}}</label>
+    </div>
+  </ion-item>
+
   <ion-item id="general">
     <ion-grid>
+      <ion-row>
+        <ion-col>
+
+        </ion-col>
+      </ion-row>
       <ion-row>
         <ion-col>
           <p><b>Rating:</b> {{rating}} </p>
