@@ -19,8 +19,9 @@ export class PlaceDetailsPage {
   public openingHours: any = '';
   public types: any = '';
   public images: Array<any> = [];
-  lat: any;
-  lng: any;
+  public navLink: any = '';
+  public lat: any;
+  public lng: any;
   counrty: any;
   description: any;
   temperature: any;
@@ -52,6 +53,11 @@ export class PlaceDetailsPage {
     this.getWeathers();
     this.getComponents();
     this.getImage();
+    //this.getNavLink();
+  }
+
+  getNavLink(){
+    this.navLink = "https://www.google.com/maps/dir/Current+Location/" + this.lat + "," + this.lng;
   }
 
   getWeathers(){
@@ -63,6 +69,7 @@ export class PlaceDetailsPage {
         this.lng = res.result.geometry.location.lng; 
         this.photoreference = res.result.photos[0].photo_reference;
         this.getWeather(this.lat, this.lng);    
+        this.navLink = "https://maps.google.com?saddr=Current+Location&daddr=" + this.lat +   "," + this.lng;
       }
     );
 
@@ -119,5 +126,9 @@ export class PlaceDetailsPage {
         this.images.push(this.image);
       }
     }
+  }
+
+  navigateToPlace(){
+    this.navLink = "https://www.google.com/maps/dir/Current+Location/43.12345,-76.12345";
   }
 }

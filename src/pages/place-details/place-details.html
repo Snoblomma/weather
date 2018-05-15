@@ -27,14 +27,24 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <p><b>Rating:</b> {{rating}} </p>
-          <p><b>Drive:</b> {{drive}} </p>
-          <p><b>Visited:</b></p>
+          <p>
+            <b>Rating:</b> {{rating}} </p>
+          <p>
+            <b>Drive:</b> {{drive}} </p>
+          <p>
+            <b>Visited:</b>
+          </p>
         </ion-col>
         <ion-col>
-          <p><b>Coffee:</b> </p>
-          <p><b>Entry:</b> </p>
-          <p><b>Parking:</b> </p>
+          <p>
+            <b>Coffee:</b>
+          </p>
+          <p>
+            <b>Entry:</b>
+          </p>
+          <p>
+            <b>Parking:</b>
+          </p>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -54,7 +64,9 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <p><b>Saturday</b></p>
+          <p>
+            <b>Saturday</b>
+          </p>
           <p *ngIf="r!=null">r: {{r.message}}</p>
           <p>Country : {{ counrty }}</p>
           <p>Weather: {{ description }}</p>
@@ -82,7 +94,5 @@
 </ion-content>
 
 <ion-footer text-center>
-  <!-- <ion-navbar text-center> -->
-    <button ion-button block color="light" class="submit" >Navigate</button>
-  <!-- </ion-navbar> -->
+    <a ion-button block color="dark" [attr.href]="navLink" clear>Navigate</a>
 </ion-footer>
