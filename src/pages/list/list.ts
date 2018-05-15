@@ -18,6 +18,8 @@ export class ListPage {
   private finished: boolean;
 
   value: any;
+  name: any;
+  t: any;
   items3: Array<any> = [];
   i: Array<{ id: string }>;
 
@@ -36,6 +38,7 @@ export class ListPage {
       { id: 'humBar' },
       { id: 'windBar' }];
     this.initialize();
+    this.getName();
   }
 
   initialize() {
@@ -88,5 +91,14 @@ export class ListPage {
 
   getWeather(placeId, placeName) {
     this.navCtrl.push(WeatherPage, { placeId: placeId, placeName: placeName });
+  }
+
+  getName(){
+    this.t = this.apiProvider.getName();
+    this.t.subscribe(
+      res => {
+        this.name = res.name;
+      }
+    );
   }
 }

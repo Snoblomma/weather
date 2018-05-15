@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
+import { Observable } from 'rxjs/Observable';
 
 @IonicPage()
 @Component({
@@ -18,6 +19,18 @@ export class PlaceDetailsPage {
   public openingHours: any = '';
   public types: any = '';
   public images: Array<any> = [];
+  lat: any;
+  lng: any;
+  counrty: any;
+  description: any;
+  temperature: any;
+  humidity: any;
+  wind: any;
+  weathers: Observable<any>;
+  placeDetails: Observable<any>;
+  private anyErrors: boolean;
+  private finished: boolean;
+  r: any;
 
 
   constructor(
@@ -36,8 +49,47 @@ export class PlaceDetailsPage {
   initialize() {
     //this.images.push(this.image);
     //this.images.push(this.image);
+    this.getWeathers();
     this.getComponents();
     this.getImage();
+  }
+
+  getWeathers(){
+    this.placeId = this.result.place.result.place_id;
+    this.placeDetails = this.apiProvider.getPlaceDetails(this.placeId);
+    this.placeDetails.subscribe(
+      res => { 
+        this.lat = res.result.geometry.location.lat; 
+        this.lng = res.result.geometry.location.lng; 
+        this.photoreference = res.result.photos[0].photo_reference;
+        this.getWeather(this.lat, this.lng);    
+      }
+    );
+
+   
+  }
+
+  getWeather(lat: string, lng: string){
+    this.weathers = this.apiProvider.getWeatherCoordinates(lat, lng);
+    this.weathers.subscribe(
+      value => {
+        this.counrty = value.sys.country;
+        this.description = value.weather[0].description;
+        this.temperature = value.main.temp;
+        this.humidity = value.main.humidity;
+        this.wind = value.wind.speed;},
+      error => this.anyErrors = true,
+      () => this.finished = true
+    );
+
+    var y = this.apiProvider.getWeather16Days();
+    y.subscribe(
+      value => {
+        this.r = value;
+      },
+      error => this.anyErrors = true,
+      () => this.finished = true
+    );
   }
 
   getComponents() {

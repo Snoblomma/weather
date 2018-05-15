@@ -68,7 +68,10 @@ export class PlacesPage {
       { name: "Glendalough", placeId: "ChIJFxLcsMuXZ0gRV-Gogyek8T0", image: "string" },
       { name: "Kilruddery House", placeId: "ChIJW2Vey4-oZ0gRNKiHuxIKtcc", image: "string" },
       { name: "Giants Causeway", placeId: "ChIJD48V9EQpYEgR0h_eGaCMIvM", image: "string" },
-      { name: "Newgrange", placeId: "ChIJL-3aomI4Z0gRF4zQvv0Phcw", image: "string" }
+      { name: "Newgrange", placeId: "ChIJL-3aomI4Z0gRF4zQvv0Phcw", image: "string" },
+      { name: "Hill of Tara", placeId: "ChIJb5F69fRCZ0gRpKZCtzStjh8", image: "string" },
+      { name: "Trim Castle", placeId: "ChIJDZMCKx1eZ0gR8P0G--k8QVA", image: "string" },
+      { name: "Belvedere House", placeId: "ChIJUe0IUam_XUgRRBVzJlvE8Dc", image: "string" }
     ];
     this.placesResult2 = [{
       place: "This is Place With Very Long Name", image: "https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350", weather: this.weathers.fog_partly_cloudy_night
