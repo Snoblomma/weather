@@ -60,32 +60,21 @@ export class PlacesPage {
       windy_night: 'assets/imgs/weather-icons/weather-icons/windy_night.png'
     };
 
-
-    this.placesDecription = [
-      { name: "Powerscourt", placeId: "ChIJp-IbAv2mZ0gRvIV9f0y-uz0", image: "string" },
-      { name: "Newbridge", placeId: "ChIJYx2pjSMaZ0gRcG9LYqCuQII", image: "string" },
-      { name: "Irish National Stud", placeId: "ChIJDYhC3dB4XUgR-WIfHkiJzhc", image: "string" },
-      { name: "Glendalough", placeId: "ChIJFxLcsMuXZ0gRV-Gogyek8T0", image: "string" },
-      { name: "Kilruddery House", placeId: "ChIJW2Vey4-oZ0gRNKiHuxIKtcc", image: "string" },
-      { name: "Giants Causeway", placeId: "ChIJD48V9EQpYEgR0h_eGaCMIvM", image: "string" },
-      { name: "Newgrange", placeId: "ChIJL-3aomI4Z0gRF4zQvv0Phcw", image: "string" },
-      { name: "Hill of Tara", placeId: "ChIJb5F69fRCZ0gRpKZCtzStjh8", image: "string" },
-      { name: "Trim Castle", placeId: "ChIJDZMCKx1eZ0gR8P0G--k8QVA", image: "string" },
-      { name: "Belvedere House", placeId: "ChIJUe0IUam_XUgRRBVzJlvE8Dc", image: "string" }
-    ];
-    this.placesResult2 = [{
-      place: "This is Place With Very Long Name", image: "https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350", weather: this.weathers.fog_partly_cloudy_night
-    }, {
-      place: "This is Place Too", image: "https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350", weather: this.weathers.hail_night
-    }]
     this.getPlaces();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PlacesPage');
+  getPlaces(){
+    let list = this.apiProvider.getPlacesList();
+    list.subscribe(
+      res => {
+        this.placesDecription = res['places'];
+        console.log(this.placesDecription);
+        this.getPlacesDetails();
+      }
+    );
   }
 
-  getPlaces() {
+  getPlacesDetails() {
     let placeDetails: any;
     this.placesDecription.forEach(element => {
       placeDetails = this.apiProvider.getPlaceDetails(element.placeId);

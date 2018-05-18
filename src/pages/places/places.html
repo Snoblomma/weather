@@ -8,25 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngIf="placesResult.length == 0">
-    <button ion-item *ngFor="let result of placesResult2" id="place" [style.backgroundImage]="'url(' + result.image + ')'" (click)="getPlaceDetails(result.place, result.place)">
-        <div class="name">
-          <label>{{result.place}}</label>
-          <p class="rating">Rating: 4.5 </p>
-        </div>
-        <!-- <div class="weather">
-          <img [src]="result.weather"/>
-        </div>
-        <div class="temp">
-          <label>19&#8451;</label>
-        </div>    -->
-        <div class="drive">
-          <ion-icon name="car"></ion-icon>
-          <label>19 mins</label>
-        </div>          
-    </button >
-  </ion-list> 
-  <ion-list *ngIf="placesResult.length > 0">
+  <ion-list *ngIf="placesResult != null">
     <button ion-item *ngFor="let result of placesResult" id="place" [style.backgroundImage]="'url(' + result.image + ')'" (click)="getPlaceDetails(result)">
       <div class="name">
         <label>{{result.place.result.name}}</label>

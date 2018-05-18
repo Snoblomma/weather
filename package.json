@@ -59,5 +59,6 @@
     "platforms": [
       "android"
     ]
-  }
+  },
+  "start": "ionic serve --proxy-config proxy.conf.js"
 }

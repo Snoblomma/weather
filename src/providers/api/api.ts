@@ -32,6 +32,10 @@ export class ApiProvider {
     return this.httpClient.get('https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + keyword + '&types=(cities)&key=AIzaSyBarlH0bIAdai_7JK2V-iGFKBO1tZCXSms');
   }
 
+  getPlacesList() {
+    return this.httpClient.get('../assets/data/places.json');
+  }
+
   getPlaceDetails(placeId: string) {
     return this.httpClient.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeId + '&key=AIzaSyBarlH0bIAdai_7JK2V-iGFKBO1tZCXSms');
   }
