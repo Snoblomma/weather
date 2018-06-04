@@ -21,7 +21,7 @@ export class ApiProvider {
   }
 
   getWeather16Days() {
-    return this.httpClient.get('http://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=ec44e7ff2e0597cf35d85dd13062e22d');
+    return this.httpClient.get('https://samples.openweathermap.org/data/2.5/forecast/daily?q=London&appid=ec44e7ff2e0597cf35d85dd13062e22d');
   }
 
   getCountries() {
@@ -33,7 +33,7 @@ export class ApiProvider {
   }
 
   getPlacesList() {
-    return this.httpClient.get('../assets/data/places.json');
+    return this.httpClient.get('/assets/data/places.json');
   }
 
   getPlaceDetails(placeId: string) {

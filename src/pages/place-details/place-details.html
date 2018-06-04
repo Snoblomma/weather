@@ -67,9 +67,10 @@
           <p>
             <b>Saturday</b>
           </p>
-          <p *ngIf="r!=null">r: {{r.message}}</p>
+          <p *ngIf="r!=null">r: {{r}}</p>
           <p>Country : {{ counrty }}</p>
           <p>Weather: {{ description }}</p>
+          <!-- <p *ngIf="r!=null">Weather: {{r.list[6].weather[0].description}}</p> -->
           <p>Temperature: {{ temperature }}&#8451;</p>
           <p>Humidity: {{ humidity }}%</p>
           <p>Wind speed: {{ wind }}mps</p>

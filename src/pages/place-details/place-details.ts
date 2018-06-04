@@ -93,6 +93,7 @@ export class PlaceDetailsPage {
     y.subscribe(
       value => {
         this.r = value;
+        console.log(this.r.list);
       },
       error => this.anyErrors = true,
       () => this.finished = true
