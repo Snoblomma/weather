@@ -18,6 +18,7 @@ export class ListPage {
   private finished: boolean;
 
   value: any;
+  notes: any;
   name: any;
   t: any;
   items3: Array<any> = [];
@@ -38,22 +39,11 @@ export class ListPage {
       { id: 'humBar' },
       { id: 'windBar' }];
     this.initialize();
-    this.getName();
   }
 
   initialize() {
-
-    // this.storage.get('name').then(
-    //   data => this.value = data,
-    //   error => console.error(error)
-    // );
-
-    // this.storage.set('name', 'Max');
-
-    // this.storage.get('name').then(
-    //   data => this.value = data,
-    //   error => console.error(error)
-    // );
+    this.getName();
+    this.getNotes();
   }
 
   plusOne() {
@@ -98,6 +88,16 @@ export class ListPage {
     this.t.subscribe(
       res => {
         this.name = res.name;
+      }
+    );
+  }
+
+  getNotes(){
+    this.t = this.apiProvider.getNotes();
+    this.t.subscribe(
+      res => {
+        console.log(res['objects']);
+        this.notes = res['objects'];
       }
     );
   }

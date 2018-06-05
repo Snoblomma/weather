@@ -18,6 +18,10 @@
     Name : {{name}}
   </ion-item>
 
+  <ion-item *ngIf="notes != null ">
+    Backend test : {{notes[1].body}}
+  </ion-item>
+
   <button ion-item (click)="plusOne()">+1</button >
 
   <ion-list *ngIf="items3.length > 0">

@@ -59,4 +59,8 @@ export class ApiProvider {
   getName(){
     return this.httpClient.get('https://localhost:44304/api/todo');
   }
+
+  getNotes(){
+    return this.httpClient.get('http://localhost:8000/api/note/');
+  }
 }
