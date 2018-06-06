@@ -36,6 +36,10 @@ export class ApiProvider {
     return this.httpClient.get('/assets/data/places.json');
   }
 
+  getPlacesListLocalBackend() {
+    return this.httpClient.get('http://localhost:8000/api/place/');
+  }
+
   getPlaceDetails(placeId: string) {
     return this.httpClient.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeId + '&key=AIzaSyBarlH0bIAdai_7JK2V-iGFKBO1tZCXSms');
   }
@@ -60,7 +64,7 @@ export class ApiProvider {
     return this.httpClient.get('https://localhost:44304/api/todo');
   }
 
-  getNotes(){
-    return this.httpClient.get('http://localhost:8000/api/note/');
+  getPlaces(){
+    return this.httpClient.get('http://localhost:8000/api/place/');
   }
 }

@@ -18,7 +18,7 @@ export class ListPage {
   private finished: boolean;
 
   value: any;
-  notes: any;
+  places: any;
   name: any;
   t: any;
   items3: Array<any> = [];
@@ -93,11 +93,11 @@ export class ListPage {
   }
 
   getNotes(){
-    this.t = this.apiProvider.getNotes();
+    this.t = this.apiProvider.getPlaces();
     this.t.subscribe(
       res => {
         console.log(res['objects']);
-        this.notes = res['objects'];
+        this.places = res['objects'];
       }
     );
   }

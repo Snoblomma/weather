@@ -64,10 +64,10 @@ export class PlacesPage {
   }
 
   getPlaces(){
-    let list = this.apiProvider.getPlacesList();
+    let list = this.apiProvider.getPlacesListLocalBackend();
     list.subscribe(
       res => {
-        this.placesDecription = res['places'];
+        this.placesDecription = res['objects'];
         console.log(this.placesDecription);
         this.getPlacesDetails();
       }
@@ -77,7 +77,7 @@ export class PlacesPage {
   getPlacesDetails() {
     let placeDetails: any;
     this.placesDecription.forEach(element => {
-      placeDetails = this.apiProvider.getPlaceDetails(element.placeId);
+      placeDetails = this.apiProvider.getPlaceDetails(element.place_id);
       placeDetails.subscribe(
         res => {
           var place: Array<any> = [];
