@@ -38,7 +38,6 @@ export class PlaceDetailsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public apiProvider: ApiProvider) {
-    //this.placeName = this.navParams.get('placeName');
     this.result = this.navParams.get('result');
     this.initialize();
   }
@@ -48,12 +47,9 @@ export class PlaceDetailsPage {
   }
 
   initialize() {
-    //this.images.push(this.image);
-    //this.images.push(this.image);
     this.getWeathers();
     this.getComponents();
     this.getImage();
-    //this.getNavLink();
   }
 
   getNavLink(){

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Add Place</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar (ionInput)="getPlaces($event)" *ngIf="selected==false"></ion-searchbar>
+  <ion-list *ngIf="places != null && selected==false">
+    <button ion-item *ngFor="let place of places.predictions" (click)="selectPlace(place)">
+      {{ place.description }},
+    </button>
+  </ion-list>
+
+  <ion-slides class="sticky" loop="true" *ngIf="selected==true">
+    <ion-slide *ngFor="let image of images">
+      <ion-item id="place" [style.backgroundImage]="'url(' + image + ')'">
+      </ion-item>
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>
+
+<ion-footer text-center *ngIf="selected==true">
+  <ion-toolbar>
+    <button color="danger" ion-button text-center style="width:49%">
+      Cancel
+    </button>
+    <button color="secondary" ion-button text-center style="width:49%">
+      Add
+    </button>
+  </ion-toolbar>
+</ion-footer>

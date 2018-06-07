@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
 import { PlaceDetailsPage } from '../place-details/place-details';
+import { AddPlacePage } from '../add-place/add-place';
 
 @IonicPage()
 @Component({
@@ -23,6 +24,7 @@ export class PlacesPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public modalCtrl: ModalController,
     public apiProvider: ApiProvider) {
 
     this.weathers = {
@@ -63,7 +65,7 @@ export class PlacesPage {
     this.getPlaces();
   }
 
-  getPlaces(){
+  getPlaces() {
     let list = this.apiProvider.getPlacesListLocalBackend();
     list.subscribe(
       res => {
@@ -80,27 +82,33 @@ export class PlacesPage {
       placeDetails = this.apiProvider.getPlaceDetails(element['place_id']);
       placeDetails.subscribe(
         res => {
-          var place: Array<any> = [];
-          var photoreference = res.result.photos[0].photo_reference;
-          this.lat = res.result.geometry.location.lat; 
-          this.lng = res.result.geometry.location.lng; 
-          var image = this.apiProvider.getPhotoString(photoreference);
+          if (res.result != null) {
+            var place: Array<any> = [];
+            var photoreference = res.result.photos[0].photo_reference;
+            this.lat = res.result.geometry.location.lat;
+            this.lng = res.result.geometry.location.lng;
+            var image = this.apiProvider.getPhotoString(photoreference);
 
-          let t: any;
-          t = this.apiProvider.getDistanceFromHome(this.lat, this.lng);
-          t.subscribe(
-            value => {
-              this.distance = value.rows[0].elements[0].duration.text;
-              var result: { place: any, image: string, weather: any, distance: any } = { place: res, image: image, weather: this.weathers.clear_night, distance: this.distance };
-              this.placesResult.push(result);
-            }
-          );
+            let t: any;
+            t = this.apiProvider.getDistanceFromHome(this.lat, this.lng);
+            t.subscribe(
+              value => {
+                this.distance = value.rows[0].elements[0].duration.text;
+                var result: { place: any, image: string, weather: any, distance: any } = { place: res, image: image, weather: this.weathers.clear_night, distance: this.distance };
+                this.placesResult.push(result);
+              }
+            );
+          }
         }
       );
     });
   }
 
   getPlaceDetails(result: any) {
-    this.navCtrl.push(PlaceDetailsPage, {result: result});
+    this.navCtrl.push(PlaceDetailsPage, { result: result });
+  }
+
+  addPlace() {
+    this.navCtrl.push(AddPlacePage);
   }
 }

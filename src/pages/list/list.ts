@@ -42,8 +42,7 @@ export class ListPage {
   }
 
   initialize() {
-    this.getName();
-    this.getNotes();
+  
   }
 
   plusOne() {
@@ -81,24 +80,5 @@ export class ListPage {
 
   getWeather(placeId, placeName) {
     this.navCtrl.push(WeatherPage, { placeId: placeId, placeName: placeName });
-  }
-
-  getName(){
-    this.t = this.apiProvider.getName();
-    this.t.subscribe(
-      res => {
-        this.name = res.name;
-      }
-    );
-  }
-
-  getNotes(){
-    this.t = this.apiProvider.getPlaces();
-    this.t.subscribe(
-      res => {
-        console.log(res['objects']);
-        this.places = res['objects'];
-      }
-    );
   }
 }

@@ -29,7 +29,11 @@ export class ApiProvider {
   }
 
   getCities(keyword: string) {
-    return this.httpClient.get('https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + keyword + '&types=(cities)&key=AIzaSyBarlH0bIAdai_7JK2V-iGFKBO1tZCXSms');
+    return this.httpClient.get('https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + keyword + '&types=(cities)&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw');
+  }
+
+  getPlaces(keyword: string) {
+    return this.httpClient.get('https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + keyword + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw');
   }
 
   getPlacesList() {
@@ -41,30 +45,26 @@ export class ApiProvider {
   }
 
   getPlaceDetails(placeId: string) {
-    return this.httpClient.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeId + '&key=AIzaSyBarlH0bIAdai_7JK2V-iGFKBO1tZCXSms');
+    return this.httpClient.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeId + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw');
   }
 
   getPlacePhoto(photoreference: string) {
-    return this.httpClient.get('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' + photoreference + '&key=AIzaSyBarlH0bIAdai_7JK2V-iGFKBO1tZCXSms');
+    return this.httpClient.get('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' + photoreference + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw');
   }
 
   getPhotoString(photoreference: string) {
-    return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' + photoreference + '&key=AIzaSyBarlH0bIAdai_7JK2V-iGFKBO1tZCXSms';
+    return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' + photoreference + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw';
   }
 
   getDistanceFromHome(lat: string, lng: string) {
-    return this.httpClient.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins=53.2472036,-6.182852100000001&destinations=' + lat + ',' + lng + '&key=AIzaSyBarlH0bIAdai_7JK2V-iGFKBO1tZCXSms');
+    return this.httpClient.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins=53.2472036,-6.182852100000001&destinations=' + lat + ',' + lng + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw');
   }
 
   getDistance() {
-    return this.httpClient.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins=53.2472036,-6.182852100000001&destinations=52.67698000000001,-7.20547&key=AIzaSyBarlH0bIAdai_7JK2V-iGFKBO1tZCXSms');
+    return this.httpClient.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins=53.2472036,-6.182852100000001&destinations=52.67698000000001,-7.20547&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw');
   }
 
-  getName(){
-    return this.httpClient.get('https://localhost:44304/api/todo');
-  }
-
-  getPlaces(){
-    return this.httpClient.get('http://localhost:8000/api/place/');
+  addPlace(place: any){
+    console.log(place);
   }
 }

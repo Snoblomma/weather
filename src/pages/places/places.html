@@ -1,10 +1,17 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button menuToggle icon-only>
+        <ion-icon name='menu'></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>Places</ion-title>
-  </ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addPlace()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -17,7 +24,7 @@
       <div class="drive">
         <ion-icon name="car"></ion-icon>
         <label>{{result.distance}}</label>
-      </div>     
+      </div>
     </button>
   </ion-list>
 </ion-content>

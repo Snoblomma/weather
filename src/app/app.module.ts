@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { ListPage } from '../pages/list/list';
 import { PlacesPage } from '../pages/places/places';
 import { WeatherPage } from '../pages/weather/weather';
+import { AddPlacePage } from '../pages/add-place/add-place';
 import { PlaceDetailsPage } from '../pages/place-details/place-details';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -23,7 +24,8 @@ import { IonicStorageModule } from '@ionic/storage';
     ListPage,
     PlacesPage,
     PlaceDetailsPage,
-    WeatherPage
+    WeatherPage,
+    AddPlacePage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { IonicStorageModule } from '@ionic/storage';
     ListPage,
     PlacesPage,
     PlaceDetailsPage,
-    WeatherPage
+    WeatherPage,
+    AddPlacePage
   ],
   providers: [
     StatusBar,

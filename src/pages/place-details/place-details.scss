@@ -15,26 +15,7 @@ page-place-details {
       }
     }
   }
-  #place {
-    color: white;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-    height: 300px;
-    padding: 0;
-    
-  }
-  #place ion-label {
-    font-size: 2rem;
-    display: table;
-    position: absolute;
-    bottom: 0;
-  }
-  ion-label #name {
-    display: table-cell;
-    text-shadow: 1px 1px 1px #000;        
-  }
+
   .name {
     margin-left: 10px;
     vertical-align: bottom;
@@ -46,17 +27,6 @@ page-place-details {
 
   .name p{
     font-size: 1.6rem;
-  }
-
-  .sticky{
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: block;
-    z-index: -1;
-    height: 400px;
-    // padding: 10px 20px;
   }
 
   .title{
