@@ -37,7 +37,7 @@ export class ApiProvider {
   }
 
   getPlacesListLocalBackend() {
-    return this.httpClient.get('http://localhost:8000/api/place/');
+    return this.httpClient.get('https://agile-springs-70240.herokuapp.com/api/place/');
   }
 
   getPlaceDetails(placeId: string) {

@@ -77,7 +77,7 @@ export class PlacesPage {
   getPlacesDetails() {
     let placeDetails: any;
     this.placesDecription.forEach(element => {
-      placeDetails = this.apiProvider.getPlaceDetails(element.place_id);
+      placeDetails = this.apiProvider.getPlaceDetails(element['place_id']);
       placeDetails.subscribe(
         res => {
           var place: Array<any> = [];
