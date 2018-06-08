@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import { ApiProvider } from './../../providers/api/api';
 import { PlaceDetailsPage } from '../place-details/place-details';
 import { AddPlacePage } from '../add-place/add-place';
+import { DataStorageProvider } from '../../providers/data-storage/data-storage';
 
 @IonicPage()
 @Component({
@@ -25,7 +26,8 @@ export class PlacesPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
-    public apiProvider: ApiProvider) {
+    public apiProvider: ApiProvider,
+    public dataStorageProvider: DataStorageProvider) {
 
     this.weathers = {
       clear_day: 'assets/imgs/weather-icons/weather-icons/clear_day.png',
@@ -69,7 +71,10 @@ export class PlacesPage {
     let list = this.apiProvider.getPlacesListLocalBackend();
     list.subscribe(
       res => {
-        this.placesDecription = res['objects'];
+        let places = res['objects'];
+        this.placesDecription = places;
+        this.dataStorageProvider.places = places;
+        this.dataStorageProvider.savePlaces();
         console.log(this.placesDecription);
         this.getPlacesDetails();
       }

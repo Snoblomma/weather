@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { DataStorageProvider } from '../data-storage/data-storage';
 import 'rxjs/add/operator/map'
 
 @Injectable()
 export class ApiProvider {
 
   constructor(
-    public httpClient: HttpClient,
-    private http: Http) {
-
+    private httpClient: HttpClient,
+    private http: Http,
+    private dataStorageProvider: DataStorageProvider) {
   }
 
   getWeatherKeyword(keyword: string) {
@@ -64,7 +65,31 @@ export class ApiProvider {
     return this.httpClient.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins=53.2472036,-6.182852100000001&destinations=52.67698000000001,-7.20547&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw');
   }
 
-  addPlace(place: any){
-    console.log(place);
+  addPlace(place_id, name, visited) {
+    var data = {
+      "place_id": place_id,
+      "name": name,
+      "visited": true
+    };
+
+    
+
+    // this.httpClient.post('https://agile-springs-70240.herokuapp.com/api/place/', data).subscribe(
+    //   value => console.log(value),
+    //   error => console.log(error)
+    // )
+  }
+
+  
+
+  getResourceId(place_id){
+    let k = this.dataStorageProvider.places;
+    k.filter((item) => {
+      if (item.place_id == place_id) {
+        console.log("resource_uri " + item.place_id);
+        return item.resource_uri;
+      }
+      return null;
+    })
   }
 }
