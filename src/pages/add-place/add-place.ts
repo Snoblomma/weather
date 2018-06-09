@@ -58,9 +58,6 @@ export class AddPlacePage {
   }
 
   addPlace() {
-
-
-    console.log(this.selectedPlace);
     let place_id = this.selectedPlace.place_id;
     let name = this.selectedPlace.structured_formatting.main_text;
     let visited = false;

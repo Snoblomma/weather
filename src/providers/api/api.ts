@@ -72,7 +72,7 @@ export class ApiProvider {
       "visited": true
     };
 
-    
+
 
     // this.httpClient.post('https://agile-springs-70240.herokuapp.com/api/place/', data).subscribe(
     //   value => console.log(value),
@@ -80,16 +80,12 @@ export class ApiProvider {
     // )
   }
 
-  
-
-  getResourceId(place_id){
-    let k = this.dataStorageProvider.places;
-    k.filter((item) => {
-      if (item.place_id == place_id) {
-        console.log("resource_uri " + item.place_id);
-        return item.resource_uri;
-      }
-      return null;
-    })
+  removePlace(resource_uri) {
+    let link = 'https://agile-springs-70240.herokuapp.com' + resource_uri;
+    console.log(link);
+    this.http.delete(link).subscribe(
+      value => console.log(value),
+      error => console.log(error)
+    );
   }
 }

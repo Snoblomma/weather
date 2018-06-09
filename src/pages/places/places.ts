@@ -11,13 +11,9 @@ import { DataStorageProvider } from '../../providers/data-storage/data-storage';
   templateUrl: 'places.html',
 })
 export class PlacesPage {
-  private anyErrors: boolean;
-  private finished: boolean;
   public images: Array<any> = [];
-  public placesDecription: Array<{ name: string, placeId: string, image: string }>;
-  public placesResult: Array<{ place: any, image: string, weather: any, distance: any }> = [];
-  public placesResult2: Array<{ place: any, image: string, weather: any }> = [];
-  public weathers: any;
+  public placesDecription: Array<{ name: string, placeId: string, image: string, resource_uri: string }>;
+  public placesResult: Array<{ place: any, image: string, distance: any, resource_uri: string }> = [];
   public distance: any;
   public lat: any;
   public lng: any;
@@ -28,43 +24,11 @@ export class PlacesPage {
     public modalCtrl: ModalController,
     public apiProvider: ApiProvider,
     public dataStorageProvider: DataStorageProvider) {
-
-    this.weathers = {
-      clear_day: 'assets/imgs/weather-icons/weather-icons/clear_day.png',
-      clear_night: 'assets/imgs/weather-icons/weather-icons/clear_night.png',
-      cloudy: 'assets/imgs/weather-icons/weather-icons/cloudy.png',
-      cloudy_snow: 'assets/imgs/weather-icons/weather-icons/cloudy_snow.png',
-      drizzle: 'assets/imgs/weather-icons/weather-icons/drizzle.png',
-      fog: 'assets/imgs/weather-icons/weather-icons/fog.png',
-      fog_clear_day: 'assets/imgs/weather-icons/weather-icons/fog_clear_day.png',
-      fog_clear_night: 'assets/imgs/weather-icons/weather-icons/fog_clear_night.png',
-      fog_partly_cloudy: 'assets/imgs/weather-icons/weather-icons/fog_partly_cloudy.png',
-      fog_partly_cloudy_day: 'assets/imgs/weather-icons/weather-icons/fog_partly_cloudy_day.png',
-      fog_partly_cloudy_night: 'assets/imgs/weather-icons/weather-icons/fog_partly_cloudy_night.png',
-      hail: 'assets/imgs/weather-icons/weather-icons/hail.png',
-      hail_day: 'assets/imgs/weather-icons/weather-icons/hail_day.png',
-      hail_night: 'assets/imgs/weather-icons/weather-icons/hail_night.png',
-      light_rain: 'assets/imgs/weather-icons/weather-icons/light_rain.png',
-      partly_cloudy_day: 'assets/imgs/weather-icons/weather-icons/partly_cloudy_day.png',
-      partly_cloudy_drizzle_day: 'assets/imgs/weather-icons/weather-icons/partly_cloudy_drizzle_day.png',
-      partly_cloudy_drizzle_night: 'assets/imgs/weather-icons/weather-icons/partly_cloudy_drizzle_night.png',
-      partly_cloudy_light_rain_day: 'assets/imgs/weather-icons/weather-icons/partly_cloudy_light_rain_day.png',
-      partly_cloudy_light_rain_night: 'assets/imgs/weather-icons/weather-icons/partly_cloudy_light_rain_night.png',
-      partly_cloudy_night: 'assets/imgs/weather-icons/weather-icons/partly_cloudy_night.png',
-      partly_cloudy_rainy: 'assets/imgs/weather-icons/weather-icons/partly_cloudy_rainy.png',
-      partly_cloudy_rainy_day: 'assets/imgs/weather-icons/weather-icons/partly_cloudy_rainy_day.png',
-      partly_cloudy_rainy_night: 'assets/imgs/weather-icons/weather-icons/partly_cloudy_rainy_night.png',
-      partly_cloudy_snow_day: 'assets/imgs/weather-icons/weather-icons/partly_cloudy_snow_day.png',
-      partly_cloudy_snow_night: 'assets/imgs/weather-icons/weather-icons/partly_cloudy_snow_night.png',
-      thunder: 'assets/imgs/weather-icons/weather-icons/thunder.png',
-      thunder_shower_day: 'assets/imgs/weather-icons/weather-icons/thunder_shower_day.png',
-      thunder_shower_night: 'assets/imgs/weather-icons/weather-icons/thunder_shower_night.png',
-      windy: 'assets/imgs/weather-icons/weather-icons/windy.png',
-      windy_day: 'assets/imgs/weather-icons/weather-icons/windy_day.png',
-      windy_night: 'assets/imgs/weather-icons/weather-icons/windy_night.png'
-    };
-
     this.getPlaces();
+  }
+
+  ionViewWillEnter() {
+    console.log('Runs when the page is about to enter and become the active page.');
   }
 
   getPlaces() {
@@ -75,7 +39,6 @@ export class PlacesPage {
         this.placesDecription = places;
         this.dataStorageProvider.places = places;
         this.dataStorageProvider.savePlaces();
-        console.log(this.placesDecription);
         this.getPlacesDetails();
       }
     );
@@ -99,7 +62,7 @@ export class PlacesPage {
             t.subscribe(
               value => {
                 this.distance = value.rows[0].elements[0].duration.text;
-                var result: { place: any, image: string, weather: any, distance: any } = { place: res, image: image, weather: this.weathers.clear_night, distance: this.distance };
+                var result: { place: any, image: string, distance: any, resource_uri: string } = { place: res, image: image, distance: this.distance, resource_uri: element.resource_uri };
                 this.placesResult.push(result);
               }
             );
@@ -109,8 +72,8 @@ export class PlacesPage {
     });
   }
 
-  getPlaceDetails(result: any) {
-    this.navCtrl.push(PlaceDetailsPage, { result: result });
+  getPlaceDetails(result, place_id, resource_uri) {
+    this.navCtrl.push(PlaceDetailsPage, { result: result, place_id: place_id, resource_uri: resource_uri });
   }
 
   addPlace() {

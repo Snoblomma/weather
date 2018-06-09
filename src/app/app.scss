@@ -3,6 +3,14 @@ ion-buttons[start] {
   order: 1;
 }
 
+.item-md p {
+  font-size: 1.6rem !important;
+}
+
+ion-label {
+  font-size: 1.8rem !important;
+}
+
 .sticky {
   position: sticky;
   top: 0;
@@ -10,8 +18,9 @@ ion-buttons[start] {
   right: 0;
   display: block;
   z-index: -1;
-  height: 400px;
+  height: 300px;
 }
+
 #place {
   color: white;
   background-repeat: no-repeat;
@@ -20,12 +29,6 @@ ion-buttons[start] {
   background-size: cover;
   height: 300px;
   padding: 0;
-}
-#place ion-label {
-  font-size: 2rem;
-  display: table;
-  position: absolute;
-  bottom: 0;
 }
 
 ion-label #name {

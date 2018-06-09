@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
 import { Observable } from 'rxjs/Observable';
 
@@ -10,7 +10,8 @@ import { Observable } from 'rxjs/Observable';
 })
 export class PlaceDetailsPage {
   public placeName: any = "-";
-  public placeId: any;
+  public place_id: any;
+  public resource_uri: any;
   public result: any = "";
   public image: string = "https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350";
   public rating: any = "-";
@@ -37,13 +38,22 @@ export class PlaceDetailsPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public alertCtrl: AlertController,
     public apiProvider: ApiProvider) {
-    this.result = this.navParams.get('result');
+    this.getPlaceDetails();
     this.initialize();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PlaceDetailsPage');
+  }
+
+  getPlaceDetails(){
+    this.result = this.navParams.get('result');
+    this.place_id = this.navParams.get('place_id');
+    this.resource_uri = this.navParams.get('resource_uri');
+
+    console.log(this.place_id + ' ' + this.resource_uri);
   }
 
   initialize() {
@@ -57,8 +67,7 @@ export class PlaceDetailsPage {
   }
 
   getWeathers(){
-    this.placeId = this.result.place.result.place_id;
-    this.placeDetails = this.apiProvider.getPlaceDetails(this.placeId);
+    this.placeDetails = this.apiProvider.getPlaceDetails(this.place_id);
     this.placeDetails.subscribe(
       res => { 
         this.lat = res.result.geometry.location.lat; 
@@ -123,6 +132,34 @@ export class PlaceDetailsPage {
         this.images.push(this.image);
       }
     }
+  }
+
+  deletePlace(){
+    this.apiProvider.removePlace(this.resource_uri);
+    this.navCtrl.pop();
+  }
+
+  showConfirm() {
+    const confirm = this.alertCtrl.create({
+      title: 'Delete this place?',
+      message: 'Do you want to delete ' + this.placeName + ' from your places?',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            console.log('Agree clicked');
+            this.deletePlace();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   navigateToPlace(){

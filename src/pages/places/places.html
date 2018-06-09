@@ -16,7 +16,7 @@
 
 <ion-content>
   <ion-list *ngIf="placesResult != null">
-    <button ion-item *ngFor="let result of placesResult" id="place" [style.backgroundImage]="'url(' + result.image + ')'" (click)="getPlaceDetails(result)">
+    <button ion-item *ngFor="let result of placesResult" id="place" [style.backgroundImage]="'url(' + result.image + ')'" (click)="getPlaceDetails(result, result.place.result.place_id, result.resource_uri)">
       <div class="name">
         <label>{{result.place.result.name}}</label>
         <p class="rating" *ngIf="result.place.result.rating != null">Rating: {{result.place.result.rating}} </p>
