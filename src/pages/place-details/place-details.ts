@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
 import { Observable } from 'rxjs/Observable';
 
@@ -36,10 +36,11 @@ export class PlaceDetailsPage {
 
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public alertCtrl: AlertController,
-    public apiProvider: ApiProvider) {
+    private navCtrl: NavController,
+    private navParams: NavParams,
+    private toastCtrl: ToastController,
+    private alertCtrl: AlertController,
+    private apiProvider: ApiProvider) {
     this.getPlaceDetails();
     this.initialize();
   }
@@ -48,7 +49,7 @@ export class PlaceDetailsPage {
     console.log('ionViewDidLoad PlaceDetailsPage');
   }
 
-  getPlaceDetails(){
+  getPlaceDetails() {
     this.result = this.navParams.get('result');
     this.place_id = this.navParams.get('place_id');
     this.resource_uri = this.navParams.get('resource_uri');
@@ -60,26 +61,26 @@ export class PlaceDetailsPage {
     this.getImage();
   }
 
-  getNavLink(){
+  getNavLink() {
     this.navLink = "https://www.google.com/maps/dir/Current+Location/" + this.lat + "," + this.lng;
   }
 
-  getWeathers(){
+  getWeathers() {
     this.placeDetails = this.apiProvider.getPlaceDetails(this.place_id);
     this.placeDetails.subscribe(
-      res => { 
-        this.lat = res.result.geometry.location.lat; 
-        this.lng = res.result.geometry.location.lng; 
+      res => {
+        this.lat = res.result.geometry.location.lat;
+        this.lng = res.result.geometry.location.lng;
         this.photoreference = res.result.photos[0].photo_reference;
-        this.getWeather(this.lat, this.lng);    
-        this.navLink = "https://maps.google.com?saddr=Current+Location&daddr=" + this.lat +   "," + this.lng;
+        this.getWeather(this.lat, this.lng);
+        this.navLink = "https://maps.google.com?saddr=Current+Location&daddr=" + this.lat + "," + this.lng;
       }
     );
 
-   
+
   }
 
-  getWeather(lat: string, lng: string){
+  getWeather(lat: string, lng: string) {
     this.weathers = this.apiProvider.getWeatherCoordinates(lat, lng);
     this.weathers.subscribe(
       value => {
@@ -87,7 +88,8 @@ export class PlaceDetailsPage {
         this.description = value.weather[0].description;
         this.temperature = value.main.temp;
         this.humidity = value.main.humidity;
-        this.wind = value.wind.speed;},
+        this.wind = value.wind.speed;
+      },
       error => this.anyErrors = true,
       () => this.finished = true
     );
@@ -131,9 +133,24 @@ export class PlaceDetailsPage {
     }
   }
 
-  deletePlace(){
+  deletePlace() {
+    this.presentToast();
     this.apiProvider.removePlace(this.resource_uri);
     this.navCtrl.pop();
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Place was removed successfully',
+      duration: 2000,
+      position: 'bottom'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
   }
 
   showConfirm() {
@@ -158,7 +175,7 @@ export class PlaceDetailsPage {
     confirm.present();
   }
 
-  navigateToPlace(){
+  navigateToPlace() {
     this.navLink = "https://www.google.com/maps/dir/Current+Location/43.12345,-76.12345";
   }
 }

@@ -10,6 +10,7 @@ import { PlacesPage } from '../pages/places/places';
 import { WeatherPage } from '../pages/weather/weather';
 import { AddPlacePage } from '../pages/add-place/add-place';
 import { PlaceDetailsPage } from '../pages/place-details/place-details';
+import { EditPlacePage } from '../pages/edit-place/edit-place';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -26,7 +27,8 @@ import { DataStorageProvider } from '../providers/data-storage/data-storage';
     PlacesPage,
     PlaceDetailsPage,
     WeatherPage,
-    AddPlacePage
+    AddPlacePage,
+    EditPlacePage
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,8 @@ import { DataStorageProvider } from '../providers/data-storage/data-storage';
     PlacesPage,
     PlaceDetailsPage,
     WeatherPage,
-    AddPlacePage
+    AddPlacePage,
+    EditPlacePage
   ],
   providers: [
     StatusBar,
