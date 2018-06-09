@@ -141,7 +141,7 @@ export class PlaceDetailsPage {
 
   presentToast() {
     let toast = this.toastCtrl.create({
-      message: 'Place was removed successfully',
+      message: this.placeName + ' was removed successfully from your places.',
       duration: 2000,
       position: 'bottom'
     });

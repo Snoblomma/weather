@@ -14,6 +14,7 @@ export class EditPlacePage {
   public placeName: any;
   public place_id: any;
   public images: Array<any> = [];
+  public placeAdded: boolean;
 
   constructor(
     private navCtrl: NavController,
@@ -50,25 +51,28 @@ export class EditPlacePage {
   }
 
   addPlace() {
+    console.log(this.dataStorageProvider.places);
+    console.log(this.place_id);
     let visited = false;
-    let placeAdded = this.isPlaceAdded(this.place_id)
-    if (placeAdded) {
+    this.placeAdded = this.isPlaceAdded(this.place_id)
+    if (this.placeAdded) {
       this.showAlert("This place is already on your list!");
     }
     else {
-      this.apiProvider.addPlace(this.place_id, name, visited);
+      this.apiProvider.addPlace(this.place_id, this.placeName, visited);
       this.presentAddedToast();
       this.navCtrl.setRoot(PlacesPage);
     }
   }
 
-  isPlaceAdded(place_id) {
-    this.dataStorageProvider.places.forEach(item => {
+  isPlaceAdded(place_id): boolean {
+    let filter = this.dataStorageProvider.places.filter((item) => {
       if (item.place_id == place_id) {
         return true;
       }
+      return false;
     });
-    return false;
+    return filter.length > 0 ? true : false;
   }
 
   showAlert(message) {
@@ -82,7 +86,7 @@ export class EditPlacePage {
 
   presentAddedToast() {
     let toast = this.toastCtrl.create({
-      message: 'Place was added successfully',
+      message: this.placeName + ' was successfully added to your places!',
       duration: 2000,
       position: 'bottom'
     });

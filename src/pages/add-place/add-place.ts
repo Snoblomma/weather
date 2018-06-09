@@ -54,44 +54,4 @@ export class AddPlacePage {
     //   }
     // })
   }
-
-  cancelPlace() {
-    this.selected = false;
-    this.places = [];
-  }
-
-  addPlace() {
-    let place_id = this.selectedPlace.place_id;
-    let name = this.selectedPlace.structured_formatting.main_text;
-    let visited = false;
-
-    let placeAdded = this.isPlaceAdded(place_id)
-
-    if (placeAdded) {
-      this.showAlert("This place is already on your list!");
-    }
-    else {
-      this.apiProvider.addPlace(place_id, name, visited);
-      this.selected = false;
-      this.navCtrl.pop();
-    }
-  }
-
-  isPlaceAdded(place_id) {
-    this.dataStorageProvider.places.forEach(item => {
-      if (item.place_id == place_id) {
-        return true;
-      }
-    });
-    return false;
-  }
-
-  showAlert(message) {
-    let alert = this.alertCtrl.create({
-      title: 'Hey!',
-      message: message,
-      buttons: ['OK']
-    });
-    alert.present();
-  }
 }
