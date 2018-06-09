@@ -72,17 +72,14 @@ export class ApiProvider {
       "visited": true
     };
 
-
-
-    // this.httpClient.post('https://agile-springs-70240.herokuapp.com/api/place/', data).subscribe(
-    //   value => console.log(value),
-    //   error => console.log(error)
-    // )
+    this.httpClient.post('https://agile-springs-70240.herokuapp.com/api/place/', data).subscribe(
+      value => console.log(value),
+      error => console.log(error)
+    )
   }
 
   removePlace(resource_uri) {
     let link = 'https://agile-springs-70240.herokuapp.com' + resource_uri;
-    console.log(link);
     this.http.delete(link).subscribe(
       value => console.log(value),
       error => console.log(error)

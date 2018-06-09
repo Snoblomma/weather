@@ -28,7 +28,7 @@ export class PlacesPage {
   }
 
   ionViewWillEnter() {
-    console.log('Runs when the page is about to enter and become the active page.');
+    this.getPlaces();
   }
 
   getPlaces() {

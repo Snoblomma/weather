@@ -74,13 +74,13 @@ export class AddPlacePage {
     }
   }
 
-  isPlaceAdded(place_id){
-    return this.dataStorageProvider.places.filter(item => {
+  isPlaceAdded(place_id) {
+    this.dataStorageProvider.places.forEach(item => {
       if (item.place_id == place_id) {
         return true;
       }
-      return false;
     });
+    return false;
   }
 
   showAlert(message) {

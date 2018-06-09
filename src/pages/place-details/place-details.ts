@@ -52,8 +52,6 @@ export class PlaceDetailsPage {
     this.result = this.navParams.get('result');
     this.place_id = this.navParams.get('place_id');
     this.resource_uri = this.navParams.get('resource_uri');
-
-    console.log(this.place_id + ' ' + this.resource_uri);
   }
 
   initialize() {
@@ -98,7 +96,6 @@ export class PlaceDetailsPage {
     y.subscribe(
       value => {
         this.r = value;
-        console.log(this.r.list);
       },
       error => this.anyErrors = true,
       () => this.finished = true
@@ -153,7 +150,6 @@ export class PlaceDetailsPage {
         {
           text: 'Delete',
           handler: () => {
-            console.log('Agree clicked');
             this.deletePlace();
           }
         }

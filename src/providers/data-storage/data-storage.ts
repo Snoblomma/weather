@@ -4,19 +4,23 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class DataStorageProvider {
-  public places: any;
+  public places: Array<any>;
 
   constructor(
     public http: HttpClient,
     public storage: Storage) {
-      this.places = this.getPlaces();
+    this.places = this.getPlaces();
   }
 
-  getPlaces() {
-    return this.storage.get("places");
+  getPlaces(): Array<any> {
+    this.storage.get("places").then(
+      data => { return data },
+      error => { console.error(error); return error }
+    );
+    return null;
   }
 
-  savePlaces(){
+  savePlaces() {
     this.storage.set("places", this.places);
   }
 }
