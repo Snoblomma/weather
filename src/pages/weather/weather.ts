@@ -64,11 +64,12 @@ export class WeatherPage {
     this.weathers = this.apiProvider.getWeatherCoordinates(lat, lng);
     this.weathers.subscribe(
       value => {
-        this.counrty = value.sys.country;
-        this.description = value.weather[0].description;
-        this.temperature = value.main.temp;
-        this.humidity = value.main.humidity;
-        this.wind = value.wind.speed;},
+        console.log(value);
+        this.counrty = value.location.country;
+        this.description = value.current.condition.text;
+        this.temperature = value.current.temp_c;
+        this.humidity = value.current.humidity;
+        this.wind = value.current.wind_kph;},
       error => this.anyErrors = true,
       () => this.finished = true
     );

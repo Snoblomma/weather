@@ -35,23 +35,7 @@ export class AddPlacePage {
       });
   }
 
-  selectPlace(place: any) {
-    this.navCtrl.push(EditPlacePage, {place: place});
-
-    // this.selectedPlace = place;
-    // this.selected = true;
-    // //get images
-    // let k: any;
-    // this.apiProvider.getPlaceDetails(place['place_id']).subscribe(res => {
-    //   k = res;
-    //   if (k.result.photos != null) {
-    //     var max = k.result.photos.length;
-    //     max = max < 10 ? max : 10
-    //     for (var index = 0; index < max; index++) {
-    //       var photoreference = k.result.photos[index].photo_reference;
-    //       this.images.push(this.apiProvider.getPhotoString(photoreference));
-    //     }
-    //   }
-    // })
+  selectPlace(place_id: any) {
+    this.navCtrl.push(EditPlacePage, {place_id: place_id});
   }
 }

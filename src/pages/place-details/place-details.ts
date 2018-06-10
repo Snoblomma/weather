@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
 import { Observable } from 'rxjs/Observable';
+import { EditPlacePage } from '../edit-place/edit-place';
 
 @IonicPage()
 @Component({
@@ -23,17 +24,12 @@ export class PlaceDetailsPage {
   public navLink: any = '';
   public lat: any;
   public lng: any;
-  counrty: any;
   description: any;
   temperature: any;
-  humidity: any;
-  wind: any;
   weathers: Observable<any>;
   placeDetails: Observable<any>;
   private anyErrors: boolean;
   private finished: boolean;
-  r: any;
-
 
   constructor(
     private navCtrl: NavController,
@@ -84,20 +80,8 @@ export class PlaceDetailsPage {
     this.weathers = this.apiProvider.getWeatherCoordinates(lat, lng);
     this.weathers.subscribe(
       value => {
-        this.counrty = value.sys.country;
         this.description = value.weather[0].description;
         this.temperature = value.main.temp;
-        this.humidity = value.main.humidity;
-        this.wind = value.wind.speed;
-      },
-      error => this.anyErrors = true,
-      () => this.finished = true
-    );
-
-    var y = this.apiProvider.getWeather16Days();
-    y.subscribe(
-      value => {
-        this.r = value;
       },
       error => this.anyErrors = true,
       () => this.finished = true
@@ -131,6 +115,10 @@ export class PlaceDetailsPage {
         this.images.push(this.image);
       }
     }
+  }
+
+  editPlace(){
+    this.navCtrl.push(EditPlacePage, {place_id: this.place_id});
   }
 
   deletePlace() {

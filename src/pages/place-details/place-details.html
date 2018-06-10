@@ -67,13 +67,8 @@
           <p>
             <b>Saturday</b>
           </p>
-          <p *ngIf="r!=null">r: {{r}}</p>
-          <p>Country : {{ counrty }}</p>
           <p>Weather: {{ description }}</p>
-          <!-- <p *ngIf="r!=null">Weather: {{r.list[6].weather[0].description}}</p> -->
           <p>Temperature: {{ temperature }}&#8451;</p>
-          <p>Humidity: {{ humidity }}%</p>
-          <p>Wind speed: {{ wind }}mps</p>
         </ion-col>
         <ion-col>
           <p>Sunday</p>
@@ -97,6 +92,10 @@
     <ion-grid>
       <ion-row>
         <ion-col>
+          <button ion-button color="edit" outline icon-left (click)="editPlace()">
+            <ion-icon name="create"></ion-icon>
+            Edit
+          </button>
           <button ion-button color="danger" outline icon-left (click)="showConfirm()">
             <ion-icon name="trash"></ion-icon>
             Remove
@@ -108,5 +107,5 @@
 </ion-content>
 
 <ion-footer text-center>
-    <a ion-button block color="dark" [attr.href]="navLink" clear>Navigate</a>
+  <a ion-button block color="dark" [attr.href]="navLink" clear>Navigate</a>
 </ion-footer>

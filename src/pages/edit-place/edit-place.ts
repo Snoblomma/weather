@@ -10,7 +10,7 @@ import { PlacesPage } from '../places/places';
   templateUrl: 'edit-place.html',
 })
 export class EditPlacePage {
-  public place: any;
+  // public place: any;
   public placeName: any;
   public place_id: any;
   public images: Array<any> = [];
@@ -31,14 +31,11 @@ export class EditPlacePage {
   }
 
   initialize() {
-    this.place = this.navParams.get('place');
-    console.log(this.place);
-    this.placeName = this.place.structured_formatting.main_text;
-    this.place_id = this.place.place_id;
-
+    this.place_id = this.navParams.get('place_id');
     let k: any;
-    this.apiProvider.getPlaceDetails(this.place['place_id']).subscribe(res => {
+    this.apiProvider.getPlaceDetails(this.place_id).subscribe(res => {
       k = res;
+      this.placeName = k.result.name;
       if (k.result.photos != null) {
         var max = k.result.photos.length;
         max = max < 10 ? max : 10
@@ -48,6 +45,10 @@ export class EditPlacePage {
         }
       }
     })
+  }
+
+  cancelPlace(){
+    this.navCtrl.pop();
   }
 
   addPlace() {

@@ -12,10 +12,19 @@
       </ion-item>
     </ion-slide>
   </ion-slides>
+  <ion-item-divider color="light">Place Details</ion-item-divider>
+  <ion-item>
+    <ion-label>Visited</ion-label>
+    <ion-toggle [(ngModel)]="visited"></ion-toggle>
+  </ion-item>
+
 </ion-content>
 
 <ion-footer text-center>
   <ion-toolbar>
+    <button color="danger" ion-button text-center style="width:49%" (click)="cancelPlace()">
+      Cancel
+    </button>
     <button color="secondary" ion-button text-center style="width:49%" (click)="addPlace()">
       Add
     </button>
