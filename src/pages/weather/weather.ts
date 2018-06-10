@@ -61,7 +61,7 @@ export class WeatherPage {
   }
 
   getWeather(lat: string, lng: string){
-    this.weathers = this.apiProvider.getWeatherCoordinates(lat, lng);
+    this.weathers = this.apiProvider.getCurrentWeatherCoordinates(lat, lng);
     this.weathers.subscribe(
       value => {
         console.log(value);

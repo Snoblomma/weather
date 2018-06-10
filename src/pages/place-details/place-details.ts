@@ -9,6 +9,9 @@ import { EditPlacePage } from '../edit-place/edit-place';
   selector: 'page-place-details',
   templateUrl: 'place-details.html',
 })
+
+
+
 export class PlaceDetailsPage {
   public placeName: any = "-";
   public place_id: any;
@@ -18,12 +21,14 @@ export class PlaceDetailsPage {
   public rating: any = "-";
   public drive: any = "-";
   public photoreference: any;
-  public openingHours: any = '';
+  public openingHours: Array<any> = [];
   public types: any = '';
   public images: Array<any> = [];
   public navLink: any = '';
   public lat: any;
   public lng: any;
+  public sat: Day;
+  public sun: Day;
   public weatherCondSat: any;
   public weatherCondSun: any;
   public tempSat: any;
@@ -34,9 +39,6 @@ export class PlaceDetailsPage {
   private finished: boolean;
   private monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"];
-  public sat: { date: number, mon: string, year: number, icon:string } = {date: null, mon: null, year: null, icon: null};
-  public sun: { date: number, mon: string, year: number, icon:string } = {date: null, mon: null, year: null, icon: null};
-  public picToView = "http://cdn.apixu.com/weather/64x64/day/389.png";
 
   constructor(
     private navCtrl: NavController,
@@ -84,8 +86,7 @@ export class PlaceDetailsPage {
     var sun = new Date();
     sat.setDate(sat.getDate() + (6 + 7 - sat.getDay()) % 7);
     sun.setDate(sat.getDate() + 1);
-    console.log(sat);   
-    
+
     this.weathers = this.apiProvider.getForecastWeatherCoordinates(lat, lng, "7");
     this.weathers.subscribe(
       value => {
@@ -95,12 +96,11 @@ export class PlaceDetailsPage {
           let sunDay = len - today;
           this.weatherCondSun = value.forecast.forecastday[sunDay].day.condition.text;
           this.tempSun = value.forecast.forecastday[sunDay].day.avgtemp_c;
-          this.sun = { date: sun.getDate(), mon: this.monthNames[sun.getMonth()], year: sun.getFullYear(), icon: 'http:'+value.forecast.forecastday[sunDay].day.condition.icon };
+          this.sun = { date: sun.getDate(), mon: this.monthNames[sun.getMonth()], year: sun.getFullYear(), icon: 'http:' + value.forecast.forecastday[sunDay].day.condition.icon };
         }
         this.weatherCondSat = value.forecast.forecastday[satDay].day.condition.text;
         this.tempSat = value.forecast.forecastday[satDay].day.avgtemp_c;
-        this.sat = { date: sat.getDate(), mon: this.monthNames[sat.getMonth()], year: sat.getFullYear(), icon: 'http:'+value.forecast.forecastday[satDay].day.condition.icon };
-        console.log(value.forecast.forecastday[satDay].day.condition.icon);
+        this.sat = { date: sat.getDate(), mon: this.monthNames[sat.getMonth()], year: sat.getFullYear(), icon: 'http:' + value.forecast.forecastday[satDay].day.condition.icon };
       },
       error => this.anyErrors = true,
       () => this.finished = true
@@ -114,12 +114,18 @@ export class PlaceDetailsPage {
       this.rating = this.result.place.result.rating;
       this.drive = this.result.distance;
       if (this.result.place.result['opening_hours']) {
-        this.openingHours = this.result.place.result.opening_hours.weekday_text;
+        let oh = this.result.place.result.opening_hours.weekday_text;
+        console.log(this.result.place.result.opening_hours);
+        oh.forEach(element => {
+          var partsOfStr = element.substr(element.indexOf(':')+1);
+          console.log(element);
+          console.log(partsOfStr);
+          this.openingHours.push(partsOfStr);
+        });
       }
       if (this.result.place.result['types']) {
         this.types = this.result.place.result.types;
       }
-
     }
   }
 
@@ -185,4 +191,11 @@ export class PlaceDetailsPage {
   navigateToPlace() {
     this.navLink = "https://www.google.com/maps/dir/Current+Location/43.12345,-76.12345";
   }
+}
+
+export interface Day {
+  date: number,
+  mon: string,
+  year: number,
+  icon: string
 }

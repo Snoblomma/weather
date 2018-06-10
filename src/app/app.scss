@@ -13,6 +13,21 @@ ion-buttons[start] {
 
 .item-md #weather {
   font-size: 1.4rem !important;
+  color: grey;
+}
+
+.item-md #temo {
+  font-size: 3rem !important;
+}
+
+.item-md #date {
+  font-size: 1.4rem !important;
+  color: grey;
+}
+
+td#openingHours p{
+  text-align: right;
+  margin-left: 12px;
 }
 
 ion-label {

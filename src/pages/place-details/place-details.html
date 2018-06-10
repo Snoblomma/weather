@@ -12,11 +12,11 @@
     </ion-slide>
   </ion-slides>
 
-  <ion-item class="title">
+  <!-- <ion-item class="title">
     <div class="name">
       <label id="placeName">{{placeName}}</label>
     </div>
-  </ion-item>
+  </ion-item> -->
 
   <ion-item id="general">
     <ion-grid>
@@ -64,55 +64,124 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <table>
+          <p id="label">
+            Saturday
+          </p>
+          <!-- <p id="date">
+            {{sat.mon}} {{sat.date}}
+          </p> -->
+          <p id="weather" *ngIf="sat==null">
+            No Forecast Available
+          </p>
+          <table *ngIf="sat!=null">
             <tr>
-              <td>
-                <p>
-                  <b id="label">Saturday</b>
-                </p>
-                <p>
-                  <b>{{sat.mon}} {{sat.date}}, {{sat.year}}</b>
-                </p>
-              </td>
               <td>
                 <img [src]="sat.icon" />
               </td>
-            </tr>
-          </table>
-
-          <p id="weather">{{ weatherCondSat }}</p>
-          <p id="weather">{{ tempSat }}&#8451;</p>
-        </ion-col>
-        <ion-col>
-          <table>
-            <tr>
               <td>
-                <p>
-                  <b id="label">Sunday</b>
-                </p>
-                <p>
-                  <b>{{sun.mon}} {{sun.date}}, {{sun.year}}</b>
-                </p>
-              </td>
-              <td>
-                <img [src]="sun.icon" />
+                <p id="temo">{{ tempSat }}&deg;</p>
+                <p id="weather">{{ weatherCondSat }}</p>
               </td>
             </tr>
           </table>
-
-          <p id="weather">{{ weatherCondSun }}</p>
-          <p id="weather">{{ tempSun }}&#8451;</p>
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-item>
-  <ion-item-divider color="light" *ngIf="openingHours != ''">OPENING HOURS</ion-item-divider>
   <ion-item>
     <ion-grid>
       <ion-row>
         <ion-col>
-          <p>{{openingHours[5]}}</p>
-          <p>{{openingHours[6]}}</p>
+          <p id="label">
+            Sunday
+          </p>
+          <!-- <p id="date">
+              {{sun.mon}} {{sun.date}}
+            </p> -->
+          <p id="weather" *ngIf="sun==null">
+            No Forecast Available
+          </p>
+          <table *ngIf="sun!=null">
+            <tr>
+              <td>
+                <img [src]="sun.icon" />
+              </td>
+              <td>
+                <p id="temo">{{ tempSun }}&deg;</p>
+                <p id="weather">{{ weatherCondSun }}</p>
+              </td>
+            </tr>
+          </table>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-item-divider color="light">OPENING HOURS</ion-item-divider>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <p id="weather" *ngIf="openingHours.length == 0">
+            No Information Available
+          </p>
+          <table *ngIf="openingHours.length > 0">
+            <tr>
+              <td>
+                <p>Monday:</p>
+              </td>
+              <td id="openingHours">
+                <p>{{openingHours[0]}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>Tuesday:</p>
+              </td>
+              <td id="openingHours">
+                <p>{{openingHours[1]}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>Wednesday:</p>
+              </td>
+              <td id="openingHours">
+                <p>{{openingHours[2]}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>Thursday:</p>
+              </td>
+              <td id="openingHours">
+                <p>{{openingHours[3]}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>Friday:</p>
+              </td>
+              <td id="openingHours">
+                <p>{{openingHours[4]}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>Saturday:</p>
+              </td>
+              <td id="openingHours">
+                <p>{{openingHours[5]}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>Sunday:</p>
+              </td>
+              <td id="openingHours">
+                <p>{{openingHours[6]}}</p>
+              </td>
+            </tr>
+          </table>
         </ion-col>
       </ion-row>
     </ion-grid>
