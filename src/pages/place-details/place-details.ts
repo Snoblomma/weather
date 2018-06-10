@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, DateTime } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
 import { Observable } from 'rxjs/Observable';
 import { EditPlacePage } from '../edit-place/edit-place';
@@ -24,12 +24,19 @@ export class PlaceDetailsPage {
   public navLink: any = '';
   public lat: any;
   public lng: any;
-  description: any;
-  temperature: any;
+  public weatherCondSat: any;
+  public weatherCondSun: any;
+  public tempSat: any;
+  public tempSun: any;
   weathers: Observable<any>;
   placeDetails: Observable<any>;
   private anyErrors: boolean;
   private finished: boolean;
+  private monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+  public sat: { date: number, mon: string, year: number, icon:string } = {date: null, mon: null, year: null, icon: null};
+  public sun: { date: number, mon: string, year: number, icon:string } = {date: null, mon: null, year: null, icon: null};
+  public picToView = "http://cdn.apixu.com/weather/64x64/day/389.png";
 
   constructor(
     private navCtrl: NavController,
@@ -57,10 +64,6 @@ export class PlaceDetailsPage {
     this.getImage();
   }
 
-  getNavLink() {
-    this.navLink = "https://www.google.com/maps/dir/Current+Location/" + this.lat + "," + this.lng;
-  }
-
   getWeathers() {
     this.placeDetails = this.apiProvider.getPlaceDetails(this.place_id);
     this.placeDetails.subscribe(
@@ -72,16 +75,32 @@ export class PlaceDetailsPage {
         this.navLink = "https://maps.google.com?saddr=Current+Location&daddr=" + this.lat + "," + this.lng;
       }
     );
-
-
   }
 
   getWeather(lat: string, lng: string) {
-    this.weathers = this.apiProvider.getWeatherCoordinates(lat, lng);
+    let today = new Date().getDay();
+
+    var sat = new Date();
+    var sun = new Date();
+    sat.setDate(sat.getDate() + (6 + 7 - sat.getDay()) % 7);
+    sun.setDate(sat.getDate() + 1);
+    console.log(sat);   
+    
+    this.weathers = this.apiProvider.getForecastWeatherCoordinates(lat, lng, "7");
     this.weathers.subscribe(
       value => {
-        this.description = value.weather[0].description;
-        this.temperature = value.main.temp;
+        let len = value.forecast.forecastday.length;
+        let satDay = len - 1 - today;
+        if (today != 0) {
+          let sunDay = len - today;
+          this.weatherCondSun = value.forecast.forecastday[sunDay].day.condition.text;
+          this.tempSun = value.forecast.forecastday[sunDay].day.avgtemp_c;
+          this.sun = { date: sun.getDate(), mon: this.monthNames[sun.getMonth()], year: sun.getFullYear(), icon: 'http:'+value.forecast.forecastday[sunDay].day.condition.icon };
+        }
+        this.weatherCondSat = value.forecast.forecastday[satDay].day.condition.text;
+        this.tempSat = value.forecast.forecastday[satDay].day.avgtemp_c;
+        this.sat = { date: sat.getDate(), mon: this.monthNames[sat.getMonth()], year: sat.getFullYear(), icon: 'http:'+value.forecast.forecastday[satDay].day.condition.icon };
+        console.log(value.forecast.forecastday[satDay].day.condition.icon);
       },
       error => this.anyErrors = true,
       () => this.finished = true
@@ -117,8 +136,8 @@ export class PlaceDetailsPage {
     }
   }
 
-  editPlace(){
-    this.navCtrl.push(EditPlacePage, {place_id: this.place_id});
+  editPlace() {
+    this.navCtrl.push(EditPlacePage, { place_id: this.place_id });
   }
 
   deletePlace() {

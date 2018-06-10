@@ -51,7 +51,6 @@ export class PlacesPage {
 
   getPlacesDetails() {
     let placeDetails: any;
-    console.log(this.placesDecription);
     this.placesDecription.forEach(element => {
       placeDetails = this.apiProvider.getPlaceDetails(element['place_id']);
       placeDetails.subscribe(
@@ -70,7 +69,6 @@ export class PlacesPage {
                 this.distance = value.rows[0].elements[0].duration.text;
                 var result: { place: any, image: string, distance: any, resource_uri: string } = { place: res, image: image, distance: this.distance, resource_uri: element.resource_uri };
                 this.placesResult.push(result);
-                console.log(result);
               }
             );
           }

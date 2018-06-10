@@ -17,12 +17,12 @@ export class ApiProvider {
     return this.httpClient.get('http://api.openweathermap.org/data/2.5/weather?q=' + keyword + '&units=metric&APPID=ec44e7ff2e0597cf35d85dd13062e22d');
   }
 
-  getWeatherCoordinates(lat: string, lon: string) {
+  getCurrentWeatherCoordinates(lat: string, lon: string) {
     return this.httpClient.get('https://api.apixu.com/v1/current.json?key=ef9bc2cafed948a69d6162938181006&q=' + lat + ',' + lon);
   }
 
-  getWeather16Days() {
-    return this.httpClient.get('https://samples.openweathermap.org/data/2.5/forecast/daily?q=London&appid=ec44e7ff2e0597cf35d85dd13062e22d');
+  getForecastWeatherCoordinates(lat: string, lon: string, days: string) {
+    return this.httpClient.get('https://api.apixu.com/v1/forecast.json?key=ef9bc2cafed948a69d6162938181006&q=' + lat + ',' + lon + '&days=' + days);
   }
 
   getCountries() {

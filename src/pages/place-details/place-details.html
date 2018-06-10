@@ -64,14 +64,44 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <p>
-            <b>Saturday</b>
-          </p>
-          <p>Weather: {{ description }}</p>
-          <p>Temperature: {{ temperature }}&#8451;</p>
+          <table>
+            <tr>
+              <td>
+                <p>
+                  <b id="label">Saturday</b>
+                </p>
+                <p>
+                  <b>{{sat.mon}} {{sat.date}}, {{sat.year}}</b>
+                </p>
+              </td>
+              <td>
+                <img [src]="sat.icon" />
+              </td>
+            </tr>
+          </table>
+
+          <p id="weather">{{ weatherCondSat }}</p>
+          <p id="weather">{{ tempSat }}&#8451;</p>
         </ion-col>
         <ion-col>
-          <p>Sunday</p>
+          <table>
+            <tr>
+              <td>
+                <p>
+                  <b id="label">Sunday</b>
+                </p>
+                <p>
+                  <b>{{sun.mon}} {{sun.date}}, {{sun.year}}</b>
+                </p>
+              </td>
+              <td>
+                <img [src]="sun.icon" />
+              </td>
+            </tr>
+          </table>
+
+          <p id="weather">{{ weatherCondSun }}</p>
+          <p id="weather">{{ tempSun }}&#8451;</p>
         </ion-col>
       </ion-row>
     </ion-grid>
