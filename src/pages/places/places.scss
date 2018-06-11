@@ -49,24 +49,19 @@ page-places {
     width: 60px;
     vertical-align: top;
   }
-
   .drive {
     font-size: 14px;
     float: right;
-    vertical-align:top;
+    vertical-align: top;
   }
   .weather img {
     vertical-align: middle;
   }
-
-
   .card-background-page {
-
     ion-card {
       position: relative;
       text-align: center;
     }
-  
     .card-title {
       position: absolute;
       top: 36%;
@@ -76,7 +71,6 @@ page-places {
       color: #fff;
       padding: 0 10px;
     }
-  
     .card-subtitle {
       font-size: 1.0em;
       position: absolute;
@@ -84,6 +78,15 @@ page-places {
       width: 100%;
       color: #fff;
     }
-  
+  }
+
+  .collapsed.searchbar{
+    margin-top: -50px;
+    transition: 0.2s all linear;
+  }
+
+  .searchbar{
+    margin-top: 0px;
+    transition: 0.2s all linear;
   }
 }

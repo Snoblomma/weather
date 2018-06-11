@@ -18,6 +18,7 @@ export class PlacesPage {
   public distance: any;
   public lat: any;
   public lng: any;
+  public collapsed: boolean = true;
 
   constructor(
     public navCtrl: NavController,
@@ -71,7 +72,7 @@ export class PlacesPage {
                 var result = { place: res, image: image, distance: this.distance, resource_uri: element.resource_uri, name: k };
                 this.placesResult.push(result);
                 this.placesResultRestore.push(result);
-                if(this.placesResult.length > 1){
+                if (this.placesResult.length > 1) {
                   this.adjust();
                 }
               }
@@ -90,7 +91,7 @@ export class PlacesPage {
     this.placesResult = this.placesResultRestore;
   }
 
-  getItems(ev: any) {
+  ionSearchInput(ev: any) {
     this.restorePlaces();
 
     const val = ev.target.value;
@@ -100,6 +101,14 @@ export class PlacesPage {
           return item;
         }
       });
+      if (this.placesResult.length > 0) {
+        this.adjust();
+      }
+    }
+  }
+
+  onSearchCancel(ev: any) {
+    if (this.placesResult.length > 0) {
       this.adjust();
     }
   }
@@ -119,6 +128,15 @@ export class PlacesPage {
         htmlRoot.style.fontSize = (parseInt(htmlRoot.style.fontSize) - 1) + "px";
       }
       i++;
+    }
+  }
+
+  toggleSearch() {
+    if (this.collapsed) {
+      this.collapsed = false;
+    }
+    else if (this.collapsed == false) {
+      this.collapsed = true;
     }
   }
 }
