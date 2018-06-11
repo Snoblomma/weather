@@ -7,14 +7,21 @@
     </ion-buttons>
     <ion-title>Places</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="addPlace()">
+      <button ion-button icon-only (click)="adjust()">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<!-- <ion-content>
+  <ion-fab bottom right>
+    <button ion-fab mini color="light" (click)="addPlace()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+
   <ion-searchbar *ngIf="placesResult != null" (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list *ngIf="placesResult != null">
     <button ion-item *ngFor="let result of placesResult" id="place" [style.backgroundImage]="'url(' + result.image + ')'" (click)="getPlaceDetails(result, result.place.result.place_id, result.resource_uri)">
@@ -28,4 +35,14 @@
       </div>
     </button>
   </ion-list>
+</ion-content> -->
+
+
+<ion-content class="card-background-page" *ngIf="placesResult != null">
+  <ion-searchbar *ngIf="placesResult != null" (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-card *ngFor="let result of placesResult" (click)="getPlaceDetails(result, result.place.result.place_id, result.resource_uri)">
+    <img [src]="result.image" />
+    <div class="card-title">{{result.name}}</div>
+    <div class="card-subtitle">{{result.distance}}</div>
+  </ion-card>
 </ion-content>

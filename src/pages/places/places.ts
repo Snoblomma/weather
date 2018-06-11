@@ -67,10 +67,13 @@ export class PlacesPage {
             t.subscribe(
               value => {
                 this.distance = value.rows[0].elements[0].duration.text;
-                let k : string = res.result.name;
-                var result = { place: res, image: image, distance: this.distance, resource_uri: element.resource_uri, name: k};
+                let k: string = res.result.name;
+                var result = { place: res, image: image, distance: this.distance, resource_uri: element.resource_uri, name: k };
                 this.placesResult.push(result);
                 this.placesResultRestore.push(result);
+                if(this.placesResult.length > 1){
+                  this.adjust();
+                }
               }
             );
           }
@@ -83,29 +86,39 @@ export class PlacesPage {
     this.navCtrl.push(PlaceDetailsPage, { result: result, place_id: place_id, resource_uri: resource_uri });
   }
 
-  restorePlaces(){
+  restorePlaces() {
     this.placesResult = this.placesResultRestore;
   }
 
   getItems(ev: any) {
-    // Reset items back to all of the items
     this.restorePlaces();
 
-    // set val to the value of the searchbar
     const val = ev.target.value;
-    // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.placesResult = this.placesResult.filter((item) => {
-        if(item.name.toLowerCase().indexOf(val.toLowerCase()) > -1){
+        if (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1) {
           return item;
         }
-        // return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
-      console.log(this.placesResult);
+      this.adjust();
     }
   }
 
   addPlace() {
     this.navCtrl.push(AddPlacePage);
+  }
+
+  adjust() {
+    var els = document.getElementsByClassName("card-title");
+    let refFontSize = parseFloat(window.getComputedStyle(els[0], null).getPropertyValue("font-size"));
+    let i = 0;
+    while (!!els[i]) {
+      let htmlRoot: HTMLElement = <HTMLElement>document.getElementsByClassName("card-title")[i];
+      htmlRoot.style.fontSize = refFontSize + "px";
+      while (htmlRoot.clientHeight > 35) {
+        htmlRoot.style.fontSize = (parseInt(htmlRoot.style.fontSize) - 1) + "px";
+      }
+      i++;
+    }
   }
 }
