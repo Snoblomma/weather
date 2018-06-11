@@ -15,10 +15,11 @@
 </ion-header>
 
 <ion-content>
+  <ion-searchbar *ngIf="placesResult != null" (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list *ngIf="placesResult != null">
     <button ion-item *ngFor="let result of placesResult" id="place" [style.backgroundImage]="'url(' + result.image + ')'" (click)="getPlaceDetails(result, result.place.result.place_id, result.resource_uri)">
       <div class="name">
-        <label>{{result.place.result.name}}</label>
+        <label>{{result.name}}</label>
         <p class="rating" *ngIf="result.place.result.rating != null">Rating: {{result.place.result.rating}} </p>
       </div>
       <div class="drive">

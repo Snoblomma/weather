@@ -13,7 +13,8 @@ import { DataStorageProvider } from '../../providers/data-storage/data-storage';
 export class PlacesPage {
   public images: Array<any> = [];
   public placesDecription: Array<{ name: string, placeId: string, image: string, resource_uri: string }>;
-  public placesResult: Array<{ place: any, image: string, distance: any, resource_uri: string }> = [];
+  public placesResult: Array<{ place: any, image: string, distance: any, resource_uri: string, name: string }> = [];
+  public placesResultRestore: any;
   public distance: any;
   public lat: any;
   public lng: any;
@@ -32,8 +33,6 @@ export class PlacesPage {
   }
 
   getPlaces() {
-    console.log(this.placesDecription);
-    console.log(this.placesResult);
     this.placesDecription = [];
     this.placesResult = [];
     this.dataStorageProvider.places = [];
@@ -62,13 +61,16 @@ export class PlacesPage {
             var image = this.apiProvider.getPhotoString(photoreference);
 
             this.placesResult = [];
+            this.placesResultRestore = [];
             let t: any;
             t = this.apiProvider.getDistanceFromHome(this.lat, this.lng);
             t.subscribe(
               value => {
                 this.distance = value.rows[0].elements[0].duration.text;
-                var result: { place: any, image: string, distance: any, resource_uri: string } = { place: res, image: image, distance: this.distance, resource_uri: element.resource_uri };
+                let k : string = res.result.name;
+                var result = { place: res, image: image, distance: this.distance, resource_uri: element.resource_uri, name: k};
                 this.placesResult.push(result);
+                this.placesResultRestore.push(result);
               }
             );
           }
@@ -79,6 +81,28 @@ export class PlacesPage {
 
   getPlaceDetails(result, place_id, resource_uri) {
     this.navCtrl.push(PlaceDetailsPage, { result: result, place_id: place_id, resource_uri: resource_uri });
+  }
+
+  restorePlaces(){
+    this.placesResult = this.placesResultRestore;
+  }
+
+  getItems(ev: any) {
+    // Reset items back to all of the items
+    this.restorePlaces();
+
+    // set val to the value of the searchbar
+    const val = ev.target.value;
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.placesResult = this.placesResult.filter((item) => {
+        if(item.name.toLowerCase().indexOf(val.toLowerCase()) > -1){
+          return item;
+        }
+        // return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      });
+      console.log(this.placesResult);
+    }
   }
 
   addPlace() {
