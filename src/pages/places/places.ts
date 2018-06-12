@@ -68,13 +68,10 @@ export class PlacesPage {
             t.subscribe(
               value => {
                 this.distance = value.rows[0].elements[0].duration.text;
-                let k: string = res.result.name;
-                var result = { place: res, image: image, distance: this.distance, resource_uri: element.resource_uri, name: k };
+                let name = res.result.name;
+                var result = { place: res, image: image, distance: this.distance, resource_uri: element.resource_uri, name: name};
                 this.placesResult.push(result);
                 this.placesResultRestore.push(result);
-                if (this.placesResult.length > 1) {
-                  this.adjust();
-                }
               }
             );
           }
@@ -101,34 +98,16 @@ export class PlacesPage {
           return item;
         }
       });
-      if (this.placesResult.length > 0) {
-        this.adjust();
-      }
     }
   }
 
   onSearchCancel(ev: any) {
     if (this.placesResult.length > 0) {
-      this.adjust();
     }
   }
 
   addPlace() {
     this.navCtrl.push(AddPlacePage);
-  }
-
-  adjust() {
-    var els = document.getElementsByClassName("card-title");
-    let refFontSize = parseFloat(window.getComputedStyle(els[0], null).getPropertyValue("font-size"));
-    let i = 0;
-    while (!!els[i]) {
-      let htmlRoot: HTMLElement = <HTMLElement>document.getElementsByClassName("card-title")[i];
-      htmlRoot.style.fontSize = refFontSize + "px";
-      while (htmlRoot.clientHeight > 35) {
-        htmlRoot.style.fontSize = (parseInt(htmlRoot.style.fontSize) - 1) + "px";
-      }
-      i++;
-    }
   }
 
   toggleSearch() {

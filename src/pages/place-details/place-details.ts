@@ -115,11 +115,8 @@ export class PlaceDetailsPage {
       this.drive = this.result.distance;
       if (this.result.place.result['opening_hours']) {
         let oh = this.result.place.result.opening_hours.weekday_text;
-        console.log(this.result.place.result.opening_hours);
         oh.forEach(element => {
           var partsOfStr = element.substr(element.indexOf(':')+1);
-          console.log(element);
-          console.log(partsOfStr);
           this.openingHours.push(partsOfStr);
         });
       }

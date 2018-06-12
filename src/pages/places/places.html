@@ -12,36 +12,22 @@
       </button>
     </ion-buttons>
   </ion-toolbar>
+  <ion-searchbar [class.collapsed]="collapsed" *ngIf="placesResult != null" (ionInput)="ionSearchInput($event)" (ionCancel)="onSearchCancel($event)"></ion-searchbar>
 </ion-header>
 
-<!-- <ion-content>
-  
-
-  <ion-list *ngIf="placesResult != null">
-    <button ion-item *ngFor="let result of placesResult" id="place" [style.backgroundImage]="'url(' + result.image + ')'" (click)="getPlaceDetails(result, result.place.result.place_id, result.resource_uri)">
-      <div class="name">
-        <label>{{result.name}}</label>
-        <p class="rating" *ngIf="result.place.result.rating != null">Rating: {{result.place.result.rating}} </p>
-      </div>
-      <div class="drive">
-        <ion-icon name="car"></ion-icon>
-        <label>{{result.distance}}</label>
-      </div>
-    </button>
-  </ion-list>
-</ion-content> -->
-
-
 <ion-content class="card-background-page" *ngIf="placesResult != null">
+
   <ion-fab bottom right>
     <button ion-fab mini color="light" (click)="addPlace()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
-  <ion-searchbar [class.collapsed]="collapsed" *ngIf="placesResult != null" (ionInput)="ionSearchInput($event)" (ionCancel)="onSearchCancel($event)"></ion-searchbar>
+
   <ion-card *ngFor="let result of placesResult" (click)="getPlaceDetails(result, result.place.result.place_id, result.resource_uri)">
     <img [src]="result.image" />
-    <div class="card-title">{{result.name}}</div>
-    <div class="card-subtitle">{{result.distance}}</div>
+    <div class="card-box">
+      <div class="card-title">{{result.name}}</div>
+      <div class="card-subtitle">{{result.distance}}</div>
+    </div>
   </ion-card>
 </ion-content>
