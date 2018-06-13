@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ViewController, ToastController } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
 import { DataStorageProvider } from '../../providers/data-storage/data-storage';
 import { PlacesPage } from '../places/places';
+import { PlaceDetailsPage } from '../place-details/place-details';
 
 @IonicPage()
 @Component({
@@ -10,7 +11,9 @@ import { PlacesPage } from '../places/places';
   templateUrl: 'edit-place.html',
 })
 export class EditPlacePage {
-  // public place: any;
+  public type: any;
+  public visited: boolean;
+  public resource_uri: any;
   public placeName: any;
   public place_id: any;
   public images: Array<any> = [];
@@ -19,6 +22,7 @@ export class EditPlacePage {
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
+    private viewCtrl: ViewController,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
     private apiProvider: ApiProvider,
@@ -31,39 +35,43 @@ export class EditPlacePage {
   }
 
   initialize() {
+    this.type = this.navParams.get('type');
     this.place_id = this.navParams.get('place_id');
-    let k: any;
+    this.visited = this.navParams.get('visited');
+    this.resource_uri = this.navParams.get('resource_uri');
+    this.placeAdded = this.isPlaceAdded(this.place_id);
+    let placeDetails: any;
     this.apiProvider.getPlaceDetails(this.place_id).subscribe(res => {
-      k = res;
-      this.placeName = k.result.name;
-      if (k.result.photos != null) {
-        var max = k.result.photos.length;
+      placeDetails = res;
+      this.placeName = placeDetails.result.name;
+      if (placeDetails.result.photos != null) {
+        var max = placeDetails.result.photos.length;
         max = max < 10 ? max : 10
         for (var index = 0; index < max; index++) {
-          var photoreference = k.result.photos[index].photo_reference;
+          var photoreference = placeDetails.result.photos[index].photo_reference;
           this.images.push(this.apiProvider.getPhotoString(photoreference));
         }
       }
     })
   }
 
-  cancelPlace(){
-    this.navCtrl.pop();
-  }
-
   addPlace() {
-    console.log(this.dataStorageProvider.places);
-    console.log(this.place_id);
-    let visited = false;
-    this.placeAdded = this.isPlaceAdded(this.place_id)
     if (this.placeAdded) {
       this.showAlert("This place is already on your list!");
     }
     else {
-      this.apiProvider.addPlace(this.place_id, this.placeName, visited);
+      this.apiProvider.addPlace(this.place_id, this.placeName, this.visited);
       this.presentAddedToast();
       this.navCtrl.setRoot(PlacesPage);
     }
+  }
+
+  updatePlace() {
+    this.apiProvider.updatePlace(this.resource_uri, this.place_id, this.placeName, this.visited);
+    this.presentUpdatedToast();
+    this.viewCtrl.dismiss({
+      "visited": this.visited,
+    });
   }
 
   isPlaceAdded(place_id): boolean {
@@ -97,5 +105,18 @@ export class EditPlacePage {
     });
 
     toast.present();
+  }
+
+  presentUpdatedToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Successfully updated ' + this.placeName + '!',
+      duration: 2000,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 }

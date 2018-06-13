@@ -36,6 +36,6 @@ export class AddPlacePage {
   }
 
   selectPlace(place_id: any) {
-    this.navCtrl.push(EditPlacePage, {place_id: place_id});
+    this.navCtrl.push(EditPlacePage, {type:"add", place_id: place_id, visited: false});
   }
 }

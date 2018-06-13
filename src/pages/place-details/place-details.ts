@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController, DateTime } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, ModalController, DateTime } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
 import { Observable } from 'rxjs/Observable';
 import { EditPlacePage } from '../edit-place/edit-place';
@@ -15,6 +15,7 @@ import { EditPlacePage } from '../edit-place/edit-place';
 export class PlaceDetailsPage {
   public placeName: any = "-";
   public place_id: any;
+  public visited: any;
   public resource_uri: any;
   public result: any = "";
   public image: string = "https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350";
@@ -43,11 +44,20 @@ export class PlaceDetailsPage {
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
+    public modalCtrl: ModalController,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private apiProvider: ApiProvider) {
     this.getPlaceDetails();
     this.initialize();
+  }
+
+  ionViewWillEnter() {
+    console.log("Hi");
+    console.log(this.result);
+    console.log(this.place_id);
+    console.log(this.visited);
+    console.log(this.resource_uri);
   }
 
   ionViewDidLoad() {
@@ -57,6 +67,7 @@ export class PlaceDetailsPage {
   getPlaceDetails() {
     this.result = this.navParams.get('result');
     this.place_id = this.navParams.get('place_id');
+    this.visited = this.navParams.get('visited');
     this.resource_uri = this.navParams.get('resource_uri');
   }
 
@@ -80,8 +91,7 @@ export class PlaceDetailsPage {
   }
 
   getWeather(lat: string, lng: string) {
-    let today = new Date().getDay();
-
+    var today = new Date().getDay();
     var sat = new Date();
     var sun = new Date();
     sat.setDate(sat.getDate() + (6 + 7 - sat.getDay()) % 7);
@@ -96,11 +106,21 @@ export class PlaceDetailsPage {
           let sunDay = len - today;
           this.weatherCondSun = value.forecast.forecastday[sunDay].day.condition.text;
           this.tempSun = value.forecast.forecastday[sunDay].day.avgtemp_c;
-          this.sun = { date: sun.getDate(), mon: this.monthNames[sun.getMonth()], year: sun.getFullYear(), icon: 'http:' + value.forecast.forecastday[sunDay].day.condition.icon };
+          this.sun = {
+            date: sun.getDate(),
+            mon: this.monthNames[sun.getMonth()],
+            year: sun.getFullYear(),
+            icon: 'http:' + value.forecast.forecastday[sunDay].day.condition.icon
+          };
         }
         this.weatherCondSat = value.forecast.forecastday[satDay].day.condition.text;
         this.tempSat = value.forecast.forecastday[satDay].day.avgtemp_c;
-        this.sat = { date: sat.getDate(), mon: this.monthNames[sat.getMonth()], year: sat.getFullYear(), icon: 'http:' + value.forecast.forecastday[satDay].day.condition.icon };
+        this.sat = {
+          date: sat.getDate(),
+          mon: this.monthNames[sat.getMonth()],
+          year: sat.getFullYear(),
+          icon: 'http:' + value.forecast.forecastday[satDay].day.condition.icon
+        };
       },
       error => this.anyErrors = true,
       () => this.finished = true
@@ -116,7 +136,7 @@ export class PlaceDetailsPage {
       if (this.result.place.result['opening_hours']) {
         let oh = this.result.place.result.opening_hours.weekday_text;
         oh.forEach(element => {
-          var partsOfStr = element.substr(element.indexOf(':')+1);
+          var partsOfStr = element.substr(element.indexOf(':') + 1);
           this.openingHours.push(partsOfStr);
         });
       }
@@ -140,7 +160,14 @@ export class PlaceDetailsPage {
   }
 
   editPlace() {
-    this.navCtrl.push(EditPlacePage, { place_id: this.place_id });
+    let modal = this.modalCtrl.create(EditPlacePage, { type: "edit", place_id: this.place_id, visited: this.visited, resource_uri: this.resource_uri });
+    modal.onDidDismiss(data => {
+      if (data != null) {
+        console.log(data);
+        this.visited = data.visited;
+      }
+    });
+    modal.present();
   }
 
   deletePlace() {

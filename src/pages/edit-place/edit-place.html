@@ -1,9 +1,15 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>{{placeName}}</ion-title>
-  </ion-navbar>
+  <ion-toolbar>
+    <ion-title>
+      {{placeName}}
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
-
 
 <ion-content>
   <ion-slides class="sticky" loop="true" *ngIf="images.length != 0">
@@ -13,20 +19,16 @@
     </ion-slide>
   </ion-slides>
   <ion-item-divider color="light">Place Details</ion-item-divider>
+  <ion-item *ngIf="placeAdded == true && type == 'add'">
+    {{placeName}} is already on your list!
+  </ion-item>
   <ion-item>
     <ion-label>Visited</ion-label>
     <ion-toggle [(ngModel)]="visited"></ion-toggle>
   </ion-item>
-
 </ion-content>
 
 <ion-footer text-center>
-  <ion-toolbar>
-    <button color="danger" ion-button text-center style="width:49%" (click)="cancelPlace()">
-      Cancel
-    </button>
-    <button color="secondary" ion-button text-center style="width:49%" (click)="addPlace()">
-      Add
-    </button>
-  </ion-toolbar>
+  <button ion-button block color="light" (click)="addPlace()" *ngIf="type == 'add'">Add</button>
+  <button ion-button block color="light" (click)="updatePlace()" *ngIf="type == 'edit'">Update</button>
 </ion-footer>

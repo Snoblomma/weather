@@ -66,13 +66,28 @@ export class ApiProvider {
   }
 
   addPlace(place_id, name, visited) {
+    console.log("visited " + visited);
     var data = {
       "place_id": place_id,
       "name": name,
-      "visited": true
+      "visited": visited
     };
 
     this.httpClient.post('https://agile-springs-70240.herokuapp.com/api/place/', data).subscribe(
+      value => console.log(value),
+      error => console.log(error)
+    )
+  }
+
+  updatePlace(resource_uri, place_id, name, visited) {
+    console.log("updating " + visited);
+    var data = {
+      "place_id": place_id,
+      "name": name,
+      "visited": visited
+    };
+
+    this.httpClient.put('https://agile-springs-70240.herokuapp.com' + resource_uri, data).subscribe(
       value => console.log(value),
       error => console.log(error)
     )

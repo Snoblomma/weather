@@ -12,7 +12,7 @@
       </button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-searchbar [class.collapsed]="collapsed" *ngIf="placesResult != null" (ionInput)="ionSearchInput($event)" (ionCancel)="onSearchCancel($event)"></ion-searchbar>
+  <ion-searchbar [class.collapsed]="collapsed" [showCancelButton]="true" *ngIf="placesResult != null" (ionInput)="ionSearchInput($event)" (ionCancel)="onSearchCancel($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content class="card-background-page" *ngIf="placesResult != null">
@@ -23,11 +23,11 @@
     </button>
   </ion-fab>
 
-  <ion-card *ngFor="let result of placesResult" (click)="getPlaceDetails(result, result.place.result.place_id, result.resource_uri)">
+  <ion-card *ngFor="let result of placesResult" (click)="getPlaceDetails(result, result.place.result.place_id, result.visited, result.resource_uri)">
     <img [src]="result.image" />
     <div class="card-box">
       <div class="card-title">{{result.name}}</div>
-      <div class="card-subtitle">{{result.distance}}</div>
+      <div class="card-subtitle" *ngIf="result.distance != null && result.distance != ''">{{result.distance}}</div>
     </div>
   </ion-card>
 </ion-content>
