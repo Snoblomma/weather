@@ -120,10 +120,6 @@ export class PlacesPage {
     this.toggleSearch();
   }
 
-  addPlace() {
-    this.navCtrl.push(AddPlacePage);
-  }
-
   toggleSearch() {
     if (this.collapsed) {
       this.collapsed = false;
