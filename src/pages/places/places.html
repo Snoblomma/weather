@@ -16,13 +16,6 @@
 </ion-header>
 
 <ion-content class="card-background-page" *ngIf="placesResult != null">
-
-  <ion-fab bottom right>
-    <button ion-fab mini color="light" (click)="addPlace()">
-      <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-fab>
-
   <ion-card *ngFor="let result of placesResult" (click)="getPlaceDetails(result, result.place.result.place_id, result.visited, result.resource_uri)">
     <img [src]="result.image" />
     <div class="card-box">
