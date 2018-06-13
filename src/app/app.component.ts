@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 
 import { ListPage } from '../pages/list/list';
 import { PlacesPage } from '../pages/places/places';
+import { AddPlacePage } from '../pages/add-place/add-place';
 import { WeatherPage } from '../pages/weather/weather';
 
 @Component({
@@ -15,6 +16,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = PlacesPage;
+  addPlacePage: any = AddPlacePage;
 
   pages: Array<{title: string, component: any}>;
 
