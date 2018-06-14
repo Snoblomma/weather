@@ -60,7 +60,7 @@ export class PlacesPage {
       placeDetails = this.apiProvider.getPlaceDetails(element['place_id']);
       placeDetails.subscribe(
         place => {
-          if (place.result.photos[0] != null) {
+          if (place.result.photos != null) {
             console.log(place.result.photos[0]);
             var photoreference = place.result.photos[0].photo_reference;
             image = this.apiProvider.getPhotoString(photoreference);
