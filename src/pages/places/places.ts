@@ -55,15 +55,21 @@ export class PlacesPage {
     let placeDetails: any;
     let lat: any;
     let lng: any;
+    let image: any;
     this.placesDecription.forEach(element => {
       placeDetails = this.apiProvider.getPlaceDetails(element['place_id']);
       placeDetails.subscribe(
         place => {
-          if (place.result != null) {
+          if (place.result.photos[0] != null) {
+            console.log(place.result.photos[0]);
             var photoreference = place.result.photos[0].photo_reference;
-            var image = this.apiProvider.getPhotoString(photoreference);
+            image = this.apiProvider.getPhotoString(photoreference);
             lat = place.result.geometry.location.lat;
             lng = place.result.geometry.location.lng;
+            this.getDistance(lat, lng, image, element, place);
+          }
+          else{
+            image = '/assets/imgs/image.jpg';
             this.getDistance(lat, lng, image, element, place);
           }
         }
