@@ -69,7 +69,7 @@ export class PlacesPage {
             this.getDistance(lat, lng, image, element, place);
           }
           else{
-            image = '/assets/imgs/image.jpg';
+            image = 'assets/imgs/image.jpg';
             this.getDistance(lat, lng, image, element, place);
           }
         }

@@ -83,7 +83,7 @@ export class PlaceDetailsPage {
       res => {
         this.lat = res.result.geometry.location.lat;
         this.lng = res.result.geometry.location.lng;
-        this.photoreference = res.result.photos[0].photo_reference;
+        // this.photoreference = res.result.photos[0].photo_reference;
         this.getWeather(this.lat, this.lng);
         this.navLink = "https://maps.google.com?saddr=Current+Location&daddr=" + this.lat + "," + this.lng;
       }
@@ -129,7 +129,7 @@ export class PlaceDetailsPage {
 
   getComponents() {
     if (this.result['place']) {
-      this.photoreference = this.result.place.result.photos[0].photo_reference;
+      // this.photoreference = this.result.place.result.photos[0].photo_reference;
       this.placeName = this.result.place.result.name;
       this.rating = this.result.place.result.rating;
       this.drive = this.result.distance;
@@ -147,15 +147,21 @@ export class PlaceDetailsPage {
   }
 
   getImage() {
-    if (this.result['place']) {
+    if (this.result.place.result.photos != null) {
       var max = this.result.place.result.photos.length;
       max = max < 10 ? max : 10
       for (var index = 0; index < max; index++) {
-        var photoreference = this.result.place.result.photos[index].photo_reference;
-        this.image = this.apiProvider.getPhotoString(photoreference);
-        var t = this.apiProvider.getPhotoString(photoreference);
-        this.images.push(this.image);
+        if (this.result.place.result.photos != null) {
+          var photoreference = this.result.place.result.photos[index].photo_reference;
+          this.image = this.apiProvider.getPhotoString(photoreference);
+          var t = this.apiProvider.getPhotoString(photoreference);
+          this.images.push(this.image);
+        }
       }
+    }
+    else {
+      this.image = 'assets/imgs/image.jpg';
+      this.images.push(this.image);
     }
   }
 
