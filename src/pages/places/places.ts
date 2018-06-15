@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
 import { PlaceDetailsPage } from '../place-details/place-details';
 import { AddPlacePage } from '../add-place/add-place';
@@ -16,14 +16,26 @@ export class PlacesPage {
   public placesResult: Array<{ place: any, image: string, distance: any, resource_uri: string, visited: boolean, name: string }> = [];
   public placesResultRestore: any;
   public collapsed: boolean = true;
+  public loading: any;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public apiProvider: ApiProvider,
-    public dataStorageProvider: DataStorageProvider) {
+    public dataStorageProvider: DataStorageProvider,
+    public loadingCtrl: LoadingController) {
+    this.presentLoadingDefault();
     this.initialize();
+    this.loading.dismiss();
+  }
+
+  presentLoadingDefault() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+
+    this.loading.present();
   }
 
   ionViewWillEnter() {
@@ -60,15 +72,14 @@ export class PlacesPage {
       placeDetails = this.apiProvider.getPlaceDetails(element['place_id']);
       placeDetails.subscribe(
         place => {
+          lat = place.result.geometry.location.lat;
+          lng = place.result.geometry.location.lng;
           if (place.result.photos != null) {
-            console.log(place.result.photos[0]);
             var photoreference = place.result.photos[0].photo_reference;
             image = this.apiProvider.getPhotoString(photoreference);
-            lat = place.result.geometry.location.lat;
-            lng = place.result.geometry.location.lng;
             this.getDistance(lat, lng, image, element, place);
           }
-          else{
+          else {
             image = 'assets/imgs/image.jpg';
             this.getDistance(lat, lng, image, element, place);
           }
