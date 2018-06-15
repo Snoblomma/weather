@@ -64,53 +64,46 @@ export class PlacesPage {
   }
 
   getPlacesDetails() {
-    let placeDetails: any;
-    let lat: any;
-    let lng: any;
-    let image: any;
     this.placesDecription.forEach(element => {
-      placeDetails = this.apiProvider.getPlaceDetails(element['place_id']);
-      placeDetails.subscribe(
-        place => {
-          lat = place.result.geometry.location.lat;
-          lng = place.result.geometry.location.lng;
-          if (place.result.photos != null) {
-            var photoreference = place.result.photos[0].photo_reference;
-            image = this.apiProvider.getPhotoString(photoreference);
-            this.getDistance(lat, lng, image, element, place);
-          }
-          else {
-            image = 'assets/imgs/image.jpg';
-            this.getDistance(lat, lng, image, element, place);
-          }
-        }
-      );
-    });
-  }
+      let place: any = "";
+      let lat: any = "";
+      let lng: any = "";
+      let distance: any = "";
+      let d: any = "";
+      let image: any = 'assets/imgs/image.jpg';
+      let name: any = "";
 
-  getDistance(lat, lng, image, element, place) {
-    this.placesResult = [];
-    this.placesResultRestore = [];
-    let distanceFromHome: any;
-    let distance: any = "";
-    distanceFromHome = this.apiProvider.getDistanceFromHome(lat, lng);
-    distanceFromHome.subscribe(
-      value => {
-        if (value.rows[0].elements[0].duration != null) {
-          distance = value.rows[0].elements[0].duration.text;
+      place = this.apiProvider.getPlaceDetails(element.place_id);
+
+      if (place) {
+        lat = place.result.geometry.location.lat || "";
+        lng = place.result.geometry.location.lng || "";
+        name = place.result.name;
+        if (place.result.photos) {
+          var photoreference = place.result.photos[0].photo_reference;
+          image = this.apiProvider.getPhotoString(photoreference);
         }
-        var result = {
-          place: place,
-          image: image,
-          distance: distance,
-          resource_uri: element['resource_uri'],
-          visited: element['visited'],
-          name: place.result.name
-        };
-        this.placesResult.push(result);
-        this.placesResultRestore.push(result);
       }
-    );
+
+      d = this.apiProvider.getDistanceFromHome(lat, lng);
+      if (d) {
+        distance = d.rows[0].elements[0].duration;
+      }
+
+      this.placesResult = [];
+      this.placesResultRestore = [];
+      var result = {
+        place: place,
+        image: image,
+        distance: distance,
+        resource_uri: element.resource_uri,
+        visited: element.visited,
+        name: name
+      };
+      this.placesResult.push(result);
+      this.placesResultRestore.push(result);
+
+    });
   }
 
   getPlaceDetails(result, place_id, visited, resource_uri) {

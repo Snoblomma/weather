@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map'
 
 @Injectable()
 export class ApiProvider {
+  public placeDetails: any;
+  public distance: any
 
   constructor(
     private httpClient: HttpClient,
@@ -46,7 +48,15 @@ export class ApiProvider {
   }
 
   getPlaceDetails(placeId: string) {
-    return this.httpClient.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeId + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw');
+    new Promise(resolve => {
+      this.http.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeId + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw')
+        .subscribe(data => {
+          this.placeDetails = data.json();
+          resolve(this.placeDetails);
+          return this.placeDetails;
+        });
+    });
+    return this.placeDetails;
   }
 
   getPlacePhoto(photoreference: string) {
@@ -58,7 +68,16 @@ export class ApiProvider {
   }
 
   getDistanceFromHome(lat: string, lng: string) {
-    return this.httpClient.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins=53.2472036,-6.182852100000001&destinations=' + lat + ',' + lng + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw');
+    new Promise(resolve => {
+      this.http.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins=53.2472036,-6.182852100000001&destinations=' + lat + ',' + lng + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw')
+        .subscribe(data => {
+          this.distance = data.json();
+          resolve(this.distance);
+          return this.distance;
+        });
+    });
+
+    return this.distance;
   }
 
   getDistance() {
