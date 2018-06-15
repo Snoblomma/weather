@@ -44,19 +44,11 @@ export class ApiProvider {
   }
 
   getPlacesListLocalBackend() {
-    return this.httpClient.get('https://agile-springs-70240.herokuapp.com/api/place/');
+    return this.httpClient.get('https://agile-springs-70240.herokuapp.com/api/place/').toPromise();
   }
 
   getPlaceDetails(placeId: string) {
-    new Promise(resolve => {
-      this.http.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeId + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw')
-        .subscribe(data => {
-          this.placeDetails = data.json();
-          resolve(this.placeDetails);
-          return this.placeDetails;
-        });
-    });
-    return this.placeDetails;
+    return this.httpClient.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeId + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw').toPromise();
   }
 
   getPlacePhoto(photoreference: string) {

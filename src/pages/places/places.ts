@@ -17,6 +17,7 @@ export class PlacesPage {
   public placesResultRestore: any;
   public collapsed: boolean = true;
   public loading: any;
+  public bla: any;
 
   constructor(
     public navCtrl: NavController,
@@ -42,68 +43,73 @@ export class PlacesPage {
     this.initialize();
   }
 
-  initialize() {
+  async initialize() {
     this.collapsed = true;
-    this.placesDecription = [];
+    // this.placesDecription = [];
     this.placesResult = [];
     this.dataStorageProvider.places = [];
-    this.getPlaces();
-  }
+    let t: any;
 
-  getPlaces() {
-    let list = this.apiProvider.getPlacesListLocalBackend();
-    list.subscribe(
+    let k = await this.apiProvider.getPlacesListLocalBackend();
+
+    await this.apiProvider.getPlacesListLocalBackend().then(
       res => {
-        let places = res['objects'];
-        this.placesDecription = places;
-        this.dataStorageProvider.places = places;
-        this.dataStorageProvider.savePlaces();
-        this.getPlacesDetails();
+        this.placesDecription = res.objects;
+        this.bla = res.objects;
+        console.log(this.bla);
       }
     );
-  }
+    console.log(this.bla);
 
-  getPlacesDetails() {
-    this.placesDecription.forEach(element => {
-      let place: any = "";
-      let lat: any = "";
-      let lng: any = "";
-      let distance: any = "";
-      let d: any = "";
-      let image: any = 'assets/imgs/image.jpg';
-      let name: any = "";
+    this.dataStorageProvider.places = this.placesDecription;
+    this.dataStorageProvider.savePlaces();
+    console.log(this.placesDecription);
 
-      place = this.apiProvider.getPlaceDetails(element.place_id);
+    if (this.placesDecription) {
+      this.placesDecription.forEach(async element => {
+        let place: any = "";
+        let lat: any = "";
+        let lng: any = "";
+        let distance: any = "";
+        let d: any = "";
+        let image: any = 'assets/imgs/image.jpg';
+        let name: any = "";
 
-      if (place) {
-        lat = place.result.geometry.location.lat || "";
-        lng = place.result.geometry.location.lng || "";
-        name = place.result.name;
-        if (place.result.photos) {
-          var photoreference = place.result.photos[0].photo_reference;
-          image = this.apiProvider.getPhotoString(photoreference);
+        // place = await this.apiProvider.getPlaceDetails(element.place_id);
+
+
+        await this.apiProvider.getPlaceDetails(element.place_id).then(
+          res => {
+            place = res;
+            lat = place.result.geometry.location.lat || "";
+            lng = place.result.geometry.location.lng || "";
+            name = place.result.name;
+            if (place.result.photos) {
+              var photoreference = place.result.photos[0].photo_reference;
+              image = this.apiProvider.getPhotoString(photoreference);
+            }
+          }
+        );
+
+        d = this.apiProvider.getDistanceFromHome(lat, lng);
+        if (d) {
+          distance = d.rows[0].elements[0].duration;
         }
-      }
 
-      d = this.apiProvider.getDistanceFromHome(lat, lng);
-      if (d) {
-        distance = d.rows[0].elements[0].duration;
-      }
-
-      this.placesResult = [];
-      this.placesResultRestore = [];
-      var result = {
-        place: place,
-        image: image,
-        distance: distance,
-        resource_uri: element.resource_uri,
-        visited: element.visited,
-        name: name
-      };
-      this.placesResult.push(result);
-      this.placesResultRestore.push(result);
-
-    });
+        this.placesResultRestore = [];
+        var result = {
+          place: place,
+          image: image,
+          distance: distance,
+          resource_uri: element.resource_uri,
+          visited: element.visited,
+          name: name
+        };
+        this.placesResult.push(result);
+        this.placesResultRestore.push(result);
+        console.log(this.placesResult.length);
+      });
+    }
   }
 
   getPlaceDetails(result, place_id, visited, resource_uri) {
