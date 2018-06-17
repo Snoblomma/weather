@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
-import { DataStorageProvider } from '../../providers/data-storage/data-storage';
 import { EditPlacePage } from '../edit-place/edit-place';
 
 @IonicPage()
@@ -19,8 +18,7 @@ export class AddPlacePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public alertCtrl: AlertController,
-    public apiProvider: ApiProvider,
-    public dataStorageProvider: DataStorageProvider) {
+    public apiProvider: ApiProvider) {
   }
 
   ionViewDidLoad() {

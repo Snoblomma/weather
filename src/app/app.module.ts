@@ -17,7 +17,6 @@ import { ApiProvider } from '../providers/api/api';
 import { AutoCompleteModule } from 'ionic2-auto-complete';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { IonicStorageModule } from '@ionic/storage';
-import { DataStorageProvider } from '../providers/data-storage/data-storage';
 
 @NgModule({
   declarations: [
@@ -50,8 +49,7 @@ import { DataStorageProvider } from '../providers/data-storage/data-storage';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiProvider,
-    NativeStorage,
-    DataStorageProvider
+    NativeStorage
   ]
 })
 export class AppModule {}

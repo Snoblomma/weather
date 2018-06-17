@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { DataStorageProvider } from '../data-storage/data-storage';
 import 'rxjs/add/operator/map'
 
 @Injectable()
@@ -11,8 +10,7 @@ export class ApiProvider {
 
   constructor(
     private httpClient: HttpClient,
-    private http: Http,
-    private dataStorageProvider: DataStorageProvider) {
+    private http: Http) {
   }
 
   getCurrentWeatherCoordinates(lat: string, lon: string) {

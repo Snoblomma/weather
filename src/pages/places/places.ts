@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, ModalController, LoadingController
 import { ApiProvider } from './../../providers/api/api';
 import { PlaceDetailsPage } from '../place-details/place-details';
 import { AddPlacePage } from '../add-place/add-place';
-import { DataStorageProvider } from '../../providers/data-storage/data-storage';
 
 @IonicPage()
 @Component({
@@ -23,7 +22,6 @@ export class PlacesPage {
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public apiProvider: ApiProvider,
-    public dataStorageProvider: DataStorageProvider,
     public loadingCtrl: LoadingController) {
     this.placesResult = [];
     this.presentLoadingDefault();
@@ -49,7 +47,6 @@ export class PlacesPage {
   async initialize() {
     this.collapsed = true;
     this.placesResult = [];
-    this.dataStorageProvider.places = [];
 
     await this.apiProvider.getPlacesListLocalBackend().then(
       res => {
@@ -57,9 +54,6 @@ export class PlacesPage {
         console.log(this.placesDecription);
       }
     );
-
-    this.dataStorageProvider.places = this.placesDecription;
-    this.dataStorageProvider.savePlaces();
 
     if (this.placesDecription) {
       this.placesDecription.forEach(async element => {

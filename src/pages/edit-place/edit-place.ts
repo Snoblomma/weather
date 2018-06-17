@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ViewController, ToastController, Tabs } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
-import { DataStorageProvider } from '../../providers/data-storage/data-storage';
 import { PlacesPage } from '../places/places';
 import { PlaceDetailsPage } from '../place-details/place-details';
 import { AddPlacePage } from '../add-place/add-place';
@@ -26,8 +25,7 @@ export class EditPlacePage {
     private viewCtrl: ViewController,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
-    private apiProvider: ApiProvider,
-    private dataStorageProvider: DataStorageProvider) {
+    private apiProvider: ApiProvider) {
     this.initialize();
   }
 
