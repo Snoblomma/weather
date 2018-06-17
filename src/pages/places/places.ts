@@ -17,7 +17,6 @@ export class PlacesPage {
   public placesResultRestore: any;
   public collapsed: boolean = true;
   public loading: any;
-  public bla: any;
 
   constructor(
     public navCtrl: NavController,
@@ -26,8 +25,11 @@ export class PlacesPage {
     public apiProvider: ApiProvider,
     public dataStorageProvider: DataStorageProvider,
     public loadingCtrl: LoadingController) {
+    this.placesResult = [];
     this.presentLoadingDefault();
-    this.initialize();
+    if (this.placesResult == []) {
+      this.initialize();
+    }
     this.loading.dismiss();
   }
 
@@ -40,30 +42,24 @@ export class PlacesPage {
   }
 
   ionViewWillEnter() {
+    console.log("called");
     this.initialize();
   }
 
   async initialize() {
     this.collapsed = true;
-    // this.placesDecription = [];
     this.placesResult = [];
     this.dataStorageProvider.places = [];
-    let t: any;
-
-    let k = await this.apiProvider.getPlacesListLocalBackend();
 
     await this.apiProvider.getPlacesListLocalBackend().then(
       res => {
         this.placesDecription = res['objects'];
-        this.bla = res['objects'];
-        console.log(this.bla);
+        console.log(this.placesDecription);
       }
     );
-    console.log(this.bla);
 
     this.dataStorageProvider.places = this.placesDecription;
     this.dataStorageProvider.savePlaces();
-    console.log(this.placesDecription);
 
     if (this.placesDecription) {
       this.placesDecription.forEach(async element => {
@@ -90,7 +86,9 @@ export class PlacesPage {
 
         await this.apiProvider.getDistanceFromHome(lat, lng).then(
           res => {
-            distance = res['rows'][0].elements[0].duration.text || "";
+            if (res['rows'][0].elements[0].duration != null) {
+              distance = res['rows'][0].elements[0].duration.text
+            }
           }
         );
 

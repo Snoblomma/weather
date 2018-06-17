@@ -51,15 +51,9 @@ export class PlaceDetailsPage {
   }
 
   ionViewWillEnter() {
-    console.log("Hi");
-    console.log(this.result);
-    console.log(this.place_id);
-    console.log(this.visited);
-    console.log(this.resource_uri);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PlaceDetailsPage');
   }
 
   getPlaceDetails() {
@@ -76,7 +70,6 @@ export class PlaceDetailsPage {
   }
 
   async getWeathers() {
-
     await this.apiProvider.getPlaceDetails(this.place_id).then(
       res => {
         this.lat = res['result'].geometry.location.lat;

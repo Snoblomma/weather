@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ViewController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ViewController, ToastController, Tabs } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
 import { DataStorageProvider } from '../../providers/data-storage/data-storage';
 import { PlacesPage } from '../places/places';
@@ -34,25 +34,28 @@ export class EditPlacePage {
     console.log('ionViewDidLoad EditPlacePage');
   }
 
-  initialize() {
+  async initialize() {
     this.type = this.navParams.get('type');
     this.place_id = this.navParams.get('place_id');
     this.visited = this.navParams.get('visited');
     this.resource_uri = this.navParams.get('resource_uri');
     this.placeAdded = this.isPlaceAdded(this.place_id);
     let placeDetails: any;
-    // this.apiProvider.getPlaceDetails(this.place_id).subscribe(res => {
-    //   placeDetails = res;
-    //   this.placeName = placeDetails.result.name;
-    //   if (placeDetails.result.photos != null) {
-    //     var max = placeDetails.result.photos.length;
-    //     max = max < 10 ? max : 10
-    //     for (var index = 0; index < max; index++) {
-    //       var photoreference = placeDetails.result.photos[index].photo_reference;
-    //       this.images.push(this.apiProvider.getPhotoString(photoreference));
-    //     }
-    //   }
-    // })
+
+    await this.apiProvider.getPlaceDetails(this.place_id).then(
+      res => {
+        placeDetails = res;
+        this.placeName = placeDetails.result.name;
+        if (placeDetails.result.photos != null) {
+          var max = placeDetails.result.photos.length;
+          max = max < 10 ? max : 10
+          for (var index = 0; index < max; index++) {
+            var photoreference = placeDetails.result.photos[index].photo_reference;
+            this.images.push(this.apiProvider.getPhotoString(photoreference));
+          }
+        }
+      }
+    );
   }
 
   addPlace() {
@@ -62,7 +65,9 @@ export class EditPlacePage {
     else {
       this.apiProvider.addPlace(this.place_id, this.placeName, this.visited);
       this.presentAddedToast();
-      this.navCtrl.setRoot(PlacesPage);
+      // going to places
+      var t: Tabs = this.navCtrl.parent;
+      t.select(0);
     }
   }
 

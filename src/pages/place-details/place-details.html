@@ -12,12 +12,6 @@
     </ion-slide>
   </ion-slides>
 
-  <!-- <ion-item class="title">
-    <div class="name">
-      <label id="placeName">{{placeName}}</label>
-    </div>
-  </ion-item> -->
-
   <ion-item id="general">
     <ion-grid>
       <ion-row>
@@ -68,9 +62,6 @@
           <p id="label">
             Saturday
           </p>
-          <!-- <p id="date">
-            {{sat.mon}} {{sat.date}}
-          </p> -->
           <p id="weather" *ngIf="sat==null">
             No Forecast Available
           </p>
@@ -96,9 +87,6 @@
           <p id="label">
             Sunday
           </p>
-          <!-- <p id="date">
-              {{sun.mon}} {{sun.date}}
-            </p> -->
           <p id="weather" *ngIf="sun==null">
             No Forecast Available
           </p>

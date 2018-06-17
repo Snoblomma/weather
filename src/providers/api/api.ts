@@ -56,7 +56,6 @@ export class ApiProvider {
   }
 
   addPlace(place_id, name, visited) {
-    console.log("visited " + visited);
     var data = {
       "place_id": place_id,
       "name": name,

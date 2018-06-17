@@ -11,12 +11,4 @@
       {{ place.description }},
     </button>
   </ion-list>
-
-  <ion-slides class="sticky" loop="true" *ngIf="selected==true">
-    <ion-slide *ngFor="let image of images">
-      <ion-item id="place" [style.backgroundImage]="'url(' + image + ')'">
-      </ion-item>
-    </ion-slide>
-  </ion-slides>
-
 </ion-content>
