@@ -15,20 +15,12 @@ export class ApiProvider {
     private dataStorageProvider: DataStorageProvider) {
   }
 
-  getWeatherKeyword(keyword: string) {
-    return this.httpClient.get('http://api.openweathermap.org/data/2.5/weather?q=' + keyword + '&units=metric&APPID=ec44e7ff2e0597cf35d85dd13062e22d');
-  }
-
   getCurrentWeatherCoordinates(lat: string, lon: string) {
     return this.httpClient.get('https://api.apixu.com/v1/current.json?key=ef9bc2cafed948a69d6162938181006&q=' + lat + ',' + lon);
   }
 
   getForecastWeatherCoordinates(lat: string, lon: string, days: string) {
-    return this.httpClient.get('https://api.apixu.com/v1/forecast.json?key=ef9bc2cafed948a69d6162938181006&q=' + lat + ',' + lon + '&days=' + days);
-  }
-
-  getCountries() {
-    return this.httpClient.get('https://restcountries.eu/rest/v2/all');
+    return this.httpClient.get('https://api.apixu.com/v1/forecast.json?key=ef9bc2cafed948a69d6162938181006&q=' + lat + ',' + lon + '&days=' + days).toPromise();
   }
 
   getCities(keyword: string) {
@@ -37,10 +29,6 @@ export class ApiProvider {
 
   getPlaces(keyword: string) {
     return this.httpClient.get('https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + keyword + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw');
-  }
-
-  getPlacesList() {
-    return this.httpClient.get('/assets/data/places.json');
   }
 
   getPlacesListLocalBackend() {
@@ -60,16 +48,7 @@ export class ApiProvider {
   }
 
   getDistanceFromHome(lat: string, lng: string) {
-    new Promise(resolve => {
-      this.http.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins=53.2472036,-6.182852100000001&destinations=' + lat + ',' + lng + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw')
-        .subscribe(data => {
-          this.distance = data.json();
-          resolve(this.distance);
-          return this.distance;
-        });
-    });
-
-    return this.distance;
+    return this.httpClient.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins=53.2472036,-6.182852100000001&destinations=' + lat + ',' + lng + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw').toPromise();
   }
 
   getDistance() {

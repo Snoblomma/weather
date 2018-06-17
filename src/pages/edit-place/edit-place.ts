@@ -41,18 +41,18 @@ export class EditPlacePage {
     this.resource_uri = this.navParams.get('resource_uri');
     this.placeAdded = this.isPlaceAdded(this.place_id);
     let placeDetails: any;
-    this.apiProvider.getPlaceDetails(this.place_id).subscribe(res => {
-      placeDetails = res;
-      this.placeName = placeDetails.result.name;
-      if (placeDetails.result.photos != null) {
-        var max = placeDetails.result.photos.length;
-        max = max < 10 ? max : 10
-        for (var index = 0; index < max; index++) {
-          var photoreference = placeDetails.result.photos[index].photo_reference;
-          this.images.push(this.apiProvider.getPhotoString(photoreference));
-        }
-      }
-    })
+    // this.apiProvider.getPlaceDetails(this.place_id).subscribe(res => {
+    //   placeDetails = res;
+    //   this.placeName = placeDetails.result.name;
+    //   if (placeDetails.result.photos != null) {
+    //     var max = placeDetails.result.photos.length;
+    //     max = max < 10 ? max : 10
+    //     for (var index = 0; index < max; index++) {
+    //       var photoreference = placeDetails.result.photos[index].photo_reference;
+    //       this.images.push(this.apiProvider.getPhotoString(photoreference));
+    //     }
+    //   }
+    // })
   }
 
   addPlace() {

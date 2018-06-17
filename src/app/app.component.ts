@@ -4,7 +4,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 
-import { ListPage } from '../pages/list/list';
 import { PlacesPage } from '../pages/places/places';
 import { AddPlacePage } from '../pages/add-place/add-place';
 import { WeatherPage } from '../pages/weather/weather';
@@ -24,7 +23,6 @@ export class MyApp {
     this.initializeApp();
 
     this.pages = [
-      { title: 'List', component: ListPage },
       { title: 'Places', component: PlacesPage }
     ];
 
@@ -32,16 +30,12 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
 }

@@ -45,7 +45,7 @@ export class WeatherPage {
   }
 
   initialize(){
-    this.placeDetails = this.apiProvider.getPlaceDetails(this.placeId);
+    // this.placeDetails = this.apiProvider.getPlaceDetails(this.placeId);
     this.placeDetails.subscribe(
       res => { 
         this.lat = res.result.geometry.location.lat; 

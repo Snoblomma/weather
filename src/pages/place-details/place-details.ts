@@ -34,8 +34,6 @@ export class PlaceDetailsPage {
   public weatherCondSun: any;
   public tempSat: any;
   public tempSun: any;
-  weathers: Observable<any>;
-  placeDetails: Observable<any>;
   private anyErrors: boolean;
   private finished: boolean;
   private monthNames = ["January", "February", "March", "April", "May", "June",
@@ -44,7 +42,7 @@ export class PlaceDetailsPage {
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
-    public modalCtrl: ModalController,
+    private modalCtrl: ModalController,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private apiProvider: ApiProvider) {
@@ -77,53 +75,50 @@ export class PlaceDetailsPage {
     this.getImage();
   }
 
-  getWeathers() {
-    this.placeDetails = this.apiProvider.getPlaceDetails(this.place_id);
-    this.placeDetails.subscribe(
+  async getWeathers() {
+
+    await this.apiProvider.getPlaceDetails(this.place_id).then(
       res => {
-        this.lat = res.result.geometry.location.lat;
-        this.lng = res.result.geometry.location.lng;
-        // this.photoreference = res.result.photos[0].photo_reference;
-        this.getWeather(this.lat, this.lng);
+        this.lat = res['result'].geometry.location.lat;
+        this.lng = res['result'].geometry.location.lng;
         this.navLink = "https://maps.google.com?saddr=Current+Location&daddr=" + this.lat + "," + this.lng;
       }
     );
+
+    this.getWeather(this.lat, this.lng);
   }
 
-  getWeather(lat: string, lng: string) {
+  async getWeather(lat: string, lng: string) {
     var today = new Date().getDay();
     var sat = new Date();
     var sun = new Date();
     sat.setDate(sat.getDate() + (6 + 7 - sat.getDay()) % 7);
     sun.setDate(sat.getDate() + 1);
 
-    this.weathers = this.apiProvider.getForecastWeatherCoordinates(lat, lng, "7");
-    this.weathers.subscribe(
-      value => {
-        let len = value.forecast.forecastday.length;
+    await this.apiProvider.getForecastWeatherCoordinates(lat, lng, "7").then(
+      res => {
+        let len = res['forecast'].forecastday.length;
         let satDay = len - 1 - today;
         if (today != 0) {
           let sunDay = len - today;
-          this.weatherCondSun = value.forecast.forecastday[sunDay].day.condition.text;
-          this.tempSun = value.forecast.forecastday[sunDay].day.avgtemp_c;
+          this.weatherCondSun = res['forecast'].forecastday[sunDay].day.condition.text;
+          this.tempSun = res['forecast'].forecastday[sunDay].day.avgtemp_c;
           this.sun = {
             date: sun.getDate(),
             mon: this.monthNames[sun.getMonth()],
             year: sun.getFullYear(),
-            icon: 'http:' + value.forecast.forecastday[sunDay].day.condition.icon
+            icon: 'http:' + res['forecast'].forecastday[sunDay].day.condition.icon
           };
         }
-        this.weatherCondSat = value.forecast.forecastday[satDay].day.condition.text;
-        this.tempSat = value.forecast.forecastday[satDay].day.avgtemp_c;
+        this.weatherCondSat = res['forecast'].forecastday[satDay].day.condition.text;
+        this.tempSat = res['forecast'].forecastday[satDay].day.avgtemp_c;
         this.sat = {
           date: sat.getDate(),
           mon: this.monthNames[sat.getMonth()],
           year: sat.getFullYear(),
-          icon: 'http:' + value.forecast.forecastday[satDay].day.condition.icon
+          icon: 'http:' + res['forecast'].forecastday[satDay].day.condition.icon
         };
-      },
-      error => this.anyErrors = true,
-      () => this.finished = true
+      }
     );
   }
 

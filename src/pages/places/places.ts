@@ -54,8 +54,8 @@ export class PlacesPage {
 
     await this.apiProvider.getPlacesListLocalBackend().then(
       res => {
-        this.placesDecription = res.objects;
-        this.bla = res.objects;
+        this.placesDecription = res['objects'];
+        this.bla = res['objects'];
         console.log(this.bla);
       }
     );
@@ -75,10 +75,7 @@ export class PlacesPage {
         let image: any = 'assets/imgs/image.jpg';
         let name: any = "";
 
-        // place = await this.apiProvider.getPlaceDetails(element.place_id);
-
-
-        await this.apiProvider.getPlaceDetails(element.place_id).then(
+        await this.apiProvider.getPlaceDetails(element['place_id']).then(
           res => {
             place = res;
             lat = place.result.geometry.location.lat || "";
@@ -91,10 +88,11 @@ export class PlacesPage {
           }
         );
 
-        d = this.apiProvider.getDistanceFromHome(lat, lng);
-        if (d) {
-          distance = d.rows[0].elements[0].duration;
-        }
+        await this.apiProvider.getDistanceFromHome(lat, lng).then(
+          res => {
+            distance = res['rows'][0].elements[0].duration.text || "";
+          }
+        );
 
         this.placesResultRestore = [];
         var result = {
@@ -102,12 +100,11 @@ export class PlacesPage {
           image: image,
           distance: distance,
           resource_uri: element.resource_uri,
-          visited: element.visited,
+          visited: element['visited'],
           name: name
         };
         this.placesResult.push(result);
         this.placesResultRestore.push(result);
-        console.log(this.placesResult.length);
       });
     }
   }

@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
-import { ListPage } from '../pages/list/list';
 import { PlacesPage } from '../pages/places/places';
 import { WeatherPage } from '../pages/weather/weather';
 import { AddPlacePage } from '../pages/add-place/add-place';
@@ -23,7 +22,6 @@ import { DataStorageProvider } from '../providers/data-storage/data-storage';
 @NgModule({
   declarations: [
     MyApp,
-    ListPage,
     PlacesPage,
     PlaceDetailsPage,
     WeatherPage,
@@ -41,7 +39,6 @@ import { DataStorageProvider } from '../providers/data-storage/data-storage';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ListPage,
     PlacesPage,
     PlaceDetailsPage,
     WeatherPage,
