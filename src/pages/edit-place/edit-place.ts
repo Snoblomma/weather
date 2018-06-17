@@ -4,6 +4,7 @@ import { ApiProvider } from './../../providers/api/api';
 import { DataStorageProvider } from '../../providers/data-storage/data-storage';
 import { PlacesPage } from '../places/places';
 import { PlaceDetailsPage } from '../place-details/place-details';
+import { AddPlacePage } from '../add-place/add-place';
 
 @IonicPage()
 @Component({
@@ -39,7 +40,7 @@ export class EditPlacePage {
     this.place_id = this.navParams.get('place_id');
     this.visited = this.navParams.get('visited');
     this.resource_uri = this.navParams.get('resource_uri');
-    this.placeAdded = this.isPlaceAdded(this.place_id);
+    this.placeAdded = await this.isPlaceAdded(this.place_id);
     let placeDetails: any;
 
     await this.apiProvider.getPlaceDetails(this.place_id).then(
@@ -66,6 +67,7 @@ export class EditPlacePage {
       this.apiProvider.addPlace(this.place_id, this.placeName, this.visited);
       this.presentAddedToast();
       // going to places
+      this.navCtrl.setRoot(AddPlacePage);
       var t: Tabs = this.navCtrl.parent;
       t.select(0);
     }
@@ -79,13 +81,18 @@ export class EditPlacePage {
     });
   }
 
-  isPlaceAdded(place_id): boolean {
-    let filter = this.dataStorageProvider.places.filter((item) => {
-      if (item.place_id == place_id) {
-        return true;
+  async isPlaceAdded(place_id): Promise<boolean> {
+    let filter: any;
+    await this.apiProvider.getPlacesListLocalBackend().then(
+      res => {
+        return filter = res['objects'].filter((item) => {
+          if (item.place_id == place_id) {
+            return true;
+          }
+          return false;
+        });
       }
-      return false;
-    });
+    );
     return filter.length > 0 ? true : false;
   }
 
