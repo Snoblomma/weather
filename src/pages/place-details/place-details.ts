@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController, ModalController, DateTime } from 'ionic-angular';
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, ModalController, DateTime, Content } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
 import { Observable } from 'rxjs/Observable';
 import { EditPlacePage } from '../edit-place/edit-place';
@@ -9,8 +9,6 @@ import { EditPlacePage } from '../edit-place/edit-place';
   selector: 'page-place-details',
   templateUrl: 'place-details.html',
 })
-
-
 
 export class PlaceDetailsPage {
   public placeName: any = "-";
@@ -38,14 +36,17 @@ export class PlaceDetailsPage {
   private finished: boolean;
   private monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"];
+  public isAtBottom: boolean;
 
+  @ViewChild(Content) content: Content;
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
     private modalCtrl: ModalController,
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
-    private apiProvider: ApiProvider) {
+    private apiProvider: ApiProvider,
+    private ref: ChangeDetectorRef) {
     this.getPlaceDetails();
     this.initialize();
   }
@@ -208,6 +209,18 @@ export class PlaceDetailsPage {
 
   navigateToPlace() {
     this.navLink = "https://www.google.com/maps/dir/Current+Location/43.12345,-76.12345";
+  }
+
+  checkTop() {
+    var position: number = this.content.getScrollElement().scrollTop;
+    if (position <= 250) {
+      var opacity = position / 25 * 0.1;
+      document.getElementById("place-header").style.backgroundColor = 'rgba(255, 255, 255, ' + opacity + ')';
+    }
+    else {
+      document.getElementById("place-header").style.backgroundColor = 'rgba(255, 255, 255, 1)';
+    }
+    this.ref.detectChanges();
   }
 }
 

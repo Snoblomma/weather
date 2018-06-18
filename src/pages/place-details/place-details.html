@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar id="place-header">
     <ion-title>{{placeName}}</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content (ionScroll)="checkTop()">
   <ion-slides class="sticky" loop="true">
     <ion-slide *ngFor="let image of images">
       <ion-item id="place" [style.backgroundImage]="'url(' + image + ')'">
