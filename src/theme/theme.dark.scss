@@ -1,0 +1,22 @@
+#dark-theme {
+  ion-content,
+  ion-card {
+    background-color: #090f2f;
+    color: #fff;
+  }
+  .item-md {
+    background-color: #090f2f;
+    color: #fff;
+  }
+  .toolbar-title {
+    color: #fff;
+  }
+  .tabs-md, .tabbar {
+    background: #090f2f;
+    color: #fff;
+  }
+  .header .toolbar-background {
+    border-color: #ff0fff;
+    background-color: #090f2f;
+  }
+}

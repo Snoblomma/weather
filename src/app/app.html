@@ -16,10 +16,10 @@
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<ion-nav [root]="rootPage" [id]="selectedTheme" #content swipeBackEnabled="false"></ion-nav>
 
-<ion-tabs>
-  <ion-tab tabIcon="home" [root]="rootPage"></ion-tab>
+<ion-tabs [id]="selectedTheme">
+  <ion-tab tabIcon="home" [root]="placesPage"></ion-tab>
   <ion-tab tabIcon="add-circle" [root]="addPlacePage"></ion-tab>
-  <ion-tab tabIcon="options" [root]="rootPage"></ion-tab>
+  <ion-tab tabIcon="options" [root]="optionsPage"></ion-tab>
 </ion-tabs>`

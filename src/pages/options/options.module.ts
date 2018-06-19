@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { SettingsPage } from './settings';
+import { OptionsPage } from './options';
 
 @NgModule({
   declarations: [
-    SettingsPage,
+    OptionsPage,
   ],
   imports: [
-    IonicPageModule.forChild(SettingsPage),
+    IonicPageModule.forChild(OptionsPage),
   ],
 })
-export class SettingsPageModule {}
+export class OptionsPageModule {}

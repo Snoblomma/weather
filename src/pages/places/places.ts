@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, LoadingController
 import { ApiProvider } from './../../providers/api/api';
 import { PlaceDetailsPage } from '../place-details/place-details';
 import { AddPlacePage } from '../add-place/add-place';
+import { SettingsProvider } from './../../providers/settings/settings';
 
 @IonicPage()
 @Component({
@@ -16,31 +17,40 @@ export class PlacesPage {
   public placesResultRestore: any;
   public collapsed: boolean = true;
   public loading: any;
+  public selectedTheme: String;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public apiProvider: ApiProvider,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    private settings: SettingsProvider) {
     this.placesResult = [];
     this.presentLoadingDefault();
     if (this.placesResult == []) {
       this.initialize();
     }
     this.loading.dismiss();
+    this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
   }
 
   presentLoadingDefault() {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
-
     this.loading.present();
   }
 
+  toggleAppTheme() {
+    if (this.selectedTheme === 'dark-theme') {
+      this.settings.setActiveTheme('light-theme');
+    } else {
+      this.settings.setActiveTheme('dark-theme');
+    }
+  }
+
   ionViewWillEnter() {
-    console.log("called");
     this.initialize();
   }
 
@@ -61,7 +71,6 @@ export class PlacesPage {
         let lat: any = "";
         let lng: any = "";
         let distance: any = "";
-        let d: any = "";
         let image: any = 'assets/imgs/image.jpg';
         let name: any = "";
 

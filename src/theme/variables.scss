@@ -1,37 +1,8 @@
-// Ionic Variables and Theming. For more info, please see:
-// http://ionicframework.com/docs/theming/
-
-// Font path is used to include ionicons,
-// roboto, and noto sans fonts
 $font-path: "../assets/fonts";
-
-
-// The app direction is used to include
-// rtl styles in your app. For more info, please see:
-// http://ionicframework.com/docs/theming/rtl-support/
 $app-direction: ltr;
 
 
 @import "ionic.globals";
-
-
-// Shared Variables
-// --------------------------------------------------
-// To customize the look and feel of this app, you can override
-// the Sass variables found in Ionic's source scss files.
-// To view all the possible Ionic variables, see:
-// http://ionicframework.com/docs/theming/overriding-ionic-variables/
-
-
-
-
-// Named Color Variables
-// --------------------------------------------------
-// Named colors makes it easy to reuse colors on various components.
-// It's highly recommended to change the default colors
-// to match your app's branding. Ionic uses a Sass map of
-// colors so you can add, rename and remove colors as needed.
-// The "primary" color is the only required color in the map.
 
 $colors: (
   primary:    #488aff,
@@ -42,20 +13,16 @@ $colors: (
   edit:       #ff8c00
 );
 
-$item-wp-font-size: 1.8rem !important;
-$item-md-font-size: 1.8rem !important;
-$item-ios-paragraph-font-size: 1.6rem !important;
-$toggle-md-track-height: 20px !important;
 
 // App iOS Variables
-// --------------------------------------------------
+$item-ios-paragraph-font-size: 1.6rem !important;
 // iOS only Sass variables can go here
 
 
-
-
 // App Material Design Variables
-// --------------------------------------------------
+$item-wp-font-size: 1.8rem !important;
+$item-md-font-size: 1.8rem !important;
+$toggle-md-track-height: 20px !important;
 // Material Design only Sass variables can go here
 
 
@@ -76,6 +43,8 @@ $toggle-md-track-height: 20px !important;
 // default are overridden.
 
 @import "ionic.theme.default";
+@import "theme.light";
+@import "theme.dark";
 
 
 // Ionicons

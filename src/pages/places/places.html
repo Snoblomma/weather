@@ -8,14 +8,18 @@
     <ion-title>Places</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="toggleSearch()">
-        <ion-icon name="search"></ion-icon>
+        <ion-icon name="more"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-searchbar [class.collapsed]="collapsed" [showCancelButton]="true" *ngIf="placesResult != null" (ionInput)="ionSearchInput($event)" (ionCancel)="onSearchCancel($event)"></ion-searchbar>
+  <ion-searchbar [class.collapsed]="collapsed" [showCancelButton]="true" *ngIf="placesResult != null" (ionInput)="ionSearchInput($event)"
+    (ionCancel)="onSearchCancel($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content class="card-background-page" *ngIf="placesResult != null">
+  <button ion-button full icon-left (click)="toggleAppTheme()">
+    <ion-icon name="bulb"></ion-icon>Toggle Theme
+  </button>
   <ion-card *ngFor="let result of placesResult" (click)="getPlaceDetails(result, result.place.result.place_id, result.visited, result.resource_uri)">
     <img [src]="result.image" />
     <div class="card-box">

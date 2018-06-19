@@ -10,6 +10,7 @@ import { WeatherPage } from '../pages/weather/weather';
 import { AddPlacePage } from '../pages/add-place/add-place';
 import { PlaceDetailsPage } from '../pages/place-details/place-details';
 import { EditPlacePage } from '../pages/edit-place/edit-place';
+import { OptionsPage } from '../pages/options/options';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -17,6 +18,7 @@ import { ApiProvider } from '../providers/api/api';
 import { AutoCompleteModule } from 'ionic2-auto-complete';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { IonicStorageModule } from '@ionic/storage';
+import { SettingsProvider } from '../providers/settings/settings';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { IonicStorageModule } from '@ionic/storage';
     PlaceDetailsPage,
     WeatherPage,
     AddPlacePage,
-    EditPlacePage
+    EditPlacePage,
+    OptionsPage
   ],
   imports: [
     BrowserModule,
@@ -42,14 +45,16 @@ import { IonicStorageModule } from '@ionic/storage';
     PlaceDetailsPage,
     WeatherPage,
     AddPlacePage,
-    EditPlacePage
+    EditPlacePage,
+    OptionsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiProvider,
-    NativeStorage
+    NativeStorage,
+    SettingsProvider
   ]
 })
 export class AppModule {}
