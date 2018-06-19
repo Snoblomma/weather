@@ -5,12 +5,22 @@ $app-direction: ltr;
 @import "ionic.globals";
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222,
-  edit:       #ff8c00
+  // primary:          #209fda,
+  // primary-dark:     #0c5b91,
+  // primary-light:    #b5e6f7,
+  // secondary:        #ea8fed,
+  primary:          #344955,
+  primary-dark:     #232f34,
+  primary-light:    #4a6572,
+  secondary:        #f9aa33,
+  secondary-dark:   #b300c6,
+  secondary-light:  #fae5fa,
+  danger:           #f53d3d,
+  light:            #f4f4f4,
+  dark:             #222,
+  edit:             #ff8c00,
+  background:       #ffffff,
+  error:            #b00020
 );
 
 
