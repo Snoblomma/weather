@@ -17,9 +17,6 @@
 </ion-header>
 
 <ion-content class="card-background-page" *ngIf="placesResult != null">
-  <button ion-button full icon-left (click)="toggleAppTheme()">
-    <ion-icon name="bulb"></ion-icon>Toggle Theme
-  </button>
   <ion-card *ngFor="let result of placesResult" (click)="getPlaceDetails(result, result.place.result.place_id, result.visited, result.resource_uri)">
     <img [src]="result.image" />
     <div class="card-box">

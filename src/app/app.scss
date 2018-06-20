@@ -57,3 +57,16 @@ ion-label #name {
   display: table-cell;
   text-shadow: 1px 1px 1px #000;
 }
+// $alert-md-background-color: map-get($colors, primary-dark);
+// $alert-md-message-text-color: #fff;
+// .app-root {
+//   background-color: #f00;   
+// }
+
+#light-theme + .alert-wrapper {
+  background-color: red !important;   
+}
+
+#dark-theme + .alert-wrapper {
+  background-color: blue !important;   
+}
