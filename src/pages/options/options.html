@@ -7,8 +7,13 @@
 <ion-content [id]="selectedTheme">
   <ion-list>
     <ion-item>
+      <ion-icon name="bulb" class="item-icon" item-start></ion-icon>
       <ion-label>Dark Theme</ion-label>
       <ion-toggle [(ngModel)]="darkTheme" (ionChange)="toggleAppTheme()"></ion-toggle>
     </ion-item>
+    <button ion-item>
+      <ion-icon name="pricetags" class="item-icon" item-start></ion-icon>
+      Categories
+    </button>
   </ion-list>
 </ion-content>

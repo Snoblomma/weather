@@ -25,7 +25,7 @@ ion-buttons[start] {
   color: grey;
 }
 
-td#openingHours p{
+td#openingHours p {
   margin-left: 12px;
 }
 
@@ -57,8 +57,14 @@ ion-label #name {
   display: table-cell;
   text-shadow: 1px 1px 1px #000;
 }
-// $alert-md-background-color: map-get($colors, primary-dark);
-// $alert-md-message-text-color: #fff;
-// .app-root {
-//   background-color: #f00;   
-// }
+
+.item-icon {
+  font-size: 2.2rem !important;
+}
+
+.item-md ion-icon[item-left]+.item-inner,
+.item-md ion-icon[item-left]+.item-input,
+.item-md ion-icon[item-start]+.item-inner,
+.item-md ion-icon[item-start]+.item-input {
+  margin-left: 10px;
+}

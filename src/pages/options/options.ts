@@ -8,7 +8,6 @@ import { SettingsProvider } from './../../providers/settings/settings';
   templateUrl: 'options.html',
 })
 export class OptionsPage {
-  // public selectedTheme: String;
   public theme: String;
   public darkTheme: boolean;
 
@@ -21,7 +20,6 @@ export class OptionsPage {
         if(val == "dark-theme" ){
           this.darkTheme = true;
         }
-        // this.selectedTheme = val; 
       });
   }
 

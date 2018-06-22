@@ -1,4 +1,9 @@
 #dark-theme {
+  background-color: map-get($colors, primary-dark);
+  color: map-get($colors, on-primary);
+}
+
+#dark-theme {
   ion-content,
   ion-card {
     background-color: map-get($colors, primary-dark);
@@ -9,24 +14,28 @@
   }
   .item-md,
   .tabs-md,
-  .tabs-md,
   .tab-button,
   .tab-button-icon {
     background: map-get($colors, primary-dark);
-    color: #fff;
+    color: map-get($colors, on-primary);
   }
   .header .toolbar-background {
-    border-color: #ff0fff;
     background-color: map-get($colors, primary-dark);
-  }
-  .tabs-md .tab-button[aria-selected=true] .tab-button-icon {
-    color: #488aff !important;
-    transform: translate3d(0, -2px, 0);
   }
   .bar-button-default-md,
   .bar-button-clear-md-default,
   .bar-button-md-default {
-    color: #fff;
-  } 
+    color: map-get($colors, on-primary);
+  }
+  .tab-button[aria-selected=true] .tab-button-icon {
+    color: map-get($colors, secondary);
+  }
+  .item-md p {
+    color: map-get($colors, on-primary);
+  }
+  .content-md,
+  .toolbar-background-md {
+    background-color: map-get($colors, primary-dark);
+    color: map-get($colors, on-primary);
+  }
 }
-
