@@ -18,6 +18,10 @@
   .tab-button-icon {
     background: map-get($colors, primary-dark);
     color: map-get($colors, on-primary);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
   }
   .header .toolbar-background {
     background-color: map-get($colors, primary-dark);
