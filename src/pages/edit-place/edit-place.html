@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [id]="selectedTheme">
   <ion-toolbar>
     <ion-title>
       {{placeName}}
@@ -11,7 +11,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [id]="selectedTheme">
   <ion-slides class="sticky" loop="true" *ngIf="images.length != 0">
     <ion-slide *ngFor="let image of images">
       <ion-item id="place" [style.backgroundImage]="'url(' + image + ')'">
@@ -28,7 +28,7 @@
   </ion-item>
 </ion-content>
 
-<ion-footer text-center>
+<ion-footer text-center [id]="selectedTheme">
   <button ion-button block color="light" (click)="addPlace()" *ngIf="type == 'add'">Add</button>
   <button ion-button block color="light" (click)="updatePlace()" *ngIf="type == 'edit'">Update</button>
 </ion-footer>

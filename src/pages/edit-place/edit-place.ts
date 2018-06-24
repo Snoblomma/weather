@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ViewController, ToastController, Tabs } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
+import { SettingsProvider } from './../../providers/settings/settings';
 import { PlacesPage } from '../places/places';
 import { PlaceDetailsPage } from '../place-details/place-details';
 import { AddPlacePage } from '../add-place/add-place';
@@ -18,6 +19,8 @@ export class EditPlacePage {
   public place_id: any;
   public images: Array<any> = [];
   public placeAdded: boolean;
+  public darkTheme: boolean;
+  public selectedTheme: string;
 
   constructor(
     private navCtrl: NavController,
@@ -25,7 +28,8 @@ export class EditPlacePage {
     private viewCtrl: ViewController,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
-    private apiProvider: ApiProvider) {
+    private apiProvider: ApiProvider,
+    private settings: SettingsProvider) {
     this.initialize();
   }
 
@@ -34,6 +38,15 @@ export class EditPlacePage {
   }
 
   async initialize() {
+    this.settings.getActiveTheme().subscribe(
+      val => {
+        if (val == "dark-theme") {
+          this.selectedTheme = "dark-theme";
+        }
+        else{
+          this.selectedTheme = "light-theme";
+        }
+      });
     this.type = this.navParams.get('type');
     this.place_id = this.navParams.get('place_id');
     this.visited = this.navParams.get('visited');
