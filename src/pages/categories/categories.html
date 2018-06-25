@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [id]="selectedTheme">
   <ion-toolbar>
     <ion-title>Categories</ion-title>
     <ion-buttons end>
@@ -10,6 +10,9 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content [id]="selectedTheme">
+  <ion-item *ngFor="let category of categories">
+    <ion-icon [name]="category.icon" class="item-icon" item-start></ion-icon>
+      <ion-label>{{category.name}}</ion-label>
+  </ion-item>
 </ion-content>

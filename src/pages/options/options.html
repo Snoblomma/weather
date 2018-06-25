@@ -11,7 +11,7 @@
       <ion-label>Dark Theme</ion-label>
       <ion-toggle [(ngModel)]="darkTheme" (ionChange)="toggleAppTheme()"></ion-toggle>
     </ion-item>
-    <button ion-item onclick="editCategories()">
+    <button ion-item (click)="editCategories()">
       <ion-icon name="pricetags" class="item-icon" item-start></ion-icon>
       Categories
     </button>
