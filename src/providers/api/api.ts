@@ -67,7 +67,6 @@ export class ApiProvider {
   }
 
   updatePlace(resource_uri, place_id, name, visited) {
-    console.log("updating " + visited);
     var data = {
       "place_id": place_id,
       "name": name,

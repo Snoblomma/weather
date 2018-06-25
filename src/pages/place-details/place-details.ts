@@ -118,7 +118,6 @@ export class PlaceDetailsPage {
 
   getComponents() {
     if (this.result['place']) {
-      // this.photoreference = this.result.place.result.photos[0].photo_reference;
       this.placeName = this.result.place.result.name;
       this.rating = this.result.place.result.rating;
       this.drive = this.result.distance;

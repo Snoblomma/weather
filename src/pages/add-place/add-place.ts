@@ -22,7 +22,6 @@ export class AddPlacePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddPlacePage');
   }
 
   getPlaces(ev) {

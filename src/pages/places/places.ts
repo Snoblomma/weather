@@ -49,7 +49,6 @@ export class PlacesPage {
     await this.apiProvider.getPlacesListLocalBackend().then(
       res => {
         this.placesDecription = res['objects'];
-        console.log(this.placesDecription);
       }
     );
 

@@ -34,7 +34,6 @@ export class EditPlacePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad EditPlacePage');
   }
 
   async initialize() {
@@ -124,7 +123,6 @@ export class EditPlacePage {
     });
 
     toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
     });
 
     toast.present();

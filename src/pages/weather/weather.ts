@@ -41,30 +41,25 @@ export class WeatherPage {
     }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WeatherPage');
   }
 
   initialize(){
-    // this.placeDetails = this.apiProvider.getPlaceDetails(this.placeId);
     this.placeDetails.subscribe(
       res => { 
         this.lat = res.result.geometry.location.lat; 
         this.lng = res.result.geometry.location.lng; 
         this.photoreference = res.result.photos[0].photo_reference;
         this.getWeather(this.lat, this.lng);    
-        // this.getPhoto(this.photoreference); 
         this.picToView = this.apiProvider.getPhotoString(this.photoreference);
         this.f = this.picToView;
       }
     );
-    //this.setBackground();
   }
 
   getWeather(lat: string, lng: string){
     this.weathers = this.apiProvider.getCurrentWeatherCoordinates(lat, lng);
     this.weathers.subscribe(
       value => {
-        console.log(value);
         this.counrty = value.location.country;
         this.description = value.current.condition.text;
         this.temperature = value.current.temp_c;

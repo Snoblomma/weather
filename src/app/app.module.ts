@@ -11,6 +11,7 @@ import { AddPlacePage } from '../pages/add-place/add-place';
 import { PlaceDetailsPage } from '../pages/place-details/place-details';
 import { EditPlacePage } from '../pages/edit-place/edit-place';
 import { OptionsPage } from '../pages/options/options';
+import { CategoriesPage } from '../pages/categories/categories';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -28,7 +29,8 @@ import { SettingsProvider } from '../providers/settings/settings';
     WeatherPage,
     AddPlacePage,
     EditPlacePage,
-    OptionsPage
+    OptionsPage,
+    CategoriesPage
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { SettingsProvider } from '../providers/settings/settings';
     WeatherPage,
     AddPlacePage,
     EditPlacePage,
-    OptionsPage
+    OptionsPage,
+    CategoriesPage
   ],
   providers: [
     StatusBar,
