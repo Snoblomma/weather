@@ -11,7 +11,8 @@ export class CategoriesPage {
   public selectedTheme: string;
   public categories: any = [
     { icon: "rose", name: "Garden", color: "#a8e6cf" }, 
-    { icon: "musical-notes", name: "Music", color: "#dcedc1" }];
+    { icon: "musical-notes", name: "Music", color: "#dcedc1" },
+    { icon: "custom-castle", name: "Castle", color: "#ffd3b6" }];
 
   constructor(
     public navCtrl: NavController,
