@@ -10,8 +10,8 @@ import { SettingsProvider } from './../../providers/settings/settings';
 export class CategoriesPage {
   public selectedTheme: string;
   public categories: any = [
-    { icon: "bulb", name: "This is bulb" }, 
-    { icon: "cog", name: "This is cog" }];
+    { icon: "rose", name: "Garden", color: "#a8e6cf" }, 
+    { icon: "musical-notes", name: "Music", color: "#dcedc1" }];
 
   constructor(
     public navCtrl: NavController,
