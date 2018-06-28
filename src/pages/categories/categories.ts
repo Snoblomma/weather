@@ -10,9 +10,15 @@ import { SettingsProvider } from './../../providers/settings/settings';
 export class CategoriesPage {
   public selectedTheme: string;
   public categories: any = [
-    { icon: "rose", name: "Garden", color: "#a8e6cf" }, 
-    { icon: "musical-notes", name: "Music", color: "#dcedc1" },
-    { icon: "custom-castle", name: "Castle", color: "#ffd3b6" }];
+    { icon: "custom-coffee", name: "Coffee", color: "#a8e6cf" }, 
+    { icon: "custom-restaurant", name: "Restaurant", color: "#dcedc1" },
+    { icon: "custom-playground", name: "Playground", color: "#dcedc1" },
+    { icon: "custom-water", name: "Water", color: "#dcedc1" },
+    { icon: "custom-beach", name: "Beach", color: "#dcedc1" },
+    { icon: "custom-castle", name: "Castle", color: "#ffd3b6" },
+    { icon: "custom-airport", name: "Airport", color: "#ffd3b6" },
+    { icon: "custom-gym", name: "Gym", color: "#ffd3b6" },
+    { icon: "custom-train", name: "Train Station", color: "#ffd3b6" }];
 
   constructor(
     public navCtrl: NavController,

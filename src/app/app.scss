@@ -70,7 +70,7 @@ ion-label #name {
 }
 
 //custom icons
-ion-icon {
+div {
   &[class*="custom-"] {
     mask-size: contain;
     mask-position: 50% 50%;
@@ -80,16 +80,31 @@ ion-icon {
     height: 1em;
   }
 
-  &[class*="custom-mobile"] {
-    mask-image: url(../assets/mobile.svg);
+  &[class*="custom-coffee"] {
+    mask-image: url(../assets/imgs/places/coffee.svg);
   }
-  &[class*="custom-qrcode"] {
-    mask-image: url(../assets/qrcode.svg);
+  &[class*="custom-restaurant"] {
+    mask-image: url(../assets/imgs/places/restaurant.svg);
   }
-  &[class*="custom-spades"] {
-    mask-image: url(../assets/spades.svg);
+  &[class*="custom-playground"] {
+    mask-image: url(../assets/imgs/places/playground.svg);
+  }
+  &[class*="custom-water"] {
+    mask-image: url(../assets/imgs/places/water.svg);
   }
   &[class*="custom-castle"] {
     mask-image: url(../assets/imgs/places/castle.svg);
+  }
+  &[class*="custom-airport"] {
+    mask-image: url(../assets/imgs/places/airport.svg);
+  }
+  &[class*="custom-beach"] {
+    mask-image: url(../assets/imgs/places/beach.svg);
+  }
+  &[class*="custom-train"] {
+    mask-image: url(../assets/imgs/places/train.svg);
+  }
+  &[class*="gym"] {
+    mask-image: url(../assets/imgs/places/gym.svg);
   }
 }

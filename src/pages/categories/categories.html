@@ -12,7 +12,9 @@
 
 <ion-content [id]="selectedTheme">
   <ion-item *ngFor="let category of categories">
-    <ion-icon [name]="category.icon" [style.backgroundColor]="category.color" class="item-icon" item-start></ion-icon>
-      <ion-label>{{category.name}}</ion-label>
+    <ion-icon [style.backgroundColor]="category.color" class="item-icon" item-start>
+      <div [class]="category.icon"></div>
+    </ion-icon>
+    <ion-label>{{category.name}}</ion-label>
   </ion-item>
 </ion-content>
