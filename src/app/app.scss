@@ -107,4 +107,37 @@ div {
   &[class*="gym"] {
     mask-image: url(../assets/imgs/places/gym.svg);
   }
+  &[class*="picnic"] {
+    mask-image: url(../assets/imgs/places/picnic.svg);
+  }
+  &[class*="mountain"] {
+    mask-image: url(../assets/imgs/places/mountain.svg);
+  }
+  &[class*="forest"] {
+    mask-image: url(../assets/imgs/places/forest.svg);
+  }
+  &[class*="park"] {
+    mask-image: url(../assets/imgs/places/park.svg);
+  }
+  &[class*="zoo"] {
+    mask-image: url(../assets/imgs/places/zoo.svg);
+  }
+  &[class*="historical"] {
+    mask-image: url(../assets/imgs/places/historical.svg);
+  }
+  &[class*="museum"] {
+    mask-image: url(../assets/imgs/places/museum.svg);
+  }
+  &[class*="cinema"] {
+    mask-image: url(../assets/imgs/places/cinema.svg);
+  }
+  &[class*="hike"] {
+    mask-image: url(../assets/imgs/places/hike.svg);
+  }
+  &[class*="pub"] {
+    mask-image: url(../assets/imgs/places/pub.svg);
+  }
+  &[class*="art"] {
+    mask-image: url(../assets/imgs/places/art.svg);
+  }
 }
