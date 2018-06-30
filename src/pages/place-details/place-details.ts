@@ -1,7 +1,6 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController, ModalController, DateTime, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, ModalController, Content } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
-import { Observable } from 'rxjs/Observable';
 import { EditPlacePage } from '../edit-place/edit-place';
 
 @IonicPage()
@@ -32,8 +31,6 @@ export class PlaceDetailsPage {
   public weatherCondSun: any;
   public tempSat: any;
   public tempSun: any;
-  private anyErrors: boolean;
-  private finished: boolean;
   private monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"];
   public isAtBottom: boolean;
@@ -142,7 +139,6 @@ export class PlaceDetailsPage {
         if (this.result.place.result.photos != null) {
           var photoreference = this.result.place.result.photos[index].photo_reference;
           this.image = this.apiProvider.getPhotoString(photoreference);
-          var t = this.apiProvider.getPhotoString(photoreference);
           this.images.push(this.image);
         }
       }

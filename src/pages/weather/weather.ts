@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { ApiProvider } from './../../providers/api/api';
-import { AlertController } from 'ionic-angular';
-import { map } from 'rxjs/operators';
 
 @IonicPage()
 @Component({
@@ -33,8 +31,7 @@ export class WeatherPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public apiProvider: ApiProvider,
-    private alertCtrl: AlertController) {
+    public apiProvider: ApiProvider) {
       this.placeName = this.navParams.get('placeName');
       this.placeId = this.navParams.get('placeId');
       this.initialize();

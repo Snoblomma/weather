@@ -2,12 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Storage } from '@ionic/storage';
 
 import { PlacesPage } from '../pages/places/places';
 import { AddPlacePage } from '../pages/add-place/add-place';
 import { OptionsPage } from '../pages/options/options';
-import { WeatherPage } from '../pages/weather/weather';
 import { SettingsProvider } from './../providers/settings/settings';
 
 @Component({

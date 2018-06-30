@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ViewController, ToastController, Tabs } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
 import { SettingsProvider } from './../../providers/settings/settings';
-import { PlacesPage } from '../places/places';
-import { PlaceDetailsPage } from '../place-details/place-details';
 import { AddPlacePage } from '../add-place/add-place';
 
 @IonicPage()

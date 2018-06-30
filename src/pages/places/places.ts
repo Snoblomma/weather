@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
 import { PlaceDetailsPage } from '../place-details/place-details';
-import { AddPlacePage } from '../add-place/add-place';
 
 @IonicPage()
 @Component({
