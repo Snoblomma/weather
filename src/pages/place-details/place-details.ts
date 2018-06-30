@@ -44,7 +44,6 @@ export class PlaceDetailsPage {
     private alertCtrl: AlertController,
     private apiProvider: ApiProvider,
     private ref: ChangeDetectorRef) {
-    this.getPlaceDetails();
     this.initialize();
   }
 
@@ -54,14 +53,23 @@ export class PlaceDetailsPage {
   ionViewDidLoad() {
   }
 
-  getPlaceDetails() {
+  async getPlaceDetails() {
     this.result = this.navParams.get('result');
+    console.log(this.result);
     this.place_id = this.navParams.get('place_id');
     this.visited = this.navParams.get('visited');
     this.resource_uri = this.navParams.get('resource_uri');
+    console.log(this.resource_uri);
+
+    await this.apiProvider.getPlaceBackend(this.resource_uri).then(
+      res => {
+        console.log(res);
+      }
+    );
   }
 
   initialize() {
+    this.getPlaceDetails();
     this.getWeathers();
     this.getComponents();
     this.getImage();
@@ -75,7 +83,6 @@ export class PlaceDetailsPage {
         this.navLink = "https://maps.google.com?saddr=Current+Location&daddr=" + this.lat + "," + this.lng;
       }
     );
-
     this.getWeather(this.lat, this.lng);
   }
 

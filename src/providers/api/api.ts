@@ -33,6 +33,10 @@ export class ApiProvider {
     return this.httpClient.get('https://agile-springs-70240.herokuapp.com/api/place/').toPromise();
   }
 
+  getPlaceBackend(resource_uri) {
+    return this.httpClient.get('https://agile-springs-70240.herokuapp.com' + resource_uri).toPromise();
+  }
+
   getPlaceDetails(placeId: string) {
     return this.httpClient.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeId + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw').toPromise();
   }
@@ -53,10 +57,11 @@ export class ApiProvider {
     return this.httpClient.get('https://maps.googleapis.com/maps/api/distancematrix/json?origins=53.2472036,-6.182852100000001&destinations=52.67698000000001,-7.20547&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw');
   }
 
-  addPlace(place_id, name, visited) {
+  addPlace(place_id, name, visited, categories) {
     var data = {
       "place_id": place_id,
       "name": name,
+      "types": categories,
       "visited": visited
     };
 
@@ -66,10 +71,12 @@ export class ApiProvider {
     )
   }
 
-  updatePlace(resource_uri, place_id, name, visited) {
+  updatePlace(resource_uri, place_id, name, visited, categories) {
+    console.log(categories);
     var data = {
       "place_id": place_id,
       "name": name,
+      "types": categories,
       "visited": visited
     };
 

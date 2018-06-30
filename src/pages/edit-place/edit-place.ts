@@ -99,7 +99,7 @@ export class EditPlacePage {
       this.showAlert("This place is already on your list!");
     }
     else {
-      this.apiProvider.addPlace(this.place_id, this.placeName, this.visited);
+      this.apiProvider.addPlace(this.place_id, this.placeName, this.visited, this.selectedCategories);
       this.presentAddedToast();
       // going to places
       this.navCtrl.setRoot(AddPlacePage);
@@ -109,7 +109,8 @@ export class EditPlacePage {
   }
 
   updatePlace() {
-    this.apiProvider.updatePlace(this.resource_uri, this.place_id, this.placeName, this.visited);
+    this.apiProvider.updatePlace(this.resource_uri, this.place_id, this.placeName, this.visited, this.selectedCategories);
+    console.log(this.selectedCategories);
     this.presentUpdatedToast();
     this.viewCtrl.dismiss({
       "visited": this.visited,

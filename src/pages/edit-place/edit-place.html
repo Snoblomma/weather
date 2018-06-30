@@ -29,7 +29,7 @@
   <ion-item>
     <ion-label>Categories</ion-label>
     <ion-select multiple="true" [(ngModel)]="selectedCategories">
-      <ion-option *ngFor="let category of categories" value="category.name">{{category.name}}</ion-option>
+      <ion-option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</ion-option>
     </ion-select>
   </ion-item>
 </ion-content>
