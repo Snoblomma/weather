@@ -26,6 +26,12 @@
     <ion-label>Visited</ion-label>
     <ion-toggle [(ngModel)]="visited"></ion-toggle>
   </ion-item>
+  <ion-item>
+    <ion-label>Categories</ion-label>
+    <ion-select multiple="true" [(ngModel)]="selectedCategories">
+      <ion-option *ngFor="let category of categories" value="category.name">{{category.name}}</ion-option>
+    </ion-select>
+  </ion-item>
 </ion-content>
 
 <ion-footer text-center [id]="selectedTheme">

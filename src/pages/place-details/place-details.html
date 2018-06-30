@@ -48,8 +48,8 @@
   <ion-item>
     <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let type of types">
-          <p>{{type}}</p>
+        <ion-col >
+          <ion-badge *ngFor="let type of types" color="secondary">{{type}}</ion-badge>
         </ion-col>
       </ion-row>
     </ion-grid>

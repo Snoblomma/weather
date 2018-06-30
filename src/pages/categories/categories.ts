@@ -26,7 +26,7 @@ export class CategoriesPage {
     { icon: "custom-picnic", name: "Picnic Spot", color: "" },
     { icon: "custom-pub", name: "Pub", color: "" },
     { icon: "custom-art", name: "Art", color: "" },
-    { icon: "custom-zoo", name: "Zoo", color: "" },
+    { icon: "custom-zoopark", name: "Zoo", color: "" },
     { icon: "custom-historical", name: "Historical", color: "" },
     { icon: "custom-museum", name: "Museum", color: "" },
     { icon: "custom-cinema", name: "Cinema", color: "" },

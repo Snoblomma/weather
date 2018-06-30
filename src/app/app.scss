@@ -119,7 +119,7 @@ div {
   &[class*="park"] {
     mask-image: url(../assets/imgs/places/park.svg);
   }
-  &[class*="zoo"] {
+  &[class*="zoopark"] {
     mask-image: url(../assets/imgs/places/zoo.svg);
   }
   &[class*="historical"] {
@@ -140,4 +140,9 @@ div {
   &[class*="art"] {
     mask-image: url(../assets/imgs/places/art.svg);
   }
+}
+
+ion-badge{
+  padding: 8px 8px;
+  margin: 0 10px;
 }
