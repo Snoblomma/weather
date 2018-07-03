@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content (ionScroll)="checkTop()">
+<ion-content (ionScroll)="checkTop()" [id]="selectedTheme">
   <ion-slides class="sticky" loop="true">
     <ion-slide *ngFor="let image of images">
       <ion-item id="place" [style.backgroundImage]="'url(' + image + ')'">

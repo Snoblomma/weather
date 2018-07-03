@@ -2,6 +2,7 @@ import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController, ModalController, Content } from 'ionic-angular';
 import { ApiProvider } from './../../providers/api/api';
 import { EditPlacePage } from '../edit-place/edit-place';
+import { SettingsProvider } from './../../providers/settings/settings';
 
 @IonicPage()
 @Component({
@@ -34,6 +35,7 @@ export class PlaceDetailsPage {
   private monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"];
   public isAtBottom: boolean;
+  public selectedTheme: any;
 
   @ViewChild(Content) content: Content;
   constructor(
@@ -43,6 +45,7 @@ export class PlaceDetailsPage {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private apiProvider: ApiProvider,
+    private settings: SettingsProvider,
     private ref: ChangeDetectorRef) {
     this.initialize();
   }
@@ -69,10 +72,23 @@ export class PlaceDetailsPage {
   }
 
   initialize() {
+    this.getTheme();
     this.getPlaceDetails();
     this.getWeathers();
     this.getComponents();
     this.getImage();
+  }
+
+  getTheme() {
+    this.settings.getActiveTheme().subscribe(
+      val => {
+        if (val == "dark-theme") {
+          this.selectedTheme = "dark-theme";
+        }
+        else {
+          this.selectedTheme = "light-theme";
+        }
+      });
   }
 
   async getWeathers() {

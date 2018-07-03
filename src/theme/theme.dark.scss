@@ -42,4 +42,7 @@
     background-color: map-get($colors, primary-dark);
     color: map-get($colors, on-primary);
   }
+  .tag::before {
+    background: map-get($colors, primary-dark);
+  }
 }
