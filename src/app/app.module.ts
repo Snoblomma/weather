@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 import { MyApp } from './app.component';
 import { PlacesPage } from '../pages/places/places';
@@ -38,6 +39,7 @@ import { SettingsProvider } from '../providers/settings/settings';
     HttpClientModule,
     HttpModule,
     AutoCompleteModule,
+    IonicImageViewerModule,
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],

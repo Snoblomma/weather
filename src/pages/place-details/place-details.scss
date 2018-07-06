@@ -25,9 +25,9 @@ page-place-details {
   }
 
   .tag {
-    background: #eee;
+    background-color: map-get($colors, secondary-light);
     border-radius: 3px 0 0 3px;
-    color: #999;
+    color: map-get($colors, primary-dark);
     display: inline-block;
     height: 26px;
     line-height: 26px;
@@ -58,5 +58,17 @@ page-place-details {
     position: absolute;
     right: -10px;
     top: 0;
+  }
+
+  .cell-left{
+    min-width: 70px;
+    max-width: 120px;
+  }
+
+  .cell-right{
+    text-align: right;
+    min-width: 80px;
+    max-width: 140px;
+    padding-right: 10px !important;
   }
 }
