@@ -45,7 +45,7 @@ export class PlacesPage {
     this.collapsed = true;
     this.placesResult = [];
 
-    await this.apiProvider.getPlacesListLocalBackend().then(
+    await this.apiProvider.getPlacesList().then(
       res => {
         this.placesDecription = res['objects'];
       }

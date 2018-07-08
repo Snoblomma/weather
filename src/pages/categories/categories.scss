@@ -22,4 +22,12 @@ page-categories {
         text-align: center;
         background-color: black;
     }
+
+    .slidingItem ion-item{
+        border-left: solid 10px;
+    }
+
+    .slidingItem ion-label{
+        padding-left: 10px;
+    }
 }

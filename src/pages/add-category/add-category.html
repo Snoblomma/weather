@@ -1,0 +1,47 @@
+<ion-header [id]="selectedTheme">
+  <ion-toolbar>
+    <ion-title *ngIf="type == 'add'">
+      Add Category
+    </ion-title>
+    <ion-title *ngIf="type == 'edit'">
+      Edit Category
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [id]="selectedTheme">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4 offset-4>
+        <ion-item>
+          <ion-label stacked>Name</ion-label>
+          <ion-input [(ngModel)]="name"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4 offset-4>
+        <ion-item>
+          <ion-label stacked>Description</ion-label>
+          <ion-input [(ngModel)]="description"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4 offset-4>
+        <button ion-button block color="primary" (click)="addCategory()" *ngIf="type == 'add'">
+          Add
+        </button>
+        <button ion-button block color="primary" (click)="updateCategory()" *ngIf="type == 'edit'">
+          Update
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

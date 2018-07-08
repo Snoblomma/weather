@@ -9,6 +9,7 @@ import { MyApp } from './app.component';
 import { PlacesPage } from '../pages/places/places';
 import { WeatherPage } from '../pages/weather/weather';
 import { AddPlacePage } from '../pages/add-place/add-place';
+import { AddCategoryPage } from '../pages/add-category/add-category';
 import { PlaceDetailsPage } from '../pages/place-details/place-details';
 import { EditPlacePage } from '../pages/edit-place/edit-place';
 import { OptionsPage } from '../pages/options/options';
@@ -29,6 +30,7 @@ import { SettingsProvider } from '../providers/settings/settings';
     PlaceDetailsPage,
     WeatherPage,
     AddPlacePage,
+    AddCategoryPage,
     EditPlacePage,
     OptionsPage,
     CategoriesPage
@@ -49,6 +51,7 @@ import { SettingsProvider } from '../providers/settings/settings';
     PlaceDetailsPage,
     WeatherPage,
     AddPlacePage,
+    AddCategoryPage,
     EditPlacePage,
     OptionsPage,
     CategoriesPage

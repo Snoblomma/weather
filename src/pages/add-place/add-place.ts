@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { ApiProvider } from './../../providers/api/api';
+import { ApiProvider } from '../../providers/api/api';
 import { EditPlacePage } from '../edit-place/edit-place';
 
 @IonicPage()

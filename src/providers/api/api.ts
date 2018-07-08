@@ -29,8 +29,12 @@ export class ApiProvider {
     return this.httpClient.get('https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + keyword + '&key=AIzaSyCoXe1dZzmHjeIWyxKB2XQlvLdKAZ7WUOw');
   }
 
-  getPlacesListLocalBackend() {
+  getPlacesList() {
     return this.httpClient.get('https://agile-springs-70240.herokuapp.com/api/place/').toPromise();
+  }
+
+  getCategoriesList() {
+    return this.httpClient.get('https://agile-springs-70240.herokuapp.com/api/category/').toPromise();
   }
 
   getPlaceBackend(resource_uri) {
@@ -72,7 +76,6 @@ export class ApiProvider {
   }
 
   updatePlace(resource_uri, place_id, name, visited, categories) {
-    console.log(categories);
     var data = {
       "place_id": place_id,
       "name": name,
@@ -86,11 +89,35 @@ export class ApiProvider {
     )
   }
 
-  removePlace(resource_uri) {
+  removeResource(resource_uri) {
     let link = 'https://agile-springs-70240.herokuapp.com' + resource_uri;
     this.http.delete(link).subscribe(
       value => console.log(value),
       error => console.log(error)
     );
+  }
+
+  addCategory(name, description) {
+    var data = {
+      "name": name,
+      "description": description
+    };
+
+    this.httpClient.post('https://agile-springs-70240.herokuapp.com/api/category/', data).subscribe(
+      value => console.log(value),
+      error => console.log(error)
+    )
+  }
+
+  updateCategory(resource_uri, name, description) {
+    var data = {
+      "name": name,
+      "description": description
+    };
+
+    this.httpClient.put('https://agile-springs-70240.herokuapp.com' + resource_uri, data).subscribe(
+      value => console.log(value),
+      error => console.log(error)
+    )
   }
 }

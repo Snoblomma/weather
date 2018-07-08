@@ -1,8 +1,8 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController, ModalController, Content } from 'ionic-angular';
-import { ApiProvider } from './../../providers/api/api';
+import { ApiProvider } from '../../providers/api/api';
 import { EditPlacePage } from '../edit-place/edit-place';
-import { SettingsProvider } from './../../providers/settings/settings';
+import { SettingsProvider } from '../../providers/settings/settings';
 
 @IonicPage()
 @Component({
@@ -21,7 +21,7 @@ export class PlaceDetailsPage {
   public drive: any = "-";
   public photoreference: any;
   public openingHours: Array<any> = [];
-  public types: any = '';
+  public types: Array<string>;
   public images: Array<any> = [];
   public navLink: any = '';
   public lat: any;
@@ -58,15 +58,15 @@ export class PlaceDetailsPage {
 
   async getPlaceDetails() {
     this.result = this.navParams.get('result');
-    console.log(this.result);
     this.place_id = this.navParams.get('place_id');
     this.visited = this.navParams.get('visited');
     this.resource_uri = this.navParams.get('resource_uri');
-    console.log(this.resource_uri);
 
     await this.apiProvider.getPlaceBackend(this.resource_uri).then(
       res => {
         console.log(res);
+        this.types = res['types'];
+        console.log(this.types.length);
       }
     );
   }
@@ -148,9 +148,11 @@ export class PlaceDetailsPage {
           this.openingHours.push(partsOfStr);
         });
       }
-      if (this.result.place.result['types']) {
-        this.types = this.result.place.result.types;
-      }
+      // if (this.result.place.result['types']) {
+      //   // this.types = this.result.place.result.types;
+        
+      // }
+      
     }
   }
 
@@ -185,7 +187,7 @@ export class PlaceDetailsPage {
 
   deletePlace() {
     this.presentToast();
-    this.apiProvider.removePlace(this.resource_uri);
+    this.apiProvider.removeResource(this.resource_uri);
     this.navCtrl.pop();
   }
 

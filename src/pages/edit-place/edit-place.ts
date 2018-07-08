@@ -119,7 +119,7 @@ export class EditPlacePage {
 
   async isPlaceAdded(place_id): Promise<boolean> {
     let filter: any;
-    await this.apiProvider.getPlacesListLocalBackend().then(
+    await this.apiProvider.getPlacesList().then(
       res => {
         return filter = res['objects'].filter((item) => {
           if (item.place_id == place_id) {
