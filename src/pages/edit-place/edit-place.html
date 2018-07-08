@@ -29,6 +29,11 @@
   <ion-item>
     <ion-label>Categories</ion-label>
     <ion-select multiple="true" [(ngModel)]="selectedCategories">
+      <ion-option>
+        <button ion-button (click)="dismiss()">
+          <ion-icon name="md-close"></ion-icon>
+        </button>
+      </ion-option>
       <ion-option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</ion-option>
     </ion-select>
   </ion-item>

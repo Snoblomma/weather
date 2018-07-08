@@ -20,27 +20,28 @@ export class EditPlacePage {
   public darkTheme: boolean;
   public selectedTheme: string;
   public selectedCategories: Array<any>;
-  public categories: Array<any> = [
-    { icon: "custom-coffee", name: "Coffee", color: "" },
-    { icon: "custom-restaurant", name: "Restaurant", color: "" },
-    { icon: "custom-playground", name: "Playground", color: "" },
-    { icon: "custom-water", name: "Water", color: "" },
-    { icon: "custom-beach", name: "Beach", color: "" },
-    { icon: "custom-castle", name: "Castle", color: "" },
-    { icon: "custom-airport", name: "Airport", color: "" },
-    { icon: "custom-gym", name: "Gym", color: "" },
-    { icon: "custom-mountain", name: "Mountain", color: "" },
-    { icon: "custom-train", name: "Train Station", color: "" },
-    { icon: "custom-forest", name: "Forest", color: "" },
-    { icon: "custom-park", name: "Park", color: "" },
-    { icon: "custom-picnic", name: "Picnic Spot", color: "" },
-    { icon: "custom-pub", name: "Pub", color: "" },
-    { icon: "custom-art", name: "Art", color: "" },
-    { icon: "custom-zoopark", name: "Zoo", color: "" },
-    { icon: "custom-historical", name: "Historical", color: "" },
-    { icon: "custom-museum", name: "Museum", color: "" },
-    { icon: "custom-cinema", name: "Cinema", color: "" },
-    { icon: "custom-hike", name: "Hike", color: "" }];
+  public categories: any;
+  // public categories: Array<any> = [
+  //   { icon: "custom-coffee", name: "Coffee", color: "" },
+  //   { icon: "custom-restaurant", name: "Restaurant", color: "" },
+  //   { icon: "custom-playground", name: "Playground", color: "" },
+  //   { icon: "custom-water", name: "Water", color: "" },
+  //   { icon: "custom-beach", name: "Beach", color: "" },
+  //   { icon: "custom-castle", name: "Castle", color: "" },
+  //   { icon: "custom-airport", name: "Airport", color: "" },
+  //   { icon: "custom-gym", name: "Gym", color: "" },
+  //   { icon: "custom-mountain", name: "Mountain", color: "" },
+  //   { icon: "custom-train", name: "Train Station", color: "" },
+  //   { icon: "custom-forest", name: "Forest", color: "" },
+  //   { icon: "custom-park", name: "Park", color: "" },
+  //   { icon: "custom-picnic", name: "Picnic Spot", color: "" },
+  //   { icon: "custom-pub", name: "Pub", color: "" },
+  //   { icon: "custom-art", name: "Art", color: "" },
+  //   { icon: "custom-zoopark", name: "Zoo", color: "" },
+  //   { icon: "custom-historical", name: "Historical", color: "" },
+  //   { icon: "custom-museum", name: "Museum", color: "" },
+  //   { icon: "custom-cinema", name: "Cinema", color: "" },
+  //   { icon: "custom-hike", name: "Hike", color: "" }];
 
   constructor(
     private navCtrl: NavController,
@@ -53,10 +54,18 @@ export class EditPlacePage {
     this.initialize();
   }
 
-  ionViewDidLoad() {
+  async initialize() {
+    this.type = this.navParams.get('type');
+    this.place_id = this.navParams.get('place_id');
+    this.visited = this.navParams.get('visited');
+    this.resource_uri = this.navParams.get('resource_uri');
+    this.placeAdded = await this.isPlaceAdded(this.place_id);
+    this.getTheme();
+    this.getCategories();
+    this.getPlaceDetails();
   }
 
-  async initialize() {
+  async getTheme() {
     this.settings.getActiveTheme().subscribe(
       val => {
         if (val == "dark-theme") {
@@ -66,18 +75,28 @@ export class EditPlacePage {
           this.selectedTheme = "light-theme";
         }
       });
+  }
+
+  async getCategories() {
+    await this.apiProvider.getCategoriesList().then(
+      res => {
+        this.categories = res['objects'];
+      }
+    );
+
     this.categories.sort((a, b) => {
       if (a.name < b.name) return -1;
       else if (a.name > b.name) return 1;
       else return 0;
     });
-    this.type = this.navParams.get('type');
-    this.place_id = this.navParams.get('place_id');
-    this.visited = this.navParams.get('visited');
-    this.resource_uri = this.navParams.get('resource_uri');
-    this.placeAdded = await this.isPlaceAdded(this.place_id);
-    let placeDetails: any;
 
+    // for (let index = 0; index < this.categories.length; index++) {
+    //   this.categories[index].color = this.colors[index % this.colors.length];
+    // }
+  }
+
+  async getPlaceDetails() {
+    let placeDetails: any;
     await this.apiProvider.getPlaceDetails(this.place_id).then(
       res => {
         placeDetails = res;

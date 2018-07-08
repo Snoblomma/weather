@@ -54,6 +54,11 @@ export class CategoriesPage {
   }
 
   async initialize() {
+    this.getTheme();
+    this.getCategories();
+  }
+
+  async getTheme() {
     this.settings.getActiveTheme().subscribe(
       val => {
         if (val == "dark-theme") {
@@ -63,7 +68,9 @@ export class CategoriesPage {
           this.selectedTheme = "light-theme";
         }
       });
+  }
 
+  async getCategories() {
     await this.apiProvider.getCategoriesList().then(
       res => {
         this.categories = res['objects'];
@@ -81,10 +88,6 @@ export class CategoriesPage {
     }
   }
 
-  dismiss() {
-    this.viewCtrl.dismiss();
-  }
-
   addCategory() {
     this.navCtrl.push(AddCategoryPage, { type: "add" });
   }
@@ -99,5 +102,9 @@ export class CategoriesPage {
     this.apiProvider.removeResource(category.resource_uri);
     this.initialize();
     this.navCtrl.setRoot(CategoriesPage);
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 }

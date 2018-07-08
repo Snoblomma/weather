@@ -21,7 +21,7 @@ export class PlaceDetailsPage {
   public drive: any = "-";
   public photoreference: any;
   public openingHours: Array<any> = [];
-  public types: Array<string>;
+  public types: Array<string> = [];
   public images: Array<any> = [];
   public navLink: any = '';
   public lat: any;
@@ -56,21 +56,6 @@ export class PlaceDetailsPage {
   ionViewDidLoad() {
   }
 
-  async getPlaceDetails() {
-    this.result = this.navParams.get('result');
-    this.place_id = this.navParams.get('place_id');
-    this.visited = this.navParams.get('visited');
-    this.resource_uri = this.navParams.get('resource_uri');
-
-    await this.apiProvider.getPlaceBackend(this.resource_uri).then(
-      res => {
-        console.log(res);
-        this.types = res['types'];
-        console.log(this.types.length);
-      }
-    );
-  }
-
   initialize() {
     this.getTheme();
     this.getPlaceDetails();
@@ -89,6 +74,23 @@ export class PlaceDetailsPage {
           this.selectedTheme = "light-theme";
         }
       });
+  }
+
+  async getPlaceDetails() {
+    this.result = this.navParams.get('result');
+    this.place_id = this.navParams.get('place_id');
+    this.visited = this.navParams.get('visited');
+    this.resource_uri = this.navParams.get('resource_uri');
+
+    await this.apiProvider.getPlaceBackend(this.resource_uri).then(
+      res => {
+        let s: string = res['types'];
+        let len = s.length;
+        s = s.slice(2, len-2);
+        this.types = s.split("', '");
+        console.log(this.types);
+      }
+    );
   }
 
   async getWeathers() {
