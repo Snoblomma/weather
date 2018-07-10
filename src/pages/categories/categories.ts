@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, ItemSliding, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ItemSliding } from 'ionic-angular';
 import { SettingsProvider } from './../../providers/settings/settings';
 import { AddCategoryPage } from '../add-category/add-category';
 import { ApiProvider } from '../../providers/api/api';
@@ -38,7 +38,6 @@ export class CategoriesPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private modalCtrl: ModalController,
     private viewCtrl: ViewController,
     private settings: SettingsProvider,
     public apiProvider: ApiProvider) {
