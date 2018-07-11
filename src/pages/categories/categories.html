@@ -22,6 +22,12 @@
     Add Category
   </button>
 
+  <ion-chip  *ngFor="let category of categories">
+    <ion-icon name="heart" [color]="category.color"></ion-icon>
+    <ion-label>{{category.name}}</ion-label>
+  </ion-chip>
+  
+
   <ion-list>
     <ion-item-sliding #slidingItem class="slidingItem" *ngFor="let category of categories">
       <ion-item [style.borderLeftColor]="category.color">
