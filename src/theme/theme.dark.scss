@@ -45,4 +45,7 @@
   .tag::before {
     background: map-get($colors, primary-dark);
   }
+  .chip-md {
+    color: map-get($colors, on-primary);
+  }
 }

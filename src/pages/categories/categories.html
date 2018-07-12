@@ -23,7 +23,7 @@
   </button>
 
   <ion-chip  *ngFor="let category of categories">
-    <ion-icon name="heart" [color]="category.color"></ion-icon>
+    <ion-icon name="heart" [style.backgroundColor]="category.color"></ion-icon>
     <ion-label>{{category.name}}</ion-label>
   </ion-chip>
   
